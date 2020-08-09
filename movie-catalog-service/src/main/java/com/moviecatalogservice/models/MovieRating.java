@@ -5,8 +5,15 @@ public class MovieRating {
 	private String movieId;
 	private int rating;
 	
+
+	
 	public MovieRating() {
 		super();
+	}
+	public MovieRating(String movieId, int rating) {
+		super();
+		this.movieId = movieId;
+		this.rating = rating;
 	}
 	public String getMovieId() {
 		return movieId;
@@ -24,11 +31,7 @@ public class MovieRating {
 	public String toString() {
 		return "MovieRating [movieId=" + movieId + ", rating=" + rating + "]";
 	}
-	public MovieRating(String movieId, int rating) {
-		super();
-		this.movieId = movieId;
-		this.rating = rating;
-	}
+	
 	
 	
 }

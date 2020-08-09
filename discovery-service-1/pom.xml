@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ashifs.microservice</groupId>
-	<artifactId>movie-catalog-service</artifactId>
+	<artifactId>discovery-service-1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>movie-catalog-service</name>
-	<description>Movie catalog sevice</description>
+	<name>discovery-service-1</name>
+	<description>Discovery sevice</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -21,29 +21,10 @@
 
 	<dependencies>
 		<dependency>
-         	 <groupId>org.springframework.cloud</groupId>
-          	 <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-         	 <groupId>org.springframework.cloud</groupId>
-          	 <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
-		<dependency>
-         	 <groupId>org.springframework.cloud</groupId>
-          	 <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
-        </dependency>	
-        <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -56,6 +37,7 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -67,7 +49,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 
 	<build>
 		<plugins>

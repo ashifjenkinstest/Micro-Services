@@ -23,6 +23,11 @@ public class UserRating {
 		this.movieRatings = movieRatings;
 	}
 
+	@Override
+	public String toString() {
+		return "UserRating [movieRatings=" + movieRatings + "]";
+	}
+
 	
 
 }
