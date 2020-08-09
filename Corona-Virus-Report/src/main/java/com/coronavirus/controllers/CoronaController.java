@@ -1,14 +1,18 @@
 package com.coronavirus.controllers;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.coronavirus.models.CoronaLocationStat;
 import com.coronavirus.services.CoronaVirusDataService;
 
 @Controller
+//@RequestMapping("/TopicController")
 public class CoronaController {
 	
 	@Autowired
@@ -49,6 +53,15 @@ public class CoronaController {
 		}
 		return "err";
 			
+	}
+	@RequestMapping("country")
+	public String getCountryStateRates(@PathParam(value = "country") String country,@PathParam(value = "state") String state,Model model) {
+		System.out.println("Country: " + country);
+		System.out.println("State: " + state);
+		model.addAttribute("country",country.toUpperCase());
+		coronaVirusDataService.getCountryStat(country, state);
+		return "country";
+		
 	}
 	
 	

@@ -41,7 +41,9 @@
   </thead>
   <tbody id="covidTable">
     <tr scope="row" th:each="CoronaLocationStat: ${CoronaLocationStats}">
-       <td th:text="${CoronaLocationStat.country}"></td>
+   		
+       <td > 
+       <a th:text="${CoronaLocationStat.country}" th:href="@{country(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state})}"></a></td>
        <td th:text="${CoronaLocationStat.state}">--</td>
        <td th:text="${CoronaLocationStat.totalCases}">0</td>
        <td th:text="${CoronaLocationStat.latestCases}">0</td>
