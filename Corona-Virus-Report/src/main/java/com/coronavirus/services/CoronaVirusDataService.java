@@ -11,7 +11,10 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
@@ -23,6 +26,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.coronavirus.models.CoronaCountryDataStat;
 import com.coronavirus.models.CoronaLocationStat;
 @Service
 public class CoronaVirusDataService {
@@ -30,6 +34,7 @@ public class CoronaVirusDataService {
 	private static final String CORONA_VIRUS_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 	
 	private List<CoronaLocationStat> coronaLocationStats  ;
+	CoronaCountryDataStat coronaCountryDataStat;
 	Iterable<CSVRecord> records;
 
 	@PostConstruct
@@ -103,11 +108,36 @@ public class CoronaVirusDataService {
 		
 	}
 	
+	public List<String>  getVirusDataHeader(String data) {
+		System.out.println("Enter getVirusDataHeader");
+		Map<String, Integer> headerMap = new HashMap<String, Integer>();
+		List<String> csvHeaderDates = new ArrayList<String>();
+		try {
+			//records = CSVFormat.DEFAULT.withHeader().withSkipHeaderRecord(false).parse(csvBodyReader);
+			CSVParser parser = CSVParser.parse(data, CSVFormat.EXCEL.withFirstRecordAsHeader());
+			headerMap = parser.getHeaderMap();
+			headerMap.remove("Province/State");
+			headerMap.remove("Country/Region");
+			headerMap.remove("Lat");
+			headerMap.remove("Long");
+			for (Map.Entry<String,Integer> entry : headerMap.entrySet()) {
+				//System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+				csvHeaderDates.add(entry.getKey());
+				} 
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		return csvHeaderDates;
+		
+	}
+	
+	
 	public List<CoronaLocationStat> getAllCountriesData(Iterable<CSVRecord> records) {
 		System.out.println("Enter getAllCountriesData");
 		List<CoronaLocationStat> coronaLocationStats = new ArrayList<CoronaLocationStat>();
 		for (CSVRecord record : records) {
-
 			CoronaLocationStat coronaLocationStat = new CoronaLocationStat();
 		    String state = record.get("Province/State");
 		    String country = record.get("Country/Region");
@@ -119,32 +149,60 @@ public class CoronaVirusDataService {
 			coronaLocationStat.setTotalCases(totalCases);
 			//System.out.println(coronaLocationStat);
 			coronaLocationStats.add(coronaLocationStat);
-		
 			}
 		return coronaLocationStats;
-		
-		
 	}
 	
-	public void getCountryStat(String country , String state) {
+	public CoronaCountryDataStat  getCountryStat(String country , String state) {
+		
+		this.coronaCountryDataStat = getCountryStatImpl(country,state,converStringToCSVV1(getDataFromGit()));
+		return this.coronaCountryDataStat;
+	}
+	
+	
+	
+	
+	public CoronaCountryDataStat getCountryStatImpl(String country , String state,Iterable<CSVRecord> records) {
+		CoronaCountryDataStat coronaCountryDataStat = new CoronaCountryDataStat();
+		//Map<String, Integer> dateVsCount = new HashMap<String, Integer>();
+		Map<Integer, Integer> dateVsCount = new HashMap<Integer, Integer>();
+		System.out.println("Enter getCountryStatImpl");
+		System.out.println("country: " + country);
+		System.out.println("state: " + state);
+		
+		 List<String> header = getVirusDataHeader(getDataFromGit());
+		
+		
 		int totalCases = 0;
 		int latestCases = 0;
-		System.out.println(records.toString());
 		for (CSVRecord record : records) {
-			System.out.println(record.toString());
 	    	String country1 = record.get("Country/Region");
 	        String state1 = record.get("Province/State");
 	        if (country.equalsIgnoreCase(country1)) {
-	        	System.out.println("country " + country + " found");
+	        	
 	        	if(state.equalsIgnoreCase(state1)) {
+	        		//System.out.println("country " + country + " found");
+	        		coronaCountryDataStat.setCountry(country1);
+	        		coronaCountryDataStat.setState(state1);
+	        		for(int i = 4;i<record.size();i++) {
+	        			//Map date to count 
+	        			//System.out.print(header.get(i-4)+ " -->"+ record.get(i)+ ", ");
+	        			dateVsCount.put(/*header.get*/(i-4), Integer.parseInt(record.get(i)));
+	        		}
+	        		coronaCountryDataStat.setDateVsCount(dateVsCount);
 	        		totalCases = Integer.parseInt(record.get(record.size() - 1));
 	    	        latestCases = totalCases - Integer.parseInt(record.get(record.size() - 2));
+	    	        coronaCountryDataStat.setLatestCases(latestCases);
+	    	        coronaCountryDataStat.setTotalCases(totalCases);
 	        	}
 	        }
 	        
 	    }
 		System.out.println("Country: " + country + " State: " + state  + " cases today: " + latestCases + " total cases: " + totalCases);
+		return coronaCountryDataStat;
+		
 	}
+	
 	
 	@Override
 	public String toString() {

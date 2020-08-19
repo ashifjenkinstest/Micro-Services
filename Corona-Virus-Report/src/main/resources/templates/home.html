@@ -14,7 +14,7 @@
 
 <div class="container">
   <div class="jumbotron">
-    <h1>COVID-19 Tracker</h1>      
+    <h4>COVID-19 Tracker</h4>      
     <p>Shows the latest cases of Covid-19 cases country wise...</p>
     <hr>
     Total number of cases: <span th:text="${totalCases}" />
@@ -41,9 +41,8 @@
   </thead>
   <tbody id="covidTable">
     <tr scope="row" th:each="CoronaLocationStat: ${CoronaLocationStats}">
-   		
        <td > 
-       <a th:text="${CoronaLocationStat.country}" th:href="@{country(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state})}"></a></td>
+       <a  th:text="${CoronaLocationStat.country}" th:href="@{country(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state})}"></a></td>
        <td th:text="${CoronaLocationStat.state}">--</td>
        <td th:text="${CoronaLocationStat.totalCases}">0</td>
        <td th:text="${CoronaLocationStat.latestCases}">0</td>
