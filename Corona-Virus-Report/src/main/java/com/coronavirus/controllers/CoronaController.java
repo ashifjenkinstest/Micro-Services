@@ -103,33 +103,6 @@ public class CoronaController {
 	
 	
 	
-	/*
-	@RequestMapping(value = "graph" ,method = RequestMethod.GET)
-	public String springMVC(ModelMap modelMap) {
-		List<List<Map<Object, Object>>> canvasjsDataList = canvasjsChartService.getCanvasjsChartData();
-		modelMap.addAttribute("dataPointsList", canvasjsDataList);
-		return "grafico2";
-	}
-	*/
-	
-	@RequestMapping(value = "/plot", method = RequestMethod.GET)
-	public String getDataPlot(ModelMap model) throws IOException {	
-		
-		List<Ponto> pontos = new ArrayList<>();
-		CoronaCountryDataStat coronaCountryDataStat = coronaVirusDataService.getCountryStat("India", "");
-		Ponto ponto = null;
-		for (Map.Entry<Integer,Integer> entry : coronaCountryDataStat.getDateVsCount().entrySet()) 
-		{
-			ponto = new Ponto();
-			ponto.setX(entry.getKey());
-			ponto.setY(entry.getValue());
-			pontos.add(ponto);
-		} 
-		model.addAttribute("pontos",pontos);		
-		
-		return "grafico2";
-	}
-	
 	
 
 }
