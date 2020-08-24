@@ -6,6 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
 <script th:inline="javascript">
@@ -21,9 +22,12 @@ window.onload = function() {
     
     var chart = new CanvasJS.Chart("chartContainer", {
     	animationEnabled: true,
-    	theme: "light2",
+    	theme: "light1",
     	title:{
     		text: "COVID-19 Daily Change Graph"
+    	},
+    	axisX: {
+    		suffix: "th Day"
     	},
     	axisY:{
     		title: "Number of Cases",
@@ -32,7 +36,8 @@ window.onload = function() {
     	data: [{  
     		title: "Day",
     		type: "spline",      
-    		dataPoints: []
+    		dataPoints: [],
+    		xValueFormatString: "#,##0th Day"
     	}]
     });
     chart.render();			
@@ -45,6 +50,7 @@ window.onload = function() {
     	
 }	
 </script>    
+
 
 <title th:text="${country}" ></title>
 </head>
@@ -65,24 +71,6 @@ window.onload = function() {
 	
 	<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>  		
- 
- <!-- 
- <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Day</th>
-      <th scope="col">Latest Cases</th>
-    </tr>
-  </thead>
-  <tbody id="covidCountryTable">
-    <tr scope="row" th:each="dateVsCount: ${dateVsCounts}">
-       <td th:text="${dateVsCount.day}">0</td>
-       <td th:text="${dateVsCount.cases}">0</td>
-    	</tr>
-  </tbody>
-</table> -->
-  
-
 
 </body>
 </html>

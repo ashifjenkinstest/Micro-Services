@@ -26,20 +26,19 @@ import com.coronavirus.services.CoronaVirusDataService;
 @Controller
 //@RequestMapping("/TopicController")
 public class CoronaController {
-	
+
 	@Autowired
 	CoronaVirusDataService coronaVirusDataService;
-	
+
 	@Autowired
 	private CanvasjsChartService canvasjsChartService;
- 
-	
+
 	@RequestMapping("/")
-	public String home(Model  model) {
+	public String home(Model model) {
 		System.out.println("Enter home");
-		//System.out.println(coronaVirusDataService.getCoronaLocationStats().size());
-		if(coronaVirusDataService.getCoronaLocationStats().size()>0) {
-			model.addAttribute("CoronaLocationStats" ,coronaVirusDataService.getCoronaLocationStats());
+		// System.out.println(coronaVirusDataService.getCoronaLocationStats().size());
+		if (coronaVirusDataService.getCoronaLocationStats().size() > 0) {
+			model.addAttribute("CoronaLocationStats", coronaVirusDataService.getCoronaLocationStats());
 			int totalCasesToday = 0;
 			int totalCases = 0;
 			int totalCasesTodayIndia = 0;
@@ -47,62 +46,56 @@ public class CoronaController {
 			for (CoronaLocationStat stat : coronaVirusDataService.getCoronaLocationStats()) {
 				totalCasesToday += stat.getLatestCases();
 				totalCases += stat.getTotalCases();
-				if(stat.getCountry().equalsIgnoreCase("INDIA")) {
+				if (stat.getCountry().equalsIgnoreCase("INDIA")) {
 					totalCasesTodayIndia += stat.getLatestCases();
-					totalCasesIndia +=stat.getTotalCases();
+					totalCasesIndia += stat.getTotalCases();
 				}
-				
 			}
-			//System.out.println(totalCasesTodayIndia);
-			//System.out.println(totalCasesIndia);
-			
-			model.addAttribute("totalCasesToday" ,totalCasesToday);
-			model.addAttribute("totalCases" ,totalCases);
-			
-			model.addAttribute("totalCasesTodayIndia" ,totalCasesTodayIndia);
-			model.addAttribute("totalCasesIndia" ,totalCasesIndia);
-			
-			
+
+			model.addAttribute("totalCasesToday", totalCasesToday);
+			model.addAttribute("totalCases", totalCases);
+
+			model.addAttribute("totalCasesTodayIndia", totalCasesTodayIndia);
+			model.addAttribute("totalCasesIndia", totalCasesIndia);
+
 			return "home";
-		
-			
+
 		}
 		return "err";
-			
+
 	}
+
 	@RequestMapping("country")
-	public String getCountryStateRates(@PathParam(value = "country") String country,@PathParam(value = "state") String state,Model model) {
+	public String getCountryStateRates(@PathParam(value = "country") String country,
+			@PathParam(value = "state") String state, Model model) {
 		System.out.println("Enter getCountryStateRates");
+
+		CoronaCountryDataStat coronaCountryDataStat = null;
 		
-		CoronaCountryDataStat coronaCountryDataStat = null ;
-		List<DateVsCount> dateVsCounts = new ArrayList<DateVsCount>();
- 		
+
 		coronaCountryDataStat = coronaVirusDataService.getCountryStat(country, state);
+		String countAndState = null;
 		
-		model.addAttribute("country", coronaCountryDataStat.getCountry().toUpperCase().concat(", " + coronaCountryDataStat.getState().toUpperCase()));  
-		model.addAttribute("totalCasesToday" ,coronaCountryDataStat.getLatestCases());
-		model.addAttribute("totalCases" ,coronaCountryDataStat.getTotalCases());
+		countAndState = (coronaCountryDataStat.getState().toUpperCase().length() > 0  ? 
+				coronaCountryDataStat.getCountry().toUpperCase().concat(", " + coronaCountryDataStat.getState().toUpperCase()) :
+				coronaCountryDataStat.getCountry().toUpperCase());
+		model.addAttribute("country", countAndState);
+		model.addAttribute("totalCasesToday", coronaCountryDataStat.getLatestCases());
+		model.addAttribute("totalCases", coronaCountryDataStat.getTotalCases());
 
 		List<Ponto> pontos = new ArrayList<>();
 		Ponto ponto = null;
-		for (Map.Entry<Integer,Integer> entry : coronaCountryDataStat.getDateVsCount().entrySet()) {
-			
+		for (Map.Entry<Integer, Integer> entry : coronaCountryDataStat.getDateVsCount().entrySet()) {
+
 			ponto = new Ponto();
 			ponto.setX(entry.getKey());
 			ponto.setY(entry.getValue());
 			pontos.add(ponto);
-			
-			
-			} 
-		model.addAttribute("pontos",pontos);		
-		
-		model.addAttribute("dateVsCounts", dateVsCounts);
+
+		}
+		model.addAttribute("pontos", pontos);
 		return "country";
-		
-	}	
-	
-	
-	
-	
+
+	}
 
 }
