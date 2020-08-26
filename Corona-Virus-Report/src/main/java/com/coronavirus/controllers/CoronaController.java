@@ -75,7 +75,8 @@ public class CoronaController {
 
 		coronaCountryDataStat = coronaVirusDataService.getCountryStat(country, state);
 		String countAndState = null;
-		
+		if (coronaCountryDataStat.getCountry().length() == 0 )
+			return "err";
 		countAndState = (coronaCountryDataStat.getState().toUpperCase().length() > 0  ? 
 				coronaCountryDataStat.getCountry().toUpperCase().concat(", " + coronaCountryDataStat.getState().toUpperCase()) :
 				coronaCountryDataStat.getCountry().toUpperCase());
