@@ -1,8 +1,6 @@
 package com.coronavirus.controllers;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,30 +9,26 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.coronavirus.dummy.Ponto;
-import com.coronavirus.garbage.CanvasjsChartService;
 import com.coronavirus.models.CoronaCountryDataStat;
 import com.coronavirus.models.CoronaLocationStat;
-import com.coronavirus.models.DateVsCount;
 import com.coronavirus.services.CoronaVirusDataService;
 
 @Controller
-//@RequestMapping("/TopicController")
 public class CoronaController {
 
 	@Autowired
 	CoronaVirusDataService coronaVirusDataService;
 
-	@Autowired
-	private CanvasjsChartService canvasjsChartService;
-
 	@RequestMapping("/")
 	public String home(Model model) {
+		return "err";
+		
+	}
+	
+	@RequestMapping("/countries")
+	public String countries(Model model) {
 		System.out.println("Enter home");
 		// System.out.println(coronaVirusDataService.getCoronaLocationStats().size());
 		if (coronaVirusDataService.getCoronaLocationStats().size() > 0) {
@@ -75,7 +69,7 @@ public class CoronaController {
 
 		coronaCountryDataStat = coronaVirusDataService.getCountryStat(country, state);
 		String countAndState = null;
-		if (coronaCountryDataStat.getCountry().length() == 0 )
+		if (coronaCountryDataStat.getCountry() == null )
 			return "err";
 		countAndState = (coronaCountryDataStat.getState().toUpperCase().length() > 0  ? 
 				coronaCountryDataStat.getCountry().toUpperCase().concat(", " + coronaCountryDataStat.getState().toUpperCase()) :

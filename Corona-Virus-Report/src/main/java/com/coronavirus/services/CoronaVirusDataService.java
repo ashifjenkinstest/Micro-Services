@@ -8,19 +8,14 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -130,13 +125,19 @@ public class CoronaVirusDataService {
 	 */
 	public Iterable<CSVRecord> converStringToCSVV1(String data) {
 		System.out.println("Enter converStringToCSV");
-		StringReader csvBodyReader = new StringReader(data);
-		try {
-			records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (data!=null) {
+			
+			StringReader csvBodyReader = new StringReader(data);
+			try {
+				records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return records;
+			
 		}
-		return records;
+		return null;
+		
 
 	}
 
@@ -204,10 +205,12 @@ public class CoronaVirusDataService {
 		System.out.println("country: " + country);
 		System.out.println("state: " + state);
 
-		List<String> header = getVirusDataHeader(getDataFromGit());
-
 		int totalCases = 0;
 		int latestCases = 0;
+		if(records == null) {
+			System.out.println("Got records null " +coronaCountryDataStat.toString());
+			return coronaCountryDataStat;
+		}
 		for (CSVRecord record : records) {
 			String country1 = record.get("Country/Region");
 			String state1 = record.get("Province/State");

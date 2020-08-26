@@ -45,8 +45,11 @@ public class CoronaCountryDataStat {
 	}
 	@Override
 	public String toString() {
-		return "CoronaCountryDataStat [country=" + country + ", state=" + state + ", dateVsCount=" + dateVsCount + "]";
+		return "CoronaCountryDataStat [country=" + country + ", state=" + state + ", dateVsCount=" + dateVsCount
+				+ ", totalCases=" + totalCases + ", latestCases=" + latestCases + "]";
 	}
+	
+	
 	
 	
 	
