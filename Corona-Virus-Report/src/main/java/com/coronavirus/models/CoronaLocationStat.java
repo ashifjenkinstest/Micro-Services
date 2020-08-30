@@ -1,7 +1,7 @@
 package com.coronavirus.models;
 
 public class CoronaLocationStat {
-	
+	private int id;
 	private String state ;
     private String country ;
     private int totalCases;
@@ -9,6 +9,12 @@ public class CoronaLocationStat {
     
     
     
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getTotalCases() {
 		return totalCases;
 	}

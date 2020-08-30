@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<meta charset="ISO-8859-1">
+<title>COVID-19 Tracker</title>
+</head>
+<body>
+   
+<div class="container">
+	<nav class="navbar navbar-default" padding-top: 60px;>
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">COVID-19 Tracker</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="/">Home</a></li>
+	      <li><a href="/admin">Admin</a></li>
+	      <li><a href="/logout">Logout</a></li>
+	      <li><a href="#">Future Feature</a></li>
+	    </ul>
+	  </div>
+	</nav>	
+  <div class="jumbotron">  
+    <p>Shows the latest cases of Covid-19 cases country wise...</p>
+    <table class="table">
+    <tr>
+    	<td>
+    		Total number of cases: <span th:text="${totalCases}" />
+    	<hr>
+    		Total number of cases today: <span th:text="${totalCasesToday}" />
+    	</td>
+    	<td>	
+    		Total number of cases in India: <span th:text="${totalCasesIndia}" />
+    	<hr>
+    		Total number of cases today in India: <span th:text="${totalCasesTodayIndia}" />		
+    	</td>
+    </tr>
+    </table>     
+  </div>
+  <div class="">
+  <h2>Filterable Table</h2>
+  <p>Type something in the input field to search the table for Country, State :</p>  
+  <input class="form-control" id="covidInput" type="text" placeholder="Search...">
+  </div>
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Country</th>
+      <th scope="col">State</th>
+      <th scope="col">Total Cases</th>
+      <th scope="col">Latest Cases</th>
+    </tr>
+  </thead>
+  <tbody id="covidTable">
+    <tr scope="row" th:each="CoronaLocationStat: ${CoronaLocationStats}">
+    	<td th:text="${CoronaLocationStat.id}">--</td>
+       <td > 
+       	<a  th:text="${CoronaLocationStat.country}" th:href="@{country(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state})}"></a>
+       </td>
+       <td th:text="${CoronaLocationStat.state}">--</td>
+       <td th:text="${CoronaLocationStat.totalCases}">0</td>
+       <td th:text="${CoronaLocationStat.latestCases}">0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<script>
+$(document).ready(function(){
+  $("#covidInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#covidTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>

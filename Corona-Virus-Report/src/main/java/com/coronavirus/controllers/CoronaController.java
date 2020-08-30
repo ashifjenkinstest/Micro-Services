@@ -23,6 +23,14 @@ public class CoronaController {
 
 	@RequestMapping("/")
 	public String home(Model model) {
+		model.addAttribute("fsmessage", "Welcome to the Home page");
+		return "err";
+		
+	}
+	
+	@RequestMapping("/admin")
+	public String admin(Model model) {
+		model.addAttribute("fsmessage", "Welcome to the Admin page");
 		return "err";
 		
 	}
@@ -52,9 +60,10 @@ public class CoronaController {
 			model.addAttribute("totalCasesTodayIndia", totalCasesTodayIndia);
 			model.addAttribute("totalCasesIndia", totalCasesIndia);
 
-			return "home";
+			return "countries";
 
 		}
+		model.addAttribute("fsmessage", "Oops : Failed to load data of all countries!");
 		return "err";
 
 	}
@@ -69,8 +78,11 @@ public class CoronaController {
 
 		coronaCountryDataStat = coronaVirusDataService.getCountryStat(country, state);
 		String countAndState = null;
-		if (coronaCountryDataStat.getCountry() == null )
+		if (coronaCountryDataStat.getCountry() == null ) {
+			model.addAttribute("fsmessage", "Oops : Failed to load data of " + country + "!");
 			return "err";
+			
+		}
 		countAndState = (coronaCountryDataStat.getState().toUpperCase().length() > 0  ? 
 				coronaCountryDataStat.getCountry().toUpperCase().concat(", " + coronaCountryDataStat.getState().toUpperCase()) :
 				coronaCountryDataStat.getCountry().toUpperCase());

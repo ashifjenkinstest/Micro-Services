@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<link rel='shortcut icon' href='favicon.ico' type='image/x-icon' />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<meta charset="ISO-8859-1">
+	<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>  		
 <!-- script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
 <script th:inline="javascript">
 window.onload = function() {
@@ -55,8 +55,23 @@ window.onload = function() {
 <title th:text="${country}" ></title>
 </head>
 <body>
+
 	<div class="container">
-  		<div class="jumbotron">
+		 <nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">COVID-19 Tracker</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a href="/">Home</a></li>
+		      <li><a href="/admin">Admin</a></li>
+		      <li><a href="/countries">All Countries</a></li>
+		      <li><a href="/logout">Logout</a></li>
+		      <li><a href="#">Future Feature</a></li>
+		    </ul>
+		  </div>
+		</nav>	
+		<div class="jumbotron">
     		<h4 th:text="${country}"> </h4>
     		<p>Shows the latest cases of Covid-19 cases country wise...</p>
     		<hr>
@@ -64,13 +79,9 @@ window.onload = function() {
     		<br>
     		Total number of cases today: <span th:text="${totalCasesToday}" />
     		<br>
-  			<a href="/countries">All Countries</a>
   		</div>
-  		
-    	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-	
-	<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>  		
-
+  		<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  		</div>
+  	
 </body>
 </html>

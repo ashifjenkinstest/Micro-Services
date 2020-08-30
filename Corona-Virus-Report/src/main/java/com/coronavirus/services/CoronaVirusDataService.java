@@ -175,12 +175,16 @@ public class CoronaVirusDataService {
 	public List<CoronaLocationStat> getAllCountriesData(Iterable<CSVRecord> records) {
 		System.out.println("Enter getAllCountriesData");
 		List<CoronaLocationStat> coronaLocationStats = new ArrayList<CoronaLocationStat>();
-		for (CSVRecord record : records) {
+		
+		int i = 0;
+		for (CSVRecord record : records) { i++;
 			CoronaLocationStat coronaLocationStat = new CoronaLocationStat();
+			
 			String state = record.get("Province/State");
 			String country = record.get("Country/Region");
 			int totalCases = Integer.parseInt(record.get(record.size() - 1));
 			int latestCases = totalCases - Integer.parseInt(record.get(record.size() - 2));
+			coronaLocationStat.setId(i);
 			coronaLocationStat.setState(state);
 			coronaLocationStat.setCountry(country);
 			coronaLocationStat.setLatestCases(latestCases);
