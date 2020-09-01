@@ -19,7 +19,7 @@
 	    <ul class="nav navbar-nav">
 	      <li class="active"><a href="/">Home</a></li>
 	      <li><a href="/admin">Admin</a></li>
-	       <li><a href="/countries">All Countries</a></li>
+	      <li><a href="/countriesV1">All Countries</a></li>
 	      <li><a href="/future">Future</a></li>
 	      <li><a href="/logout">Logout</a></li>
 	    </ul>
@@ -61,7 +61,7 @@
     <tr scope="row" th:each="CoronaLocationStat: ${CoronaLocationStats}">
     	<td th:text="${CoronaLocationStat.id}">--</td>
        <td > 
-       	<a  th:text="${CoronaLocationStat.country}" th:href="@{country(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state})}"></a>
+       	<a  th:text="${CoronaLocationStat.country}" th:href="@{countryV1(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state})}"></a>
        </td>
        <td th:text="${CoronaLocationStat.state}">--</td>
        <td th:text="${CoronaLocationStat.totalCases}">0</td>

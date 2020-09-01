@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 import com.coronavirus.models.CoronaCountryDataStat;
 import com.coronavirus.models.CoronaLocationStat;
 
-@Service
+//@Service
 public class CoronaVirusDataService {
 
 	private static final String CORONA_VIRUS_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
@@ -55,8 +55,8 @@ public class CoronaVirusDataService {
 		
 	
 	
-	@PostConstruct
-	@Scheduled(cron = "0 0 * * * *")
+	//@PostConstruct
+	//@Scheduled(cron = "0 0 * * * *")
 	public void getVirusDataV1() {
 		System.out.println("Enter getVirusDataV1");
 		setCoronaLocationStats(getAllCountriesData(converStringToCSVV1(getDataFromGit())));
