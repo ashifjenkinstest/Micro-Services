@@ -35,6 +35,14 @@ public class CoronaController {
 		
 	}
 	
+	@RequestMapping("/future")
+	public String future(Model model) {
+		model.addAttribute("fsmessage", "Welcome to the Future , its Bright :) ");
+		return "err";
+		
+	}
+	
+	
 	@RequestMapping("/countries")
 	public String countries(Model model) {
 		System.out.println("Enter home");

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<meta charset="ISO-8859-1">
-<title>COVID-19 Tracker</title>
+	
+	<title>COVID-19 Tracker</title>
 </head>
 <body>
 
@@ -20,8 +22,9 @@
 	      <li class="active"><a href="/">Home</a></li>
 	      <li><a href="/admin">Admin</a></li>
 	      <li><a href="/countries">All Countries</a></li>
+	      <li><a href="/future">Future</a></li>
 	      <li><a href="/logout">Logout</a></li>
-	      <li><a href="#">Future Feature</a></li>
+	      <li><span th:text="${#authentication.getPrincipal().getUsername()}"></span></li>
 	    </ul>
 	  </div>
 	</nav>
