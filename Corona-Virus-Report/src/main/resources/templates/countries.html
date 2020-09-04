@@ -55,6 +55,7 @@
       <th scope="col">State</th>
       <th scope="col">Total Cases</th>
       <th scope="col">Latest Cases</th>
+       <th scope="col">Press ADD to save</th>
     </tr>
   </thead>
   <tbody id="covidTable">
@@ -66,6 +67,10 @@
        <td th:text="${CoronaLocationStat.state}">--</td>
        <td th:text="${CoronaLocationStat.totalCases}">0</td>
        <td th:text="${CoronaLocationStat.latestCases}">0</td>
+       <td > 
+       	<a  th:text="ADD" th:href="@{addcountryV1(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state},totalCases=${CoronaLocationStat.totalCases},latestCases=${CoronaLocationStat.latestCases})}"></a>
+       </td>
+       
     </tr>
   </tbody>
 </table>
