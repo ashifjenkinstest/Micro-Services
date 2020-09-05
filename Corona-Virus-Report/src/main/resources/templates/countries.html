@@ -68,7 +68,7 @@
        <td th:text="${CoronaLocationStat.totalCases}">0</td>
        <td th:text="${CoronaLocationStat.latestCases}">0</td>
        <td > 
-       	<a  th:text="ADD" th:href="@{addcountryV1(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state},totalCases=${CoronaLocationStat.totalCases},latestCases=${CoronaLocationStat.latestCases})}"></a>
+       	<a  th:text="ADD" th:href="@{add-country(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state},totalCases=${CoronaLocationStat.totalCases},latestCases=${CoronaLocationStat.latestCases})}"></a>
        </td>
        
     </tr>
