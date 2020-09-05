@@ -20,8 +20,6 @@ import com.coronavirus.utils.LoadDataFromUrl;
 @Service
 public class CoronaVirusDataServiceImpl {
 	
-	
-
 	private String dataFromGitURL;
 
 	private CoronaCountryDataStat coronaCountryDataStat;
@@ -31,8 +29,6 @@ public class CoronaVirusDataServiceImpl {
 	@Autowired
 	private LoadDataFromUrl dataFromUrl;
 
-	
-	
 	public CoronaVirusDataServiceImpl() {
 		System.out.println("Called CoronaVirusDataServiceImpl");
 	}

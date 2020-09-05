@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="shortcut icon" type="image/x-icon" href="../static/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<meta charset="ISO-8859-1">
-<title>COVID-19 Tracker</title>
+	
+	<title>COVID-19 Tracker</title>
 </head>
 <body>
-   
+
 <div class="container">
-	<nav class="navbar navbar-default" padding-top: 60px;>
+	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
 	      <a class="navbar-brand" href="#">COVID-19 Tracker</a>
@@ -24,30 +26,14 @@
 	      <li><a href="/logout">Logout</a></li>
 	    </ul>
 	  </div>
-	</nav>	
-  <div class="jumbotron">  
-    <p>Shows the latest cases of Covid-19 cases country wise...</p>
-    <table class="table">
-    <tr>
-    	<td>
-    		Total number of cases: <span th:text="${totalCases}" />
-    	<hr>
-    		Total number of cases today: <span th:text="${totalCasesToday}" />
-    	</td>
-    	<td>	
-    		Total number of cases in India: <span th:text="${totalCasesIndia}" />
-    	<hr>
-    		Total number of cases today in India: <span th:text="${totalCasesTodayIndia}" />		
-    	</td>
-    </tr>
-    </table>     
+	</nav>
+
+  <div class="jumbotron">
+    <h4><span th:text="${fsmessage}" /></h4>
   </div>
-  <div class="">
-  <h2>Filterable Table</h2>
-  <p>Type something in the input field to search the table for Country, State :</p>  
-  <input class="form-control" id="covidInput" type="text" placeholder="Search...">
-  </div>
- <table class="table">
+</div>  
+<div class="container">
+	<table class="table">
   <thead>
     <tr>
       <th scope="col">Id</th>
@@ -55,11 +41,13 @@
       <th scope="col">State</th>
       <th scope="col">Total Cases</th>
       <th scope="col">Latest Cases</th>
-       <th scope="col">ADD to save</th>
+      <!--
+      <th scope="col">DELETE to remove</th>
+      -->
     </tr>
   </thead>
   <tbody id="covidTable">
-    <tr scope="row" th:each="CoronaLocationStat: ${CoronaLocationStats}">
+    <tr scope="row" th:each="CoronaLocationStat: ${addedCountryDataList}">
     	<td th:text="${CoronaLocationStat.id}">--</td>
        <td > 
        	<a  th:text="${CoronaLocationStat.country}" th:href="@{countryV1(country=${CoronaLocationStat.country},state=${CoronaLocationStat.state})}"></a>
@@ -67,27 +55,15 @@
        <td th:text="${CoronaLocationStat.state}">--</td>
        <td th:text="${CoronaLocationStat.totalCases}">0</td>
        <td th:text="${CoronaLocationStat.latestCases}">0</td>
+       <!-- 
        <td > 
-       	<a  th:text="ADD" th:href="@{add-country(id=${CoronaLocationStat.id},country=${CoronaLocationStat.country},state=${CoronaLocationStat.state},totalCases=${CoronaLocationStat.totalCases},latestCases=${CoronaLocationStat.latestCases})}"></a>
+       	<a  th:text="DELETE" th:href="@{delete-country(id=${CoronaLocationStat.id},country=${CoronaLocationStat.country})}"></a>
        </td>
-       
+        -->
     </tr>
   </tbody>
 </table>
 </div>
-
-
-<script>
-$(document).ready(function(){
-  $("#covidInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#covidTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-
 
 </body>
 </html>

@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http
         .authorizeRequests()
         .antMatchers("/admin").hasRole("ADMIN")// The admin api can only be accessed by the users with admin role
-        .antMatchers("/future").hasRole("USER")
+        //.antMatchers("/future").hasRole("USER")
             .antMatchers("/**").hasAnyRole("USER","ADMIN","ADMIN1")// All the other api can be accessed by  any other role
           //  .antMatchers("/future").hasRole("USER")// The future api can only be accessed by the users with user role
             /*Here the order in which roles are defined matters, in this case we allow all the apis to be accessible by all the users
