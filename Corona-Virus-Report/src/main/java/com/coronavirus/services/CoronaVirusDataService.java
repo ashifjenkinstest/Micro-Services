@@ -12,14 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.PostConstruct;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-
 import com.coronavirus.models.CoronaCountryDataStat;
 import com.coronavirus.models.CoronaLocationStat;
 

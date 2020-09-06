@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.coronavirus.models.CoronaCountryDataStat;
 import com.coronavirus.models.CoronaLocationStat;
-import com.coronavirus.models.CoronaRecord;
 import com.coronavirus.utils.LoadDataFromUrl;
 
 @Service
@@ -34,16 +33,16 @@ public class CoronaVirusDataServiceImpl {
 	}
 	
 	@PostConstruct
-	@Scheduled(cron = "0 0 * * * *")
+	@Scheduled(cron = "0 0 1 * * *")
 	private void getVirusDataV1() {
+		
 		System.out.println("Enter getVirusDataV1");
-		//dataFromUrl = new LoadDataFromUrl();
 		setDataFromGitURL(dataFromUrl.getDataFromGit());
-		//Iterable<CSVRecord>  recoIterable = dataFromUrl.converStringToCSVV1(getDataFromGitURL());
 		
 		setCsvCoronaRecord(/*recoIterable*/ dataFromUrl.converStringToCSVV1(getDataFromGitURL()));
 		setCoronaLocationStats(getAllCountriesData(getCsvCoronaRecord()));
 		System.out.println("Exit getVirusDataV1");
+		
 	}
 	
 	
@@ -54,6 +53,7 @@ public class CoronaVirusDataServiceImpl {
 	 * @return List<CoronaLocationStat>
 	 */
 	public List<CoronaLocationStat> getAllCountriesData(Iterable<CSVRecord> records) {
+		
 		System.out.println("Enter getAllCountriesDataNEW");
 		List<CoronaLocationStat> coronaLocationStats = new ArrayList<CoronaLocationStat>();
 		
@@ -70,7 +70,7 @@ public class CoronaVirusDataServiceImpl {
 			coronaLocationStat.setCountry(country);
 			coronaLocationStat.setLatestCases(latestCases);
 			coronaLocationStat.setTotalCases(totalCases);
-			// System.out.println(coronaLocationStat);
+			
 			coronaLocationStats.add(coronaLocationStat);
 		}
 		return coronaLocationStats;
@@ -83,8 +83,8 @@ public class CoronaVirusDataServiceImpl {
 	 */
 	
 	public CoronaCountryDataStat getCountryStatImpl(String country, String state) {
+		
 		CoronaCountryDataStat coronaCountryDataStat = new CoronaCountryDataStat();
-		// Map<String, Integer> dateVsCount = new HashMap<String, Integer>();
 		Map<Integer, Integer> dateVsCount = new HashMap<Integer, Integer>();
 		System.out.println("Enter getCountryStatImplNEW");
 		System.out.println("country: " + country);
@@ -104,12 +104,9 @@ public class CoronaVirusDataServiceImpl {
 			if (country.equalsIgnoreCase(country1)) {
 
 				if (state.equalsIgnoreCase(state1)) {
-					// System.out.println("country " + country + " found");
 					coronaCountryDataStat.setCountry(country1);
 					coronaCountryDataStat.setState(state1);
 					for (int i = 4; i < record.size(); i++) {
-						// Map date to count
-						// System.out.print(header.get(i-4)+ " -->"+ record.get(i)+ ", ");
 						dateVsCount.put(/* header.get */(i - 4), Integer.parseInt(record.get(i)));
 					}
 					coronaCountryDataStat.setDateVsCount(dateVsCount);
@@ -129,38 +126,17 @@ public class CoronaVirusDataServiceImpl {
 	
 	public CoronaCountryDataStat getCountryStat(String country, String state) {
 
-		//this.coronaCountryDataStat = getCountryStatImpl(country, state);
 		setCoronaCountryDataStat(getCountryStatImpl(country, state));
 		return getCoronaCountryDataStat();
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
 	public String getDataFromGitURL() {
-		//System.out.println(dataFromGitURL);
 		return dataFromGitURL;
 	}
 
 	public void setDataFromGitURL(String dataFromGitURL) {
 		this.dataFromGitURL = dataFromGitURL;
 	}
-
-	
-	
 
 	public Iterable<CSVRecord> getCsvCoronaRecord() {
 		
@@ -188,8 +164,6 @@ public class CoronaVirusDataServiceImpl {
 		this.coronaLocationStats = coronaLocationStats;
 	}
 
-	
-	
 	public void showLoadedData() {
 		System.out.println("Enter showLoadedData");
 		int i = 0;

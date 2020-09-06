@@ -2,10 +2,6 @@ package com.coronavirus.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +46,6 @@ public class CountryDataService {
 	
 	public Boolean checkIfAdded(Integer id) {
 		System.out.println("checkIfAdded " +countryDataRepository.existsById(id) );
-		
 		return countryDataRepository.existsById(id);
 		
 	}
