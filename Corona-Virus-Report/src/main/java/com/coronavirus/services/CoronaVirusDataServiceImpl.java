@@ -14,16 +14,20 @@ import org.springframework.stereotype.Service;
 
 import com.coronavirus.models.CoronaCountryDataStat;
 import com.coronavirus.models.CoronaLocationStat;
+import com.coronavirus.repositories.AllCountriesDataRepository;
+import com.coronavirus.repositories.CountryDataRepository;
 import com.coronavirus.utils.LoadDataFromUrl;
 
 @Service
 public class CoronaVirusDataServiceImpl {
 	
 	private String dataFromGitURL;
-
 	private CoronaCountryDataStat coronaCountryDataStat;
 	private List<CoronaLocationStat> coronaLocationStats;
 	private Iterable<CSVRecord>  csvCoronaRecord;
+	
+	@Autowired
+	AllCountriesDataService allCountriesDataService;
 	
 	@Autowired
 	private LoadDataFromUrl dataFromUrl;
@@ -41,6 +45,7 @@ public class CoronaVirusDataServiceImpl {
 		
 		setCsvCoronaRecord(/*recoIterable*/ dataFromUrl.converStringToCSVV1(getDataFromGitURL()));
 		setCoronaLocationStats(getAllCountriesData(getCsvCoronaRecord()));
+		allCountriesDataService.insertAllCountriesData(getCoronaLocationStats());
 		System.out.println("Exit getVirusDataV1");
 		
 	}

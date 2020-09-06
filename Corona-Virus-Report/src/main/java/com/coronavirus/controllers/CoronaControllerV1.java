@@ -15,6 +15,7 @@ import com.coronavirus.dummy.Ponto;
 import com.coronavirus.models.CoronaCountryDataStat;
 import com.coronavirus.models.CoronaLocationStat;
 import com.coronavirus.models.CountryData;
+import com.coronavirus.services.AllCountriesDataService;
 import com.coronavirus.services.CoronaVirusDataServiceImpl;
 import com.coronavirus.services.CountryDataService;
 
@@ -26,6 +27,9 @@ public class CoronaControllerV1 {
 	private CoronaVirusDataServiceImpl coronaVirusDataServiceImpl;
 	@Autowired
 	private CountryDataService countryDataService;
+	@Autowired 
+	private AllCountriesDataService allCountriesDataService;
+	
 	
 	@RequestMapping(value = "/")
 	public String home(Model model) {
@@ -140,8 +144,8 @@ public class CoronaControllerV1 {
 	public String addCountry(@PathParam(value = "id")int id,
 							 @PathParam(value = "country") String country,
 							 @PathParam(value = "state") String state,
-							 @PathParam(value = "totalCases") String totalCases,
-							 @PathParam(value = "latestCases") String latestCases,
+							 @PathParam(value = "totalCases") int totalCases,
+							 @PathParam(value = "latestCases") int latestCases,
 							 Model model) {
 		String messageStr = null;
 		
@@ -187,8 +191,8 @@ public class CoronaControllerV1 {
 	public String updateCountry(@PathParam(value = "id")int id,
 							 @PathParam(value = "country") String country,
 							 @PathParam(value = "state") String state,
-							 @PathParam(value = "totalCases") String totalCases,
-							 @PathParam(value = "latestCases") String latestCases,
+							 @PathParam(value = "totalCases") int totalCases,
+							 @PathParam(value = "latestCases") int latestCases,
 							 Model model) {
 		String messageStr = null;
 		
@@ -220,11 +224,25 @@ public class CoronaControllerV1 {
 		String messageStr = null;
 		messageStr = "\nCountries from the Database...";
 		model.addAttribute("fsmessage", messageStr);
-		return "updateLoadedCountry";
+		return "updateDeleteLoadedCountry";
 		
 	
 		
 	}
 	
-
+	@RequestMapping(value = "/show-all-countries", method = RequestMethod.GET)
+	//@ResponseBody
+	public String showAllCountries(Model model) {
+		
+		
+		model.addAttribute("addedCountryDataList",allCountriesDataService.showAllCountriesData()) ;
+		String messageStr = null;
+		messageStr = "\nCountries from the Database...";
+		model.addAttribute("fsmessage", messageStr);
+		return "showAllStoredCountries";
+		
+	
+		
+	}
+	
 }

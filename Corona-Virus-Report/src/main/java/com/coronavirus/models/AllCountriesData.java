@@ -15,7 +15,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
-public class CountryData {
+public class AllCountriesData {
 	
 	@Id
 	private Integer id;
