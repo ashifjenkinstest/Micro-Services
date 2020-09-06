@@ -6,6 +6,7 @@ public class CoronaLocationStat {
     private String country ;
     private int totalCases;
     private int latestCases;
+    private String status;
     
     
     
@@ -39,11 +40,18 @@ public class CoronaLocationStat {
 	public void setLatestCases(int latestCases) {
 		this.latestCases = latestCases;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "CoronaLocationStat [state=" + state + ", country=" + country + ", latestCases=" + latestCases + "]";
+		return "CoronaLocationStat [id=" + id + ", state=" + state + ", country=" + country + ", totalCases="
+				+ totalCases + ", latestCases=" + latestCases + ", status=" + status + "]";
 	}
-	    
-    
+	
+	
 
 }

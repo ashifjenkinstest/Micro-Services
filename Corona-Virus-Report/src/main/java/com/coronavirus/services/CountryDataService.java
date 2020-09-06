@@ -48,4 +48,12 @@ public class CountryDataService {
 		
 	}
 	
+	public Boolean checkIfAdded(Integer id) {
+		System.out.println("checkIfAdded " +countryDataRepository.existsById(id) );
+		
+		return countryDataRepository.existsById(id);
+		
+	}
+	
+	
 }
