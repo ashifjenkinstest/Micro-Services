@@ -24,7 +24,7 @@ public class AllCountriesDataService {
 			allCountriesData.setState(coronaLocationStat.getState());
 			allCountriesData.setTotalCases(coronaLocationStat.getTotalCases());
 			allCountriesData.setLatestCases(coronaLocationStat.getLatestCases());
-			
+			System.out.println(allCountriesData.toString());
 			allCountriesDataRepository.save(allCountriesData);
 			
 			

@@ -37,16 +37,19 @@ public class CoronaVirusDataServiceImpl {
 	}
 	
 	@PostConstruct
-	@Scheduled(cron = "0 0 1 * * *")
+	@Scheduled(cron = "0 0 0 * * *")
 	private void getVirusDataV1() {
 		
 		System.out.println("Enter getVirusDataV1");
 		setDataFromGitURL(dataFromUrl.getDataFromGit());
 		
 		setCsvCoronaRecord(/*recoIterable*/ dataFromUrl.converStringToCSVV1(getDataFromGitURL()));
+		if(getCsvCoronaRecord() != null) {
 		setCoronaLocationStats(getAllCountriesData(getCsvCoronaRecord()));
 		allCountriesDataService.insertAllCountriesData(getCoronaLocationStats());
+		}
 		System.out.println("Exit getVirusDataV1");
+		
 		
 	}
 	

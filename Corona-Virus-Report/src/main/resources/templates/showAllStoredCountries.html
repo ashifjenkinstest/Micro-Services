@@ -41,6 +41,8 @@
       <th scope="col">State</th>
       <th scope="col">Total Cases</th>
       <th scope="col">Latest Cases</th>
+       <th scope="col">Create Date</th>
+       <th scope="col">Modify Date</th>
     </tr>
   </thead>
   <tbody id="covidTable">
@@ -52,6 +54,9 @@
        <td th:text="${CoronaLocationStat.state}">--</td>
        <td th:text="${CoronaLocationStat.totalCases}">0</td>
        <td th:text="${CoronaLocationStat.latestCases}">0</td>
+       <td th:text="${#dates.format(CoronaLocationStat.createDate, 'dd-MM-yyyy HH:mm:ss')}">date</td>
+       <td th:text="${#dates.format(CoronaLocationStat.modifyDate, 'dd-MM-yyyy HH:mm:ss')}">date</td>
+       
        
     </tr>
   </tbody>
