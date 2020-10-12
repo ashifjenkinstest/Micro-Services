@@ -41,7 +41,7 @@
   <tbody id="covidTable">
     <tr scope="row" th:each="Countries: ${AllCountries}">
        <td > 
-       	<a  th:text="${Countries.country}" th:href="@{getCountryCaseHistory(iso=${Countries.iso2})}"></a>
+       	<a  th:text="${Countries.country}" th:href="@{/getCountryCaseHistory/{iso2}(iso2 = ${Countries.iso2})}"></a>
        </td>
        <td th:text="${Countries.slug}">--</td>
        <td th:text="${Countries.iso2}">0</td>
