@@ -3,6 +3,8 @@ package com.coronavirus;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerExchangeFilterFunction;
 //import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 //import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -21,10 +23,19 @@ public class Covid19Application {
 		SpringApplication.run(Covid19Application.class, args);
 	}
 	
+	/*
 	@Bean
 	@LoadBalanced
 	public WebClient.Builder getWebClientBuilder() {
 		return  WebClient.builder();
 	}
+	*/
+	
+	@Bean
+    WebClient webClient(LoadBalancerClient loadBalancerClient) {
+        return WebClient.builder()
+                .filter(new LoadBalancerExchangeFilterFunction(loadBalancerClient))
+                .build();
+    }
 	
 }
