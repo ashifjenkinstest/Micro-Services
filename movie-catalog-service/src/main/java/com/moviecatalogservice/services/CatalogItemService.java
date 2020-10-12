@@ -27,7 +27,7 @@ public class CatalogItemService {
                     @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000")
 					/*Wait for 5 seconds before sending the  next set of requests.*/,
             })
-	public CatalogItem getCatalogItem(MovieRating movieRating){
+		public CatalogItem getCatalogItem(MovieRating movieRating){
 		System.out.println("Enter getCatalogItem");
 		System.out.println("movieRating " + movieRating);
 		Movie movie = builder

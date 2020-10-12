@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<meta charset="ISO-8859-1">
+<title>COVID-19 Tracker</title>
+</head>
+<body>
+   
+<div class="container">
+	<nav class="navbar navbar-default" padding-top: 60px;>
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">COVID-19 Tracker</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	      <li class="active"><a href="/">Home</a></li>
+	      <li><a href="/admin">Admin</a></li>
+	      <li><a href="/countriesV1">All Countries</a></li>
+	      <li><a href="/loaded-countries">Saved Countries</a></li>
+	      <li><a href="/logout">Logout</a></li>
+	    </ul>
+	  </div>
+	</nav>	
+  <div class="">
+  <h2><a href="/show-all-countries">Load All Countries</a></li></h2>
+  <p>Type something in the input field to search the table for Country, State :</p>  
+  <input class="form-control" id="covidInput" type="text" placeholder="Search...">
+  </div>
+ <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Country</th>
+      <th scope="col">Confirmed</th>
+      <th scope="col">Recovered</th>
+      <th scope="col">Active</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody id="covidTable">
+    <tr scope="row" th:each="countryCaseHist: ${countryCaseHistory}">
+       <td > 
+       	<a  th:text="${countryCaseHist.country}" ></a>
+       </td>
+       <td th:text="${countryCaseHist.confirmed}">--</td>
+       <td th:text="${countryCaseHist.recovered}">0</td>
+       <td th:text="${countryCaseHist.active}">0</td>
+       <td th:text="${#dates.format(countryCaseHist.dateOfCase, 'dd-MM-yyyy HH:mm:ss')}">date</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<script>
+$(document).ready(function(){
+  $("#covidInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#covidTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>
