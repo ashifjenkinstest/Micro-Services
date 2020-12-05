@@ -53,7 +53,6 @@ import com.microservices.utils.LoadDataFromUri;
 @Configuration
 @ComponentScan(basePackages = "com.microservices")
 @Component
-//@Scope
 public class ReadDataFromCSVFile  {
 	
 	@Autowired
@@ -71,89 +70,7 @@ public class ReadDataFromCSVFile  {
 	
 	@Autowired
 	private CSVReaderStepListener testMyStepListener;
-	/*
-	private ExecutionContext context;
-	
-	private StepExecution stepExecution;
-	
-	private static final String[] OVERRIDDEN_BY_EXPRESSION = null;
-	
-	//@Value("#{jobParameters['csvHeader']}")
-	private String[] header;
-	
-	
-
-	JobParameters parameters = null;//stepExecution.getJobExecution().getJobParameters();
-	
-	
-	
-	
-	public String[] getHeader() {
-		return header;
-	}
-
-	public void setHeader(String[] header) {
-		this.header = header;
-	}
-
-	@Override
-	public String toString() {
-		return "ReadDataFromCSVFile [header=" + Arrays.toString(header) + "]";
-	}
-
-	@BeforeStep
-	//@Deprecated
-	public void beforeReadDataFromCSVFile(StepExecution stepExecution) {
-		System.out.println();
-		System.out.println("Enter beforeReadDataFromCSVFileInternal");
-		this.context = stepExecution.getJobExecution().getExecutionContext();
-		this.parameters = stepExecution.getJobExecution().getJobParameters();
 		
-		String[] addd = (String[]) this.context.get("csvHeader");
-		System.out.println(addd.length);
-		this.stepExecution = stepExecution;
-		
-		//this.header = (String[]) stepExecution.getJobExecution().getExecutionContext().get("csvHeader");
-		setHeader((String[]) stepExecution.getJobExecution().getExecutionContext().get("csvHeader"));
-		System.out.println(getHeader());
-		System.out.println(toString());
-		System.out.println("Exit beforeReadDataFromCSVFileInternal");
-		
-		
-	}
-	
-	*/
-	
-	@Bean
-	@StepScope
-	public FlatFileItemReader<CovidDetailedData>  flatFileItemReaderInternal(String[] header){
-		System.out.println("Enter flatFileItemReaderInternal");
-	
-		System.out.println("Getting header");
-		/*
-		testMyStepListener.getHeader();
-		
-		*/
-		if(header!=null)
-		{
-			for (String string : header) {
-				System.out.print(string+  ", ");
-				System.out.println("header length " + header.length);
-			}
-			
-		}
-		else {
-			System.out.println("Header is null");
-		}
-		
-		System.out.println("Exit flatFileItemReaderInternal");
-		return readDataFromCSVFileImpl.flatFileItemReader(header);
-				
-				
-	}
-	
-	
-	
 	@Bean
 	public Step readDataFromCSVFileStep(String calledFrom) {
 		System.out.println("Enter readDataFromCSVFileStep");
@@ -171,34 +88,6 @@ public class ReadDataFromCSVFile  {
 				.build();
 		
 	}
-
-
-	/*
-
-	@BeforeStep
-	public void beforeStep(StepExecution stepExecution) {
-		// TODO Auto-generated method stub
-		System.out.println("Enter beforeStep");
-		if(stepExecution ==null) {
-			System.out.println("stepExecution is null");
-		}else {
-			System.out.println(((String[]) stepExecution.getJobExecution().getExecutionContext().get("csvHeader")).length);
-			this.header = (String[]) stepExecution.getJobExecution().getExecutionContext().get("csvHeader");
-			System.out.println(this.header);
-			
-		}
-		System.out.println("Exit beforeStep");
-	
-	}
-
-	@BeforeRead
-	public void bread() {
-		System.out.println("Enter bread");
-		System.out.println("Exit bread");
-		
-	}
-	
-*/
 	
 	
 }

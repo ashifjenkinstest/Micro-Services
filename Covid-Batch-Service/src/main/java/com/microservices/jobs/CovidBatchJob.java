@@ -36,7 +36,7 @@ public class CovidBatchJob {
 	public Job CovidBatchJobImpl() {
 		System.out.println("CovidBatchJobImpl");
 		
-		return jobBuilderFactory.get("CovidBatchJobImpl_306")
+		return jobBuilderFactory.get("CovidBatchJobImpl_307")
 				//.listener(new MyStepItemReadListener())
 				.start(loadCSVData.loadCSVDataStep())
 				.on("COMPLETED")
