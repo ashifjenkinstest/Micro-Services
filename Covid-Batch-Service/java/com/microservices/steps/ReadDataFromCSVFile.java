@@ -72,9 +72,8 @@ public class ReadDataFromCSVFile  {
 	private CSVReaderStepListener testMyStepListener;
 		
 	@Bean
-	public Step readDataFromCSVFileStep(String calledFrom) {
+	public Step readDataFromCSVFileStep() {
 		System.out.println("Enter readDataFromCSVFileStep");
-		System.out.println("Called from " + calledFrom);
 		System.out.println("Exit readDataFromCSVFileStep");
 		return stepBuilderFactory.get("flatFileReaderStep")
 				.//listener(new MyStepListener())//add your Listener here
@@ -82,9 +81,11 @@ public class ReadDataFromCSVFile  {
 				listener(testMyStepListener)
 				.<CovidDetailedData,CovidDetailedData>chunk(100)
 				//.listener(new MyStepItemReadListener())//add your Listener here
-				.reader(readDataFromCSVFileImpl.flatFileItemReader(null))
+				.reader(readDataFromCSVFileImpl.flatFileItemReader())
 				//.listener(new MyStepItemReadListener())//add your Listener here
-				.writer(readDataFromCSVFileImpl.localItemWriter())
+				//.writer(readDataFromCSVFileImpl.localItemWriter())
+				.writer(readDataFromCSVFileImpl.compositeItemWriter())
+				.faultTolerant()
 				.build();
 		
 	}

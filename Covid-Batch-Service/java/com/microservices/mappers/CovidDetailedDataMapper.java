@@ -20,11 +20,31 @@ public class CovidDetailedDataMapper implements FieldSetMapper<CovidDetailedData
 			dayCount.add(fieldSet.readInt(i));
 		}
 		//System.out.println("Exit mapFieldSet");
+		String prov = "";
+		String lati = "";
+		String longi = "";
+		if(fieldSet.readString("Province/State") == null || fieldSet.readString("Province/State").length()==0) {
+			prov = "NULL-PROV";
+		}else {
+			prov = fieldSet.readString("Province/State");
+		}
+		//System.out.println("PROV" + prov);
+		if(fieldSet.readString("Lat") == null || fieldSet.readString("Lat").length()==0) {
+			lati = "NULL-LAT";
+		}else {
+			lati = fieldSet.readString("Lat");
+		}
+		if(fieldSet.readString("Long") == null || fieldSet.readString("Long").length()==0) {
+			longi = "NULL-LONG";
+		}else {
+			longi = fieldSet.readString("Long");
+		}
+		
 		return new CovidDetailedData(
-				fieldSet.readString("Province/State"),
+				prov,
 				fieldSet.readString("Country/Region"),
-				fieldSet.readString("Lat"),
-				fieldSet.readString("Long"),
+				lati,
+				longi,
 				dayCount
 				);
 	}

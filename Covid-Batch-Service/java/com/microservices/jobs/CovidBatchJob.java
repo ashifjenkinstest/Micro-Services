@@ -36,14 +36,11 @@ public class CovidBatchJob {
 	public Job CovidBatchJobImpl() {
 		System.out.println("CovidBatchJobImpl");
 		
-		return jobBuilderFactory.get("CovidBatchJobImpl_307")
-				//.listener(new MyStepItemReadListener())
+		return jobBuilderFactory.get("CovidBatchJobImpl_353")
 				.start(loadCSVData.loadCSVDataStep())
 				.on("COMPLETED")
-				.to(readDataFromCSVFile.readDataFromCSVFileStep("Job")).end()
+				.to(readDataFromCSVFile.readDataFromCSVFileStep()).end()
 				.build();
-		
-		//https://stackoverflow.com/questions/6078009/how-to-get-access-to-job-parameters-from-itemreader-in-spring-batch
 		
 	}
 

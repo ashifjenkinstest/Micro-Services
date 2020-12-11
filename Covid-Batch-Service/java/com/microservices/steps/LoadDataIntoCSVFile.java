@@ -2,7 +2,7 @@ package com.microservices.steps;
 
 import java.util.Map;
 
-
+import javax.sql.DataSource;
 
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Step;
@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.microservices.config.LoadDataIntoCSVFileListener;
@@ -41,7 +42,9 @@ public class LoadDataIntoCSVFile  /*implements StepExecutionListener */{
 	@Autowired
 	private StepBuilderFactory stepBuilderFactory;
 	
-
+	@Autowired
+	private DataSource dataSource;
+	
 	private StepExecution stepExecution;
 	
 	
@@ -68,6 +71,25 @@ public class LoadDataIntoCSVFile  /*implements StepExecutionListener */{
 		
 	}
 	
+
+	/*
+	@Bean
+	public Tasklet deleteTables(DataSource da) {
+		System.out.println("Enter deleteTables");
+		return new Tasklet() {
+			
+			@Override
+			public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+				
+				new JdbcTemplate(da).execute("DELETE COVID_COUNTRY_BATCH");
+				System.out.println("Exit deleteTables");
+				return RepeatStatus.FINISHED;
+				
+			};
+		};
+		
+	}
+	*/
 		
 	@Bean
 	public Step loadCSVDataStep() {
@@ -76,7 +98,9 @@ public class LoadDataIntoCSVFile  /*implements StepExecutionListener */{
 		return stepBuilderFactory.get("loadCSVDataStep")
 				//.listener(new MyStepListener())
 				//.listener(new LoadDataIntoCSVFile())
+				//.tasklet(deleteTables(this.dataSource))
 				.tasklet(loadCSVDataStepTasklet())
+				//.tasklet(deleteTables(this.dataSource))
 				.build();
 		
 	}

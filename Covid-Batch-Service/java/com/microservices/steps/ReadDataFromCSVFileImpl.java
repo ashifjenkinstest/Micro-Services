@@ -26,9 +26,12 @@ import org.springframework.batch.core.listener.ExecutionContextPromotionListener
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
+import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourceProvider;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
+import org.springframework.batch.item.support.CompositeItemWriter;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,13 +77,12 @@ public class ReadDataFromCSVFileImpl {
 	
 	@Bean
 	@StepScope
-	//@JobScope
-	public FlatFileItemReader<CovidDetailedData>  flatFileItemReader(String[] header){
+	public FlatFileItemReader<CovidDetailedData>  flatFileItemReader(){
 		System.out.println("Enter flatFileItemReader");
 		
 		FlatFileItemReader<CovidDetailedData> fileItemReader  = new FlatFileItemReader<CovidDetailedData>();
 		fileItemReader.setLinesToSkip(1);
-		//new PathResource
+
 		System.out.println("Dynamic File Name " + testMyStepListener.getCsvFileName());
 		fileItemReader.setStrict(true);
 		
@@ -88,14 +90,11 @@ public class ReadDataFromCSVFileImpl {
 		System.out.println(directory.getAbsolutePath());
 		System.out.println("Exists " + directory.exists());
 		
-		
-		//fileItemReader.setResource(new ClassPathResource("Data/Covid_051220208478227628523852485.csv"));
 		fileItemReader.setResource(new PathResource(csv_data_dir.concat("/".concat(testMyStepListener.getCsvFileName()))));
 		DefaultLineMapper<CovidDetailedData> defaultLineMapper = new DefaultLineMapper<CovidDetailedData>();
 		
 		DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer(",");
 		delimitedLineTokenizer.setNames(testMyStepListener.getHeader());
-		
 		
 		defaultLineMapper.setLineTokenizer(delimitedLineTokenizer);
 		defaultLineMapper.setFieldSetMapper(new CovidDetailedDataMapper());
@@ -107,21 +106,47 @@ public class ReadDataFromCSVFileImpl {
 		
 	}
 	
-
-
 	@Bean
 	public org.springframework.batch.item.ItemWriter<CovidDetailedData> localItemWriter(){
 		System.out.println("Enter localItemWriter");
 		System.out.println("Exit localItemWriter");
 		return items -> {
             for(CovidDetailedData item : items ){
-               System.out.println(item.toString());
+               System.out.println("Actual " + item.toString());
 
             }
         };
 	}
 
 
+	
+	
+	@Bean
+	public JdbcBatchItemWriter<CovidDetailedData> jdbcBatchCovidCountryWriter(){
+		System.out.println("Enter jdbcBatchCovidCountryWriter");
+		JdbcBatchItemWriter<CovidDetailedData> jdbcBatchItemWriter = new JdbcBatchItemWriter<CovidDetailedData>();
+		jdbcBatchItemWriter.setDataSource(this.dataSource);
+		
+		jdbcBatchItemWriter.setSql(""
+				+ "INSERT INTO COVID_COUNTRY_BATCH ( COUNTRY, PROVINCE, LONGITUDE, LATITUDE) "
+				+ "VALUES ( :country, :province , :lat, :lon)"
+				+ "");
+		
+	
+		jdbcBatchItemWriter.setItemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<CovidDetailedData>());
+		jdbcBatchItemWriter.afterPropertiesSet();
+			
+		System.out.println("Exit jdbcBatchCovidCountryWriter");
+		return jdbcBatchItemWriter;
+		
+	}
+	
+	@Bean
+	public CompositeItemWriter<CovidDetailedData> compositeItemWriter(){
+	    CompositeItemWriter<CovidDetailedData> writer = new CompositeItemWriter<CovidDetailedData>();
+	    writer.setDelegates(Arrays.asList(localItemWriter(),jdbcBatchCovidCountryWriter()));
+	    return writer;
+	}
 	
 	
 }

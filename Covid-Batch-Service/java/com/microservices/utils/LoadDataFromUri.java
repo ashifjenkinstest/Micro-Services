@@ -165,7 +165,13 @@ public class LoadDataFromUri {
 	    Date date = new Date();  
 	    //System.out.println(formatter.format(date).toString()); 
 		String csv_file_name = "Covid_".concat(formatter.format(date).replace("\"", ""));
-		
+		for (File f : directory.listFiles()) {
+		    if (f.getName().startsWith(csv_file_name)) {
+		    	System.out.println(f.getName() + " will be Deleted");
+		        f.delete();
+		    	
+		    }
+		}
 		
 	    File file = File.createTempFile(csv_file_name, ".csv", directory);
 	    System.out.println("AbsolutePath " + file.getAbsolutePath());
