@@ -1,18 +1,11 @@
 package com.microservices.config;
 
 
-import javax.batch.runtime.context.StepContext;
-
-import org.aspectj.lang.annotation.Before;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.AfterStep;
 import org.springframework.batch.core.annotation.BeforeStep;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-
-import com.microservices.models.CovidCsvHeader;
-import com.microservices.utils.LoadDataFromUri;
 
 @Component
 @Configuration

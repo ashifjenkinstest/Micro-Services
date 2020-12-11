@@ -1,20 +1,14 @@
 package com.microservices.jobs;
 
-import javax.batch.runtime.StepExecution;
-
 import org.springframework.batch.core.Job;
 
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.listener.ExecutionContextPromotionListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.microservices.listeners.MyJobListener;
-import com.microservices.listeners.MyStepItemReadListener;
-import com.microservices.listeners.CSVReaderStepListener;
 import com.microservices.steps.LoadDataIntoCSVFile;
 import com.microservices.steps.ReadDataFromCSVFile;
 
@@ -36,7 +30,7 @@ public class CovidBatchJob {
 	public Job CovidBatchJobImpl() {
 		System.out.println("CovidBatchJobImpl");
 		
-		return jobBuilderFactory.get("CovidBatchJobImpl_353")
+		return jobBuilderFactory.get("CovidBatchJobImpl_354")
 				.start(loadCSVData.loadCSVDataStep())
 				.on("COMPLETED")
 				.to(readDataFromCSVFile.readDataFromCSVFileStep()).end()
