@@ -1,0 +1,1 @@
+1.src/main/resources is under the class path just like src/main/java
