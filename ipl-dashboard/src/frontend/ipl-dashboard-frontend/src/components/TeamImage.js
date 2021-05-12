@@ -28,7 +28,7 @@ export const TeamImage = ({ team }) => {
   };
 
   let logoName = deflogo;
-  console.log("in image team " + team);
+  //console.log("In image team " + team);
   if (team === "Mumbai Indians") {
     logoName = milogo;
   }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.ashifs.model.Match;
+import com.ashifs.model.Matches;
 import com.ashifs.model.Team;
 import com.ashifs.model.Teams;
 import com.ashifs.repositories.MatchRepository;
@@ -52,21 +53,22 @@ public class TeamController {
     }
 
     @RequestMapping(path = "/matches/{teamName}")
-    public List<Match> getMatchOfTeam(@PathVariable String teamName) {
+    public Matches getMatchOfTeam(@PathVariable String teamName) {
 
-        return this.matchRepository.findTopFewByTeam1OrTeam2OrderByMatchDateDesc(teamName, 4);
+        return new Matches(this.matchRepository.findTopFewByTeam1OrTeam2OrderByMatchDateDesc(teamName, 4));
 
     }
 
     @RequestMapping(path = "/teams/{teamName}/matches")
-    public List<Match> getMatchOfTeamByDateRanges(@PathVariable String teamName, @RequestParam int year) {
+    public Matches getMatchOfTeamByDateRanges(@PathVariable String teamName, @RequestParam int year) {
         LocalDate startDate = LocalDate.of(year, 1, 1);
         LocalDate endDate = LocalDate.of(year + 1, 1, 1).getYear() > LocalDate.now().getYear()
                 ? LocalDate.of(year, 1, 1).plusMonths(12)
                 : LocalDate.of(year + 1, 1, 1);
         System.out.println(startDate + " " + endDate);
-        return this.matchRepository.findByTeam1AndMatchDateBetweenOrTeam2AndMatchDateBetweenOrderByMatchDateDesc(
-                teamName, startDate, LocalDate.now(), teamName, startDate, LocalDate.now());
+        return new Matches(
+                this.matchRepository.findByTeam1AndMatchDateBetweenOrTeam2AndMatchDateBetweenOrderByMatchDateDesc(
+                        teamName, startDate, LocalDate.now(), teamName, startDate, LocalDate.now()));
 
     }
 

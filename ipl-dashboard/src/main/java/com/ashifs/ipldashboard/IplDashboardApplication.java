@@ -1,4 +1,4 @@
-package com.ashifs.ipldashboardq;
+package com.ashifs.ipldashboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
