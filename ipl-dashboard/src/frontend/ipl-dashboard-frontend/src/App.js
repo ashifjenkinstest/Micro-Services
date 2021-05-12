@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import AllTeams from "./pages/AllTeams";
 import AllTeamsPage from "./pages/AllTeams";
 import TeamPage from "./pages/TeamPage";

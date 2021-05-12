@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import MatchSummaryCard from "../components/MatchSummaryCard";
 import TeamImage from "../components/TeamImage";
 import { useParams, Link } from "react-router-dom";
+import "../csss/TeamPage.scss";
+import LastMatchSummary from "../components/LastMatchSummaryCard";
 
 export const TeamPage = ({ team }) => {
   const [teamLocal, setTeamLocal] = useState({ lastestMatches: [] });
@@ -29,34 +31,42 @@ export const TeamPage = ({ team }) => {
     };
     fetchAllTeams();
   }, [rootTeamName]);
-
+  const matchesWon = teamLocal.totalWins;
+  const matchesLost = teamLocal.totalMatches - teamLocal.totalWins;
   if (!teamLocal || !teamLocal.teamName) {
     return <h1>Team Not Found!</h1>;
   }
   return (
     <React.Fragment>
       <div className="TeamPage">
-        <div className="card">
-          <div className="container">
-            <h1>
-              <b>Team {teamLocal.teamName}</b>
-            </h1>
-            <TeamImage team={teamLocal.teamName} />
-            <p>
-              {teamLocal.teamName} ,Matches Played : {teamLocal.totalMatches}{" "}
-              ,Matches Won: {teamLocal.totalWins}
-            </p>
-          </div>
+        <div className="team-name-section">
+          <h1 className="team-name">Team {teamLocal.teamName}</h1>
+          <TeamImage team={teamLocal.teamName} />
         </div>
-        <ul>
-          {teamLocal.lastestMatches.slice(1).map((latestMatch) => (
+        <div className="win-loss-section">
+          Win/LossesMatches {teamLocal.totalWins}/{matchesLost}
+        </div>
+        <div className="last-match-summary-section">
+          <LastMatchSummary
+            key={teamLocal.lastestMatches[0].id}
+            match={teamLocal.lastestMatches[0]}
+            mainTeam={rootTeamName}
+          />
+        </div>
+
+        {teamLocal.lastestMatches.slice(1).map((latestMatch) => (
+          <div className="match-summary-section">
             <MatchSummaryCard
               key={latestMatch.id}
               match={latestMatch}
               mainTeam={rootTeamName}
             />
-          ))}
-        </ul>
+          </div>
+        ))}
+
+        <div>
+          <a href="#">More</a>
+        </div>
       </div>
     </React.Fragment>
   );

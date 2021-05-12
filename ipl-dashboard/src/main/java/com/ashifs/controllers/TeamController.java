@@ -1,9 +1,7 @@
 package com.ashifs.controllers;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.ashifs.model.Match;
 import com.ashifs.model.Matches;
 import com.ashifs.model.Team;
 import com.ashifs.model.Teams;
@@ -46,7 +44,7 @@ public class TeamController {
         team.setTotalMatches(teamInternal.getTotalMatches());
         team.setTotalWins(teamInternal.getTotalWins());
 
-        team.setLastestMatches(this.matchRepository.findTop5ByTeam1OrTeam2OrderByMatchDateDesc(teamName, teamName));
+        team.setLastestMatches(this.matchRepository.findTop4ByTeam1OrTeam2OrderByMatchDateDesc(teamName, teamName));
 
         return team;
 
