@@ -41,7 +41,9 @@ export const TeamPage = ({ team }) => {
       <div className="TeamPage">
         <div className="team-name-section">
           <h1 className="team-name">Team {teamLocal.teamName}</h1>
-          <TeamImage team={teamLocal.teamName} />
+          <div className="team-image">
+            <TeamImage team={teamLocal.teamName} />
+          </div>
         </div>
         <div className="win-loss-section">
           Win/LossesMatches {teamLocal.totalWins}/{matchesLost}

@@ -1,0 +1,27 @@
+.MatchPage {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+
+  .latest-match-from-year {
+    font: 100;
+    grid-column: span 2;
+    justify-self: start;
+    align-self: center;
+    color: whitesmoke;
+  }
+  .team-image {
+    grid-column: span 1;
+    align-self: end;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 3px;
+    width: 210px;
+  }
+  .match-detail-section {
+    grid-column: span 3;
+    align-self: center;
+  }
+}

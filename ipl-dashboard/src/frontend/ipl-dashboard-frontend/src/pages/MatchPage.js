@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MatchDetailsCard from "../components/MatchDetailsCard";
 import TeamImage from "../components/TeamImage";
 import TeamPage from "./TeamPage";
+import "../csss/MatchPage.scss";
 import { useParams, Link } from "react-router-dom";
 
 function MatchPage() {
@@ -29,21 +30,27 @@ function MatchPage() {
       </div>
     );
   return (
-    <div>
-      <h1>
-        Latest Matches of {matchesOfTeam} from Year {matchFromYear}{" "}
-      </h1>
-      <TeamImage team={matchesOfTeam} />
-      <ul>
-        {matches.match.map((mat) => (
+    <div className="MatchPage">
+      <div className="latest-match-from-year">
+        <h3>Latest Matches of </h3>
+        <h1></h1>
+        <h1>{matchesOfTeam} </h1>
+        <h3>since </h3> <h1> {matchFromYear} </h1>
+      </div>
+      <div className="team-image">
+        <TeamImage team={matchesOfTeam} />
+      </div>
+
+      {matches.match.map((mat) => (
+        <div className="match-detail-section">
           <MatchDetailsCard
             key={mat.id}
             match={mat}
             matchesOfYear={matchYear}
             matchOfTeam={matchesOfTeam}
           />
-        ))}
-      </ul>
+        </div>
+      ))}
     </div>
   );
 }

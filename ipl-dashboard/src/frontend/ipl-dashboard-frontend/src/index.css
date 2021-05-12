@@ -8,10 +8,15 @@
 
 a {
   text-decoration: none;
+  color: lawngreen;
 }
 
 body {
   font-family: "Rubik", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
+  color: white;
+  max-width: 1110px;
+  margin: auto;
 }
