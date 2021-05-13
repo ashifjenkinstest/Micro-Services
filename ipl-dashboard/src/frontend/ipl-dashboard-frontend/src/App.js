@@ -16,6 +16,9 @@ function App() {
           <Route path="/teams/:rootTeamName">
             <TeamPage />
           </Route>
+          <Route path="/teams">
+            <AllTeams />
+          </Route>
         </Switch>
       </Router>
     </div>

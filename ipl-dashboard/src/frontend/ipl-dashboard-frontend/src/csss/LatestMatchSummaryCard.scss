@@ -1,0 +1,24 @@
+.LastestMatchSummaryCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px;
+  margin-bottom: 1px;
+
+  .latest-match-additional-detail,
+  .match-date,
+  .team-name,
+  .toss-winner-descision,
+  .match-winner-result-margin,
+  .player-of-the-match,
+  .match-venue,
+  .match-umpires {
+    margin-top: 5px;
+  }
+
+  .latest-match-additional-detail {
+    text-align: right;
+    & > p {
+      margin-bottom: 20px;
+    }
+  }
+}

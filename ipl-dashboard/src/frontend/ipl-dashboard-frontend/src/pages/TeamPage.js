@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import MatchSummaryCard from "../components/MatchSummaryCard";
+
 import TeamImage from "../components/TeamImage";
 import { useParams, Link } from "react-router-dom";
 import "../csss/TeamPage.scss";
 import LastMatchSummary from "../components/LastMatchSummaryCard";
+import MatchSummaryCard from "../components/MatchSummaryCard";
+import "../csss/MatchSummaryCard.scss";
 
 export const TeamPage = ({ team }) => {
   const [teamLocal, setTeamLocal] = useState({ lastestMatches: [] });
@@ -46,7 +48,7 @@ export const TeamPage = ({ team }) => {
           </div>
         </div>
         <div className="win-loss-section">
-          Win/LossesMatches {teamLocal.totalWins}/{matchesLost}
+          Win/Losses: {teamLocal.totalWins}/{matchesLost}
         </div>
         <div className="last-match-summary-section">
           <LastMatchSummary
@@ -55,10 +57,14 @@ export const TeamPage = ({ team }) => {
             mainTeam={rootTeamName}
           />
         </div>
+        <div className="match-summary-vs">
+          <h5>Match Summary vs</h5>
+        </div>
 
         {teamLocal.lastestMatches.slice(1).map((latestMatch) => (
-          <div className="match-summary-section">
+          <div>
             <MatchSummaryCard
+              className="match-summary-section"
               key={latestMatch.id}
               match={latestMatch}
               mainTeam={rootTeamName}
@@ -66,8 +72,8 @@ export const TeamPage = ({ team }) => {
           </div>
         ))}
 
-        <div>
-          <a href="#">More</a>
+        <div className="more-section">
+          <a href="#">More></a>
         </div>
       </div>
     </React.Fragment>

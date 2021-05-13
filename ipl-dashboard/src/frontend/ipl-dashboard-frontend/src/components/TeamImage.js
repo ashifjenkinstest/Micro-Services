@@ -1,5 +1,5 @@
 import React from "react";
-import "../csss/MatchSummaryCard.css";
+import "../csss/MatchSummaryCard.scss";
 import deflogo from "../images/DEF.jpg"; // Tell webpack this JS file uses this image
 import Image from "react-bootstrap/Image";
 import csklogo from "../images/CSK.jpg";

@@ -1,0 +1,17 @@
+.AllTeams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+
+  .ipl-teams-section {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+
+  .team-name-section {
+    font-size: 4rem;
+    margin-bottom: 20px;
+  }
+}

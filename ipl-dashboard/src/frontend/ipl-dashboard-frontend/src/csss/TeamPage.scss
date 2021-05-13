@@ -1,7 +1,7 @@
 .TeamPage {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 
@@ -13,17 +13,8 @@
   }
 
   .team-name {
-    font: 100;
-  }
-  .last-match-summary-section {
-    grid-column: span 4;
-  }
-  .match-summary-section {
-    grid-column: span 1;
-  }
-
-  .win-loss-section {
-    justify-self: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
   }
 
   .team-image {
@@ -32,5 +23,29 @@
     border-radius: 4px;
     padding: 3px;
     width: 210px;
+  }
+  .win-loss-section {
+    justify-self: center;
+    font-size: 1rem;
+    grid-column: span 1;
+  }
+
+  .last-match-summary-section {
+    grid-column: span 4;
+    margin-bottom: 0 px;
+  }
+  .match-summary-vs {
+    grid-column: span 4;
+    grid-row-start: auto;
+    height: min-content;
+  }
+  .match-summary-section-root {
+  }
+
+  .match-summary-section {
+    grid-column: span 1;
+  }
+  .more-section {
+    grid-column: span 1;
   }
 }

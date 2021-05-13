@@ -1,37 +1,38 @@
 import React from "react";
-import "../csss/MatchSummaryCard.css";
+import "../csss/MatchSummaryCard.scss";
 import { useParams, Link } from "react-router-dom";
 
 export const MatchSummaryCard = ({ mainTeam, match }) => {
   const rootTeam = mainTeam === match.team1 ? match.team2 : match.team1;
   const rootTeamRoute = "/teams/" + rootTeam;
+
+  const isMatchWonByMainTeam = mainTeam === match.winner;
+
   return (
-    <div className="MatchSummaryCard">
-      <h5>Match Summary vs</h5>
+    <div
+      className={
+        isMatchWonByMainTeam
+          ? "MatchSummaryCard won-card"
+          : "MatchSummaryCard lost-card"
+      }
+    >
       <h3>
         <Link to={rootTeamRoute}>{rootTeam}</Link>
       </h3>
-      <h6>(*Team 1 Bats First)</h6>
-      <table id="customers">
-        <tbody>
-          <tr>
-            <th>Match Date</th>
-            <th>Team 1</th>
-            <th>Team 2</th>
+      <h5 className="match-date">Played On {match.matchDate}</h5>
 
-            <th>Result</th>
-          </tr>
-          <tr>
-            <td>{match.matchDate}</td>
-            <td>{match.team1}</td>
-            <td>{match.team2}</td>
-
-            <td>
-              {match.tossWinner} Won By {match.resultMargin} {match.result}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <span>
+        <h4 className="toss-winner-descision">
+          {match.tossWinner} won the TOSS and elected to {match.tossDecision}{" "}
+          first.
+        </h4>
+      </span>
+      <h2 className="match-winner-result-margin">
+        {match.winner} by {match.resultMargin} {match.result}
+      </h2>
+      <h4 className="player-of-the-match">
+        {match.playerOfMatch} was Player of the Match
+      </h4>
     </div>
   );
 };
