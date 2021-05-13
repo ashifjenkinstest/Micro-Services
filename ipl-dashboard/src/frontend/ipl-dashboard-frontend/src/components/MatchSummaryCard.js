@@ -16,6 +16,7 @@ export const MatchSummaryCard = ({ mainTeam, match }) => {
           : "MatchSummaryCard lost-card"
       }
     >
+      <span>vs</span>
       <h3>
         <Link to={rootTeamRoute}>{rootTeam}</Link>
       </h3>
@@ -23,7 +24,7 @@ export const MatchSummaryCard = ({ mainTeam, match }) => {
 
       <span>
         <h4 className="toss-winner-descision">
-          {match.tossWinner} won the TOSS and elected to {match.tossDecision}{" "}
+          {match.tossWinner} won the toss and elected to {match.tossDecision}{" "}
           first.
         </h4>
       </span>

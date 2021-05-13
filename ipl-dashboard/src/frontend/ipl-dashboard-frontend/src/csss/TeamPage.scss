@@ -6,9 +6,9 @@
   grid-row-gap: 20px;
 
   .team-name-section {
-    grid-column: span 3;
+    grid-column: span 2;
     justify-self: start;
-    align-self: end;
+    margin-top: 10px;
     color: white;
   }
 
@@ -27,12 +27,14 @@
   }
   .win-loss-section {
     justify-self: center;
-    font-size: 1rem;
+    width: 210px;
     grid-column: span 1;
+    padding: 30px;
+    text-align: center;
   }
 
   .last-match-summary-section {
-    grid-column: span 3;
+    grid-column: span 4;
     margin-bottom: 0 px;
   }
   .match-summary-vs {
@@ -48,5 +50,11 @@
   }
   .more-section {
     grid-column: span 1;
+    align-self: center;
+    font-size: 1rem;
+    justify-self: center;
   }
+}
+.summary-card {
+  height: 30px;
 }

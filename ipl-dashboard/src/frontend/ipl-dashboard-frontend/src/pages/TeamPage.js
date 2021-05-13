@@ -6,6 +6,7 @@ import "../csss/TeamPage.scss";
 import LastMatchSummary from "../components/LastMatchSummaryCard";
 import MatchSummaryCard from "../components/MatchSummaryCard";
 import "../csss/MatchSummaryCard.scss";
+import { PieChart } from "react-minimal-pie-chart";
 
 export const TeamPage = ({ team }) => {
   const [teamLocal, setTeamLocal] = useState({ lastestMatches: [] });
@@ -42,15 +43,26 @@ export const TeamPage = ({ team }) => {
     <React.Fragment>
       <div className="TeamPage">
         <div className="team-name-section">
-          <h1 className="team-name">Team {teamLocal.teamName}</h1>
-        </div>
-
-        <div className="win-loss-section">
-          Win/Losses: {teamLocal.totalWins}/{matchesLost}
+          <h1 className="team-name"> {teamLocal.teamName}</h1>
         </div>
         <div className="team-image">
           <TeamImage team={teamLocal.teamName} />
         </div>
+
+        <div className="win-loss-section">
+          <h5>Win/Loss</h5>
+          <PieChart
+            data={[
+              {
+                title: "Won",
+                value: teamLocal.totalWins,
+                color: "#4da375",
+              },
+              { title: "Lost", value: matchesLost, color: "#a34d5d" },
+            ]}
+          />
+        </div>
+
         <div className="last-match-summary-section">
           <LastMatchSummary
             key={teamLocal.lastestMatches[0].id}
@@ -58,8 +70,10 @@ export const TeamPage = ({ team }) => {
             mainTeam={rootTeamName}
           />
         </div>
-        <div className="match-summary-vs">
-          <h5>Match Summary vs</h5>
+        <div className="match-summary-vs summary-card">
+          <h5></h5>
+          <h2>Match Summary of previous matches</h2>
+          <h5></h5>
         </div>
 
         {teamLocal.lastestMatches.slice(1).map((latestMatch) => (
@@ -74,7 +88,7 @@ export const TeamPage = ({ team }) => {
         ))}
 
         <div className="more-section">
-          <a href="#">More></a>
+          <a href="#">More ></a>
         </div>
       </div>
     </React.Fragment>
