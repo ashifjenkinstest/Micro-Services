@@ -43,12 +43,13 @@ export const TeamPage = ({ team }) => {
       <div className="TeamPage">
         <div className="team-name-section">
           <h1 className="team-name">Team {teamLocal.teamName}</h1>
-          <div className="team-image">
-            <TeamImage team={teamLocal.teamName} />
-          </div>
         </div>
+
         <div className="win-loss-section">
           Win/Losses: {teamLocal.totalWins}/{matchesLost}
+        </div>
+        <div className="team-image">
+          <TeamImage team={teamLocal.teamName} />
         </div>
         <div className="last-match-summary-section">
           <LastMatchSummary

@@ -13,11 +13,12 @@
   }
 
   .team-name {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 20px;
   }
 
   .team-image {
+    grid-column: span 1;
     align-self: end;
     border: 2px solid #ddd;
     border-radius: 4px;
@@ -31,7 +32,7 @@
   }
 
   .last-match-summary-section {
-    grid-column: span 4;
+    grid-column: span 3;
     margin-bottom: 0 px;
   }
   .match-summary-vs {

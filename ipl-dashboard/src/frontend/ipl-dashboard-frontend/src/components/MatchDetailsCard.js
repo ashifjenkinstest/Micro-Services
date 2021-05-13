@@ -8,8 +8,17 @@ export const MatchDetailsCard = ({ match, matchesOfYear, matchOfTeam }) => {
     matchOfTeam === match.team1 ? match.team2 : match.team1;
   const matchesOfTeamUrl = `/teams/${oppositionTeam}/matches/${matchesOfYear}`;
   const spc = "           ";
+
+  const isMatchWonByMainTeam = matchOfTeam === match.winner;
+
   return (
-    <div className="MatchDetailsCard">
+    <div
+      className={
+        isMatchWonByMainTeam
+          ? "MatchDetailsCard won-card"
+          : "MatchDetailsCard lost-card"
+      }
+    >
       <h1>
         <span className="vs">vs</span>{" "}
         <Link to={matchesOfTeamUrl}>{oppositionTeam}</Link>
