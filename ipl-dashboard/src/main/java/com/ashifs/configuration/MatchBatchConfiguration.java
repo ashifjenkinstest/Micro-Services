@@ -40,9 +40,9 @@ public class MatchBatchConfiguration {
   public StepBuilderFactory stepBuilderFactory;
 
   @Autowired
-	private DataSource dataSource;
+  private DataSource dataSource;
 
-  MatchBatchConfiguration(){
+  MatchBatchConfiguration() {
     System.out.println("<============== MatchBatchConfiguration ==================>");
   }
 
@@ -51,7 +51,6 @@ public class MatchBatchConfiguration {
     System.out.println("FlatFileItemReader===>");
     return new FlatFileItemReaderBuilder<MatchInput>().name("personItemReader")
         .resource(new ClassPathResource("IPL Matches 2008-2020.csv")).delimited().names(FIELD_NAME)
-        .linesToSkip(2)
         .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchInput>() {
           {
             setTargetType(MatchInput.class);
@@ -69,30 +68,21 @@ public class MatchBatchConfiguration {
     return new JdbcBatchItemWriterBuilder<Match>()
         .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
         .sql(
-            "INSERT INTO MATCH (id,city,match_date,player_of_match,venue,team1,team2,toss_winner,toss_decision,winner,result,result_margin,eliminator,umpire2,umpire1)"
-                + "VALUES (:id,:city,:matchDate,:playerOfMatch,:venue,:team1,:team2,:tossWinner,:tossDecision,:winner,:result,:resultMargin,:eliminator,:umpire2,:umpire1)")
+            "INSERT INTO MATCH (id,city,match_date,player_of_match,venue,team1,team2,toss_winner,toss_decision,winner,opponent,result,result_margin,eliminator,umpire2,umpire1)"
+                + "VALUES (:id,:city,:matchDate,:playerOfMatch,:venue,:team1,:team2,:tossWinner,:tossDecision,:winner,:opponent,:result,:resultMargin,:eliminator,:umpire2,:umpire1)")
         .dataSource(this.dataSource).build();
   }
 
   @Bean
   public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
-    return jobBuilderFactory
-    .get("importMatchDetails")
-    .incrementer(new RunIdIncrementer())
-    .listener(listener)
-    .flow(step1)
-    .end()
-    .build();
+    return jobBuilderFactory.get("importMatchDetails").incrementer(new RunIdIncrementer()).listener(listener)
+        .flow(step1).end().build();
   }
 
   @Bean
   public Step step1(JdbcBatchItemWriter<Match> writer) {
-    return stepBuilderFactory
-    .get("step1")
-    .<MatchInput, Match>chunk(10)
-    .reader(reader())
-    .processor(processor())
-    .writer(writer).build();
+    return stepBuilderFactory.get("step1").<MatchInput, Match>chunk(10).reader(reader()).processor(processor())
+        .writer(writer).build();
   }
 
 }

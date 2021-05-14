@@ -1,9 +1,17 @@
 package com.ashifs.controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.ashifs.model.MatchStatisticsLost;
+import com.ashifs.model.MatchStatisticsWon;
 import com.ashifs.model.Matches;
 import com.ashifs.model.Team;
+import com.ashifs.model.TeamStat;
+import com.ashifs.model.TeamStatistics;
 import com.ashifs.model.Teams;
 import com.ashifs.repositories.MatchRepository;
 import com.ashifs.repositories.TeamRepository;
@@ -70,4 +78,31 @@ public class TeamController {
 
     }
 
+    @RequestMapping(path = "/teams/{teamName}/statistics")
+    public TeamStat getMatchStatisticsByTeamName(@PathVariable String teamName) {
+
+        List<TeamStatistics> teamStatistics = new ArrayList<>();
+        TeamStat teamStatReturn = new TeamStat();
+        Map<String, TeamStatistics> teamStat = new HashMap<String, TeamStatistics>();
+        System.out.println("Initial list of elements: " + teamStat);
+        for (MatchStatisticsWon iterable_element : this.matchRepository.findByWinnerGroupByOpponent(teamName)) {
+            // System.out.println(iterable_element.getOpponent());
+            teamStat.put(iterable_element.getOpponent(), new TeamStatistics(iterable_element.getWinner(),
+                    iterable_element.getOpponent(), iterable_element.getWon(), 0L));
+        }
+
+        for (MatchStatisticsLost iterable_element : this.matchRepository.findByLoserGroupByOpponent(teamName)) {
+            if (teamStat.get(iterable_element.getWinner()) == null)
+                teamStat.put(iterable_element.getOpponent(), new TeamStatistics(iterable_element.getOpponent(),
+                        iterable_element.getWinner(), 0L, iterable_element.getLost()));
+            else
+                teamStat.get(iterable_element.getWinner()).setLost(iterable_element.getLost()); // System.out.println(iterable_element.getWinner());
+        }
+
+        teamStat.values().forEach(team -> teamStatistics.add(team));
+        teamStatReturn.setStatistics(teamStatistics);
+        // return this.matchRepository.findByWinnerGroupByOpponent(teamName);
+        // return this.matchRepository.findByLoserGroupByOpponent(teamName);
+        return teamStatReturn;
+    }
 }

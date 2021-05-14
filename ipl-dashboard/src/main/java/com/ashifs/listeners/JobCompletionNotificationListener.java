@@ -36,38 +36,34 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
       Map<String, Team> teamData = new HashMap<>();
 
-      entityManager.createQuery("SELECT M.team1,COUNT(*) FROM MATCH M GROUP BY M.team1", Object[].class)
-          .getResultList().stream().map(e -> new Team((String) e[0], (long) e[1]))
+      entityManager.createQuery("SELECT M.team1,COUNT(*) FROM MATCH M GROUP BY M.team1", Object[].class).getResultList()
+          .stream().map(e -> new Team((String) e[0], (long) e[1]))
           .forEach(team -> teamData.put(team.getTeamName(), team));
 
-      entityManager.createQuery("SELECT M.team2,COUNT(*) FROM MATCH M GROUP BY M.team2", Object[].class)
-          .getResultList().stream().forEach(e -> {
+      entityManager.createQuery("SELECT M.team2,COUNT(*) FROM MATCH M GROUP BY M.team2", Object[].class).getResultList()
+          .stream().forEach(e -> {
             Team team = teamData.get((String) e[0]);
-            if(team!=null){
-              
-            team.setTotalMatches(team.getTotalMatches() + (long) e[1]);
-            teamData.put(team.getTeamName(), team);
+            if (team != null) {
+
+              team.setTotalMatches(team.getTotalMatches() + (long) e[1]);
+              teamData.put(team.getTeamName(), team);
 
             }
           });
 
-          entityManager.createQuery("SELECT M.winner,COUNT(*) FROM MATCH M GROUP BY M.winner",Object[].class)
-          .getResultList()
-          .stream()
-          .forEach( e -> {
+      entityManager.createQuery("SELECT M.winner,COUNT(*) FROM MATCH M GROUP BY M.winner", Object[].class)
+          .getResultList().stream().forEach(e -> {
             Team team = teamData.get((String) e[0]);
-            if(team!=null){
-                  
+            if (team != null) {
+
               team.setTotalWins((long) e[1]);
               teamData.put(team.getTeamName(), team);
 
             }
-          }
-            );
+          });
 
-            teamData.values().forEach(team -> entityManager.persist(team));
-            teamData.values().forEach(team -> System.out.println(team.toString()));
-            
+      teamData.values().forEach(team -> entityManager.persist(team));
+      // teamData.values().forEach(team -> System.out.println(team.toString()));
 
       /*
        * jdbcTemplate.

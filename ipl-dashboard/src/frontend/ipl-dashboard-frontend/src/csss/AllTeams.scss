@@ -6,12 +6,23 @@
   grid-row-gap: 20px;
 
   .ipl-teams-section {
-    font-size: 4rem;
+    font-size: 2rem;
     margin-bottom: 20px;
-  }
+    text-align: center;
 
-  .team-name-section {
-    font-size: 4rem;
-    margin-bottom: 20px;
+    grid-column: span 2;
   }
+  .all-teams-section {
+    grid-column: span 2;
+  }
+  .team-name-section {
+    text-align: center;
+  }
+}
+
+.ipl-teams-section-card {
+  background-color: blueviolet;
+}
+.ipl-team-section-card {
+  background-color: rgb(147, 118, 175);
 }

@@ -23,14 +23,14 @@ function AllTeams() {
     );
   return (
     <div className="AllTeams">
-      <div className="ipl-teams-section">
+      <div className="ipl-teams-section ipl-teams-section-card ">
         <h1>IPL Teams</h1>
       </div>
-      <div className="team-name-section">
+      <div className="all-teams-section">
         {data.teams.map((team) => (
-          <h3 className="team-name-section" key={team.id}>
-            {team.teamName}
-          </h3>
+          <div className="team-name-section .ipl-team-section-card">
+            <h3 key={team.id}>{team.teamName}</h3>
+          </div>
         ))}
       </div>
     </div>

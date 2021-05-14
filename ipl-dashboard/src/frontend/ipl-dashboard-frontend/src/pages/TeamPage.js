@@ -50,7 +50,9 @@ export const TeamPage = ({ team }) => {
         </div>
 
         <div className="win-loss-section">
-          <h5>Win/Loss</h5>
+          <h5>
+            Win/Loss : {teamLocal.totalWins}/{matchesLost}
+          </h5>
           <PieChart
             data={[
               {

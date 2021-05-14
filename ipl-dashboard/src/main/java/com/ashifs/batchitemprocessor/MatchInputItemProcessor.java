@@ -21,7 +21,6 @@ public class MatchInputItemProcessor implements ItemProcessor<MatchInput, Match>
     Long id = 1L;
     try {
       id = Long.parseLong(matchInput.getId());
-      System.out.println(id);
     } catch (NumberFormatException e) {
       e.printStackTrace();
     }
@@ -46,7 +45,6 @@ public class MatchInputItemProcessor implements ItemProcessor<MatchInput, Match>
     String firstInningTeam = null, secondInningTeam = null;
 
     if ("bat".equals(matchInput.getToss_decision())) {
-      System.out.println();
       firstInningTeam = matchInput.getToss_winner();
       secondInningTeam = (firstInningTeam).equals(matchInput.getTeam1()) ? matchInput.getTeam2()
           : matchInput.getTeam1();
@@ -58,9 +56,12 @@ public class MatchInputItemProcessor implements ItemProcessor<MatchInput, Match>
 
     }
 
+    final String opponent = firstInningTeam.equals(winner) ? secondInningTeam : firstInningTeam;
+
     final Match transformedMatch = new Match(id, city, date, playerOfMatch, venue, firstInningTeam, secondInningTeam,
-        tossWinner, tossDecision, winner, result, resutMargin, eliminator, umpire2, umpire1);
-    log.info("Converting (" + matchInput.toString() + ") into (" + transformedMatch.toString() + ")");
+        tossWinner, tossDecision, winner, opponent, result, resutMargin, eliminator, umpire2, umpire1);
+    // log.info("Converting (" + matchInput.toString() + ") into (" +
+    // transformedMatch.toString() + ")");
     return transformedMatch;
   }
 
