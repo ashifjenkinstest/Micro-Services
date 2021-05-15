@@ -4,6 +4,7 @@ import AllTeamsPage from "./pages/AllTeams";
 import TeamPage from "./pages/TeamPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MatchPage from "./pages/MatchPage";
+import TeamStatistics from "./components/TeamStatistics";
 
 function App() {
   return (
@@ -13,10 +14,13 @@ function App() {
           <Route path="/teams/:rootTeamName/matches/:matchYear">
             <MatchPage />
           </Route>
+          <Route path="/teams/:rootTeamName/statistics">
+            <TeamStatistics />
+          </Route>
           <Route path="/teams/:rootTeamName">
             <TeamPage />
           </Route>
-          <Route path="/teams">
+          <Route path="">
             <AllTeams />
           </Route>
         </Switch>

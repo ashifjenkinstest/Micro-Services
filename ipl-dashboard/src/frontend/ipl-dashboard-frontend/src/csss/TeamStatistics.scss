@@ -1,20 +1,15 @@
-.AllTeams {
+.TeamStatistics {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 2px;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 20px;
   grid-row-gap: 20px;
 
-  .ipl-teams-section {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    text-align: justify;
-    align-self: start;
+  .team-name-section {
     grid-column: span 2;
+    text-align: center;
+    align-self: center;
     margin-top: 5px;
-  }
-
-  .ipl-name {
   }
 
   .team-image {
@@ -25,25 +20,19 @@
     padding: 3px;
     width: 210px;
   }
-
-  .all-teams-section {
-    width: 250px;
-    justify-self: start;
-
-    height: 220px;
+  .win-vs-loss {
+    grid-column: span 1;
   }
-  .team-name-section {
-    width: 210px;
-    justify-self: center;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+
   .win-loss-count-section {
-    text-align: start;
+    text-align: right;
 
-    justify-self: right;
-    margin-top: 5px;
+    & > p {
+      margin-right: 4px;
+    }
+    & > h4 {
+      margin-right: 4px;
+    }
   }
   .pie-chart-section {
     margin-top: 4px;
@@ -52,8 +41,9 @@
     margin-bottom: 4px;
     border-style: hidden;
   }
+
   .stat-teams-section-card {
-    background-color: rgb(53, 59, 59);
+    background-color: rgb(81, 85, 85);
     border: 1px;
     border-style: dashed;
   }

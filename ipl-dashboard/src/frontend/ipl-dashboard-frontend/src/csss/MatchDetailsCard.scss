@@ -2,6 +2,7 @@
   padding: 10px;
   margin-bottom: 1px;
   height: auto;
+  border-style: dotted;
   .match-date,
   .team-name,
   .toss-winner-descision,
@@ -10,5 +11,9 @@
   .match-venue,
   .match-umpires {
     margin-top: 5px;
+  }
+  .vs {
+    font-size: 1rem;
+    text-align: start;
   }
 }

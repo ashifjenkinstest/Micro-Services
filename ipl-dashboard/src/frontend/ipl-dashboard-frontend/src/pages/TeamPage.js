@@ -13,7 +13,9 @@ export const TeamPage = ({ team }) => {
 
   const { rootTeamName } = useParams();
 
-  const tname = typeof team === "undefined" ? "Rajasthan Royals" : team;
+  const tname = rootTeamName;
+  const moreRoute = rootTeamName + "/matches/2000";
+  const statsRoute = rootTeamName + "/statistics";
 
   useEffect(() => {
     const fetchAllTeams = async () => {
@@ -33,7 +35,7 @@ export const TeamPage = ({ team }) => {
       //console.log(data);
     };
     fetchAllTeams();
-  }, [rootTeamName]);
+  }, [rootTeamName, moreRoute, statsRoute]);
   const matchesWon = teamLocal.totalWins;
   const matchesLost = teamLocal.totalMatches - teamLocal.totalWins;
   if (!teamLocal || !teamLocal.teamName) {
@@ -90,7 +92,7 @@ export const TeamPage = ({ team }) => {
         ))}
 
         <div className="more-section">
-          <a href="#">More ></a>
+          <Link to={moreRoute}>More ></Link>
         </div>
       </div>
     </React.Fragment>

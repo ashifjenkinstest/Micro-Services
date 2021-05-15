@@ -1,9 +1,10 @@
 .MatchSummaryCard {
   display: grid;
 
-  height: auto;
+  height: 290px;
   padding: 10px;
   margin-bottom: 1px;
+  border-style: dotted;
   .match-date,
   .team-name,
   .toss-winner-descision,

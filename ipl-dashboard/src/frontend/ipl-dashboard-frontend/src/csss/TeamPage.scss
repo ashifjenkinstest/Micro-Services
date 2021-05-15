@@ -36,6 +36,7 @@
   .last-match-summary-section {
     grid-column: span 4;
     margin-bottom: 0 px;
+    border-style: dotted;
   }
   .match-summary-vs {
     grid-column: span 4;
@@ -49,7 +50,7 @@
     grid-column: span 1;
   }
   .more-section {
-    grid-column: span 1;
+    grid-column: span 0.5;
     align-self: center;
     font-size: 1rem;
     justify-self: center;

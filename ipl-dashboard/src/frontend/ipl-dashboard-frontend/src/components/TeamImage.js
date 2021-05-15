@@ -13,12 +13,10 @@ import kxiplogo from "../images/KXIP.jpg";
 import milogo from "../images/MI.jpg";
 import rrlogo from "../images/RR.jpg";
 import srhlogo from "../images/SRH.jpg";
-
 import rcblogo from "../images/RCB.jpg";
-
 import ktklogo from "../images/KTK.jpg";
-
 import rpslogo from "../images/RPS.png";
+import ipllogo from "../images/IPL.jpg";
 
 export const TeamImage = ({ team }) => {
   const state = {
@@ -29,6 +27,9 @@ export const TeamImage = ({ team }) => {
 
   let logoName = deflogo;
   //console.log("In image team " + team);
+  if (team === "IPL") {
+    logoName = ipllogo;
+  }
   if (team === "Mumbai Indians") {
     logoName = milogo;
   }
