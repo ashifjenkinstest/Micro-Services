@@ -41,7 +41,7 @@ function MatchPage() {
           <YearSelector team={matchesOfTeam} />
         </div>
         <div className="match-detail-section">
-          <div className="match-detail-card-section no-match-played-card">
+          <div className="no-match-played-section no-match-played-card">
             <h1>
               No mathes Played by {matchesOfTeam} since {matchFromYear}
             </h1>

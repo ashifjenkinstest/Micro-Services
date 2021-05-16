@@ -38,6 +38,7 @@ export const TeamStatistics = ({ team }) => {
       <div className="TeamStatistics">
         <div className="team-name-section">
           <h1 className="team-name"> {rootTeamName}</h1>
+
           <Link to={rootTeamRoute}> Latest Matches</Link>
         </div>
         <div className="team-image">
