@@ -7,7 +7,7 @@
 
   .team-name-section {
     grid-column: span 2;
-    text-align: center;
+    text-align: start;
     align-self: center;
     margin-top: 5px;
   }
@@ -15,6 +15,7 @@
   .team-image {
     grid-column: span 2;
     align-self: start;
+    justify-self: end;
     border: 2px solid #ddd;
     border-radius: 4px;
     padding: 3px;

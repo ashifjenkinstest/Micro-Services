@@ -16,6 +16,7 @@ import srhlogo from "../images/SRH.jpg";
 import rcblogo from "../images/RCB.jpg";
 import ktklogo from "../images/KTK.jpg";
 import rpslogo from "../images/RPS.png";
+import pwilogo from "../images/PWI.png";
 import ipllogo from "../images/IPL.jpg";
 
 export const TeamImage = ({ team }) => {
@@ -34,7 +35,7 @@ export const TeamImage = ({ team }) => {
     logoName = milogo;
   }
   if (team === "Pune Warriors") {
-    logoName = deflogo;
+    logoName = pwilogo;
   }
   if (team === "Sunrisers Hyderabad") {
     logoName = srhlogo;
