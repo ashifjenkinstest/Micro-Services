@@ -23,11 +23,30 @@ function MatchPage() {
     console.log(matches);
   }, [rootTeamName, matchYear]);
 
-  if (!matches || matches.length === 0)
+  if (!matches || matches.match.length === 0)
     return (
-      <div>
-        <h1>IPL Dashboard</h1>
-        <ul>No Team Found</ul>
+      <div className="MatchPage">
+        <div className="latest-match-from-year">
+          <h3>Latest Matches of </h3>
+          <h1></h1>
+          <h1>{matchesOfTeam} </h1>
+          <h3>since </h3> <h1> {matchFromYear} </h1>
+          <Link to={`/teams`}> All Teams</Link>
+        </div>
+        <div className="team-image">
+          <TeamImage team={matchesOfTeam} />
+        </div>
+
+        <div className="year-selector-section">
+          <YearSelector team={matchesOfTeam} />
+        </div>
+        <div className="match-detail-section">
+          <div className="match-detail-card-section no-match-played-card">
+            <h1>
+              No mathes Played by {matchesOfTeam} since {matchFromYear}
+            </h1>
+          </div>
+        </div>
       </div>
     );
   return (
