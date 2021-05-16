@@ -12,6 +12,7 @@
     align-self: start;
     grid-column: span 2;
     margin-top: 5px;
+    justify-self: center;
   }
 
   .ipl-name {
@@ -24,20 +25,23 @@
     border-radius: 4px;
     padding: 3px;
     width: 210px;
+    justify-self: center;
   }
 
   .all-teams-section {
     width: 250px;
     justify-self: start;
 
-    height: 220px;
+    height: 230px;
   }
   .team-name-section {
     width: 210px;
-    justify-self: center;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    //justify-self: center;
+    text-align: end;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
   .win-loss-count-section {
     text-align: start;
@@ -47,8 +51,8 @@
   }
   .pie-chart-section {
     margin-top: 4px;
-    margin-left: 100px;
-    margin-right: 4px;
+    margin-left: 110px;
+    margin-right: 5px;
     margin-bottom: 4px;
     border-style: hidden;
   }

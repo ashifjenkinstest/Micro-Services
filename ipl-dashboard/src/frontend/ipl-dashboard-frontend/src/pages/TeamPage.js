@@ -14,7 +14,8 @@ export const TeamPage = ({ team }) => {
   const { rootTeamName } = useParams();
 
   const tname = rootTeamName;
-  const moreRoute = rootTeamName + "/matches/2000";
+  const moreRoute =
+    rootTeamName + "/matches/" + process.env.REACT_APP_IPL_LAST_YEAR;
   const statsRoute = rootTeamName + "/statistics";
 
   useEffect(() => {
@@ -65,6 +66,9 @@ export const TeamPage = ({ team }) => {
               { title: "Lost", value: matchesLost, color: "#a34d5d" },
             ]}
           />
+          <div className="more-section">
+            <Link to={statsRoute}>Statistics ></Link>
+          </div>
         </div>
 
         <div className="last-match-summary-section">

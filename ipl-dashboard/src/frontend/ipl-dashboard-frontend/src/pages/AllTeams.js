@@ -8,20 +8,27 @@ import { PieChart } from "react-minimal-pie-chart";
 function AllTeams() {
   const [data, setData] = useState({ teams: [] });
 
-  const rootTeamRoute = "";
+  const rootTeamRoute = "teams/";
   useEffect(async () => {
     const response = await fetch("http://localhost:8099/teams");
 
     const data = await response.json();
     //console.log("teams" + data);
     setData(data);
-  }, []);
+  }, [rootTeamRoute]);
 
   if (!data || data.teams.length === 0)
     return (
-      <div>
-        <h1>IPL Dashboard</h1>
-        <ul>No Team Found</ul>
+      <div className="AllTeams">
+        <div className="ipl-teams-section ipl-teams-section-card">
+          <div className="ipl-name">
+            <h1>IPL Teams Found</h1>
+          </div>
+
+          <div className="team-image">
+            <TeamImage team="IPL" />
+          </div>
+        </div>
       </div>
     );
 
@@ -39,11 +46,12 @@ function AllTeams() {
       {data.teams.map((team) => (
         <div className="all-teams-section stat-teams-section-card">
           <div className="team-name-section">
-            <Link to={"teams/" + rootTeamRoute + team.teamName + "/statistics"}>
-              {team.teamName}
-            </Link>
-
-            <h4> Played / Won / Lost</h4>
+            <div className="link-section">
+              <Link to={rootTeamRoute + team.teamName + "/statistics"}>
+                {team.teamName}
+              </Link>
+            </div>
+            <h6> Played / Won / Lost</h6>
             <p>
               {team.totalMatches} / {team.totalWins} /{" "}
               {team.totalMatches - team.totalWins}
@@ -65,6 +73,11 @@ function AllTeams() {
                   },
                 ]}
               />
+              <div className="link-section">
+                <Link to={rootTeamRoute + team.teamName + ""}>
+                  Latest Matches >
+                </Link>
+              </div>
             </div>
           </div>
         </div>

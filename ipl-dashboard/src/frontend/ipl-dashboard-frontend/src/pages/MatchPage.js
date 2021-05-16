@@ -4,10 +4,10 @@ import TeamImage from "../components/TeamImage";
 import TeamPage from "./TeamPage";
 import "../csss/MatchPage.scss";
 import { useParams, Link } from "react-router-dom";
+import YearSelector from "../components/YearSelector";
 
 function MatchPage() {
   const [matches, setMatches] = useState({ match: [] });
-  const [data2, setData2] = useState({ hits: [] });
 
   const { rootTeamName } = useParams();
   const { matchYear } = useParams();
@@ -20,7 +20,8 @@ function MatchPage() {
     );
     const data = await response.json();
     setMatches(data);
-  }, [rootTeamName]);
+    console.log(matches);
+  }, [rootTeamName, matchYear]);
 
   if (!matches || matches.length === 0)
     return (
@@ -36,21 +37,27 @@ function MatchPage() {
         <h1></h1>
         <h1>{matchesOfTeam} </h1>
         <h3>since </h3> <h1> {matchFromYear} </h1>
+        <Link to={`/teams`}> All Teams</Link>
       </div>
       <div className="team-image">
         <TeamImage team={matchesOfTeam} />
       </div>
 
-      {matches.match.map((mat) => (
-        <div className="match-detail-section">
-          <MatchDetailsCard
-            key={mat.id}
-            match={mat}
-            matchesOfYear={matchYear}
-            matchOfTeam={matchesOfTeam}
-          />
-        </div>
-      ))}
+      <div className="year-selector-section">
+        <YearSelector team={matchesOfTeam} />
+      </div>
+      <div className="match-detail-section">
+        {matches.match.map((mat) => (
+          <div className="match-detail-card-section">
+            <MatchDetailsCard
+              key={mat.id}
+              match={mat}
+              matchesOfYear={matchYear}
+              matchOfTeam={matchesOfTeam}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

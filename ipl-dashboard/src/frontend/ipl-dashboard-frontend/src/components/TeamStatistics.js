@@ -10,7 +10,7 @@ export const TeamStatistics = ({ team }) => {
     tags: ["tag1", "tag2", "tag3"],
   };
   const { rootTeamName } = useParams();
-
+  const rootTeamRoute = "/teams/" + rootTeamName;
   const [stat, setStat] = useState({ statistics: [] });
 
   useEffect(() => {
@@ -31,13 +31,14 @@ export const TeamStatistics = ({ team }) => {
       console.log(data);
     };
     fetchTeamStatistics();
-  }, []);
+  }, [rootTeamName]);
 
   return (
     <React.Fragment>
       <div className="TeamStatistics">
         <div className="team-name-section">
           <h1 className="team-name"> {rootTeamName}</h1>
+          <Link to={rootTeamRoute}> Latest Matches</Link>
         </div>
         <div className="team-image">
           <TeamImage team={rootTeamName} />
@@ -45,9 +46,10 @@ export const TeamStatistics = ({ team }) => {
         {stat.statistics.map((st) => (
           <div className="win-vs-loss-section stat-teams-section-card">
             <div className="win-loss-count-section">
-              <h4>vs {st.opponent}</h4>
-
-              <Link to={"teams/" + st.opponent}></Link>
+              <h4>vs</h4>
+              <Link to={"/teams/" + st.opponent + "/statistics"}>
+                {st.opponent}
+              </Link>
               <h4>Win</h4>
               <p>{st.won}</p>
               <h4>Loss</h4>

@@ -1,6 +1,6 @@
 .MatchPage {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
@@ -13,15 +13,25 @@
     color: whitesmoke;
   }
   .team-image {
-    grid-column: span 1;
+    grid-column: span 2;
     align-self: end;
+    justify-self: end;
     border: 2px solid #ddd;
     border-radius: 4px;
     padding: 3px;
     width: 210px;
   }
+  .year-selector-section {
+    grid-column: span 1;
+    padding-top: 20px;
+    justify-self: start;
+  }
   .match-detail-section {
     grid-column: span 3;
     align-self: center;
+    padding-top: 2px;
+  }
+  .match-detail-card-section {
+    padding-top: 20px;
   }
 }
