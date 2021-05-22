@@ -16,7 +16,7 @@ function MatchPage() {
   useEffect(() => {
     const fetchTeamMatchesFromYear = async () => {
       const response = await fetch(
-        `http://localhost:8099/teams/${rootTeamName}/matches?year=${matchYear}`
+        `${process.env.REACT_APP_API_ROOT_URL}/teams/${rootTeamName}/matches?year=${matchYear}`
       );
       const data = await response.json();
       setMatches(data);

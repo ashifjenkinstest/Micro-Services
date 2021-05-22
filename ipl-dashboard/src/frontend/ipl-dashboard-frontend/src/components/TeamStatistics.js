@@ -11,7 +11,7 @@ export const TeamStatistics = ({ team }) => {
   useEffect(() => {
     const fetchTeamStatistics = async () => {
       const response = await fetch(
-        `http://localhost:8099/teams/${rootTeamName}/statistics`
+        `${process.env.REACT_APP_API_ROOT_URL}/teams/${rootTeamName}/statistics`
       );
       const data = await response.json();
       setStat(data);

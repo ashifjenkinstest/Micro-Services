@@ -11,7 +11,9 @@ function AllTeams() {
 
   useEffect(() => {
     const fetchAllTeams = async () => {
-      const response = await fetch(`http://localhost:8099/teams`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_ROOT_URL}/teams`
+      );
 
       const data = await response.json();
       setData(data);
