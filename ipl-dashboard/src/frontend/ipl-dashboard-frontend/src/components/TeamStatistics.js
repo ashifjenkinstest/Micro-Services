@@ -4,31 +4,17 @@ import { useParams, Link } from "react-router-dom";
 import { PieChart } from "react-minimal-pie-chart";
 import TeamImage from "./TeamImage";
 export const TeamStatistics = ({ team }) => {
-  const state = {
-    count: 0,
-    imageUrl: "https://picsum.photos/200",
-    tags: ["tag1", "tag2", "tag3"],
-  };
   const { rootTeamName } = useParams();
   const rootTeamRoute = "/teams/" + rootTeamName;
   const [stat, setStat] = useState({ statistics: [] });
 
   useEffect(() => {
     const fetchTeamStatistics = async () => {
-      //console.log(team);
-
-      console.log("tname " + rootTeamName);
       const response = await fetch(
-        // "http://localhost:8099/teams/" + team
         `http://localhost:8099/teams/${rootTeamName}/statistics`
       );
-
       const data = await response.json();
-      // console.log(data.lastestMatches.map(dd => console.log(dd)));
-
       setStat(data);
-
-      console.log(data);
     };
     fetchTeamStatistics();
   }, [rootTeamName]);
@@ -45,7 +31,10 @@ export const TeamStatistics = ({ team }) => {
           <TeamImage team={rootTeamName} />
         </div>
         {stat.statistics.map((st) => (
-          <div className="win-vs-loss-section stat-teams-section-card">
+          <div
+            className="win-vs-loss-section stat-teams-section-card"
+            key={st.opponent}
+          >
             <div className="win-loss-count-section">
               <h4>vs</h4>
               <Link to={"/teams/" + st.opponent + "/statistics"}>

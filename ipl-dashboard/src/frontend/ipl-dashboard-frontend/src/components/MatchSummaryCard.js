@@ -1,6 +1,6 @@
 import React from "react";
 import "../csss/MatchSummaryCard.scss";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const MatchSummaryCard = ({ mainTeam, match }) => {
   const rootTeam = mainTeam === match.team1 ? match.team2 : match.team1;

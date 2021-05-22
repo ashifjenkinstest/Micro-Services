@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import TeamImage from "../components/TeamImage";
-import TeamPage from "./TeamPage";
 import "../csss/AllTeams.scss";
 import { Link } from "react-router-dom";
 import { PieChart } from "react-minimal-pie-chart";
@@ -9,12 +8,15 @@ function AllTeams() {
   const [data, setData] = useState({ teams: [] });
 
   const rootTeamRoute = "teams/";
-  useEffect(async () => {
-    const response = await fetch("http://localhost:8099/teams");
 
-    const data = await response.json();
-    //console.log("teams" + data);
-    setData(data);
+  useEffect(() => {
+    const fetchAllTeams = async () => {
+      const response = await fetch(`http://localhost:8099/teams`);
+
+      const data = await response.json();
+      setData(data);
+    };
+    fetchAllTeams();
   }, [rootTeamRoute]);
 
   if (!data || data.teams.length === 0)
@@ -44,7 +46,10 @@ function AllTeams() {
       </div>
 
       {data.teams.map((team) => (
-        <div className="all-teams-section stat-teams-section-card">
+        <div
+          className="all-teams-section stat-teams-section-card"
+          key={team.teamName}
+        >
           <div className="team-name-section">
             <div className="link-section">
               <Link to={rootTeamRoute + team.teamName + "/statistics"}>

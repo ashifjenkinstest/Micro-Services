@@ -1,10 +1,9 @@
 import "./App.scss";
-import AllTeams from "./pages/AllTeams";
-import AllTeamsPage from "./pages/AllTeams";
 import TeamPage from "./pages/TeamPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MatchPage from "./pages/MatchPage";
 import TeamStatistics from "./components/TeamStatistics";
+import AllTeams from "./pages/AllTeams";
 
 function App() {
   return (

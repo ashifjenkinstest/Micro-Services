@@ -13,31 +13,23 @@ export const TeamPage = ({ team }) => {
 
   const { rootTeamName } = useParams();
 
-  const tname = rootTeamName;
   const moreRoute =
     rootTeamName + "/matches/" + process.env.REACT_APP_IPL_LAST_YEAR;
   const statsRoute = rootTeamName + "/statistics";
 
   useEffect(() => {
-    const fetchAllTeams = async () => {
-      //console.log(team);
-
-      console.log("tname " + tname);
+    const fetchTeams = async () => {
       const response = await fetch(
         // "http://localhost:8099/teams/" + team
         `http://localhost:8099/teams/${rootTeamName}`
       );
 
       const data = await response.json();
-      // console.log(data.lastestMatches.map(dd => console.log(dd)));
 
       setTeamLocal(data);
-
-      //console.log(data);
     };
-    fetchAllTeams();
+    fetchTeams();
   }, [rootTeamName, moreRoute, statsRoute]);
-  const matchesWon = teamLocal.totalWins;
   const matchesLost = teamLocal.totalMatches - teamLocal.totalWins;
   if (!teamLocal || !teamLocal.teamName) {
     return <h1>Team Not Found!</h1>;
@@ -79,16 +71,12 @@ export const TeamPage = ({ team }) => {
           />
         </div>
         <div className="match-summary-vs summary-card">
-          <h5></h5>
           <h2>Match Summary of previous matches</h2>
-          <h5></h5>
         </div>
-
         {teamLocal.lastestMatches.slice(1).map((latestMatch) => (
-          <div>
+          <div key={latestMatch.id}>
             <MatchSummaryCard
               className="match-summary-section"
-              key={latestMatch.id}
               match={latestMatch}
               mainTeam={rootTeamName}
             />

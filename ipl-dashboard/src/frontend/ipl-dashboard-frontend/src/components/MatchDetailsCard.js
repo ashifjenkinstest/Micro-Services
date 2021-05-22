@@ -6,7 +6,6 @@ export const MatchDetailsCard = ({ match, matchesOfYear, matchOfTeam }) => {
   const oppositionTeam =
     matchOfTeam === match.team1 ? match.team2 : match.team1;
   const matchesOfTeamUrl = `/teams/${oppositionTeam}/matches/${matchesOfYear}`;
-  const spc = "           ";
 
   //console.log(match);
   const isMatchWonByMainTeam = matchOfTeam === match.winner;
