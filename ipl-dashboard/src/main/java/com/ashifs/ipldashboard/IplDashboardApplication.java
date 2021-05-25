@@ -15,7 +15,9 @@ public class IplDashboardApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(IplDashboardApplication.class, args);
-		System.out.println("<========= IplDashboardApplication =========>");
+		System.out.println("<===========================================>");
+		System.out.println("<\t Ipl  Dashboard  Application\t  >");
+		System.out.println("<===========================================>");
 	}
 
 }
