@@ -1,0 +1,71 @@
+.BallByBallMatchDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  margin-bottom: 1px;
+
+  .t1-vs-t2-header-section {
+    grid-column: span 3;
+    align-self: baseline;
+    justify-self: center;
+  }
+
+  .teamname-teamimage-section-1 {
+    grid-column: span 1;
+    padding: 10px;
+    grid-column: span 1;
+    align-self: center;
+    justify-self: center;
+    border-style: dashed;
+    width: 240px;
+  }
+
+  .vs-section {
+    padding: 10px;
+    grid-column: span 1;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .teamname-teamimage-section-2 {
+    padding: 10px;
+    grid-column: span 1;
+    align-self: center;
+    justify-self: center;
+    border-style: dashed;
+    width: 240px;
+  }
+
+  .team-image {
+    grid-column: span 1;
+    align-self: start;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 3px;
+    width: 210px;
+    justify-self: center;
+  }
+  .team-name {
+    padding: 10px;
+    align-self: center;
+    justify-self: center;
+  }
+  .vs-image {
+    grid-column: span 1;
+    align-self: start;
+    //border: 2px solid #ddd;
+    // border-radius: 4px;
+    padding: 3px;
+    width: 210px;
+    justify-self: center;
+  }
+  .ball-by-ball-main-section {
+    grid-column: span 3;
+    align-self: start;
+    //border: 2px solid #ddd;
+    // border-radius: 4px;
+    padding: 20px;
+    width: 210px;
+    justify-self: center;
+  }
+}

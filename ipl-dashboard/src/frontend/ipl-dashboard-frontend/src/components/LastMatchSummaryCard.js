@@ -6,7 +6,7 @@ import "../csss/LatestMatchSummaryCard.scss";
 export const LastMatchSummary = ({ mainTeam, match }) => {
   const rootTeam = mainTeam === match.team1 ? match.team2 : match.team1;
   const rootTeamRoute = "/teams/" + rootTeam;
-
+  const matchDetailsRoute = "/teams/matches/" + match.id;
   const isMatchWonByMainTeam = mainTeam === match.winner;
   return (
     // <div className="LastestMatchSummaryCard">
@@ -47,6 +47,9 @@ export const LastMatchSummary = ({ mainTeam, match }) => {
         <p>
           {match.umpire1}, {match.umpire2}
         </p>
+        <h6>
+          <Link to={matchDetailsRoute}>More Details</Link>
+        </h6>
       </div>
     </div>
   );

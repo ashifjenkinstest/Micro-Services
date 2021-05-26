@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ashifs.model.BallByBall;
+import com.ashifs.model.BallByBalls;
 import com.ashifs.model.MatchStatisticsLost;
 import com.ashifs.model.MatchStatisticsWon;
 import com.ashifs.model.Matches;
@@ -13,6 +15,7 @@ import com.ashifs.model.Team;
 import com.ashifs.model.TeamStat;
 import com.ashifs.model.TeamStatistics;
 import com.ashifs.model.Teams;
+import com.ashifs.repositories.BallByBallRepositories;
 import com.ashifs.repositories.MatchRepository;
 import com.ashifs.repositories.TeamRepository;
 
@@ -29,11 +32,14 @@ public class TeamController {
 
     private TeamRepository teamRepository;
     private MatchRepository matchRepository;
+    private BallByBallRepositories ballRepositories;
 
     @Autowired
-    public TeamController(TeamRepository teamRepository, MatchRepository matchRepository) {
+    public TeamController(TeamRepository teamRepository, MatchRepository matchRepository,
+            BallByBallRepositories ballByBallRepositories) {
         this.teamRepository = teamRepository;
         this.matchRepository = matchRepository;
+        this.ballRepositories = ballByBallRepositories;
     }
 
     @RequestMapping(path = "/teams")
@@ -78,6 +84,12 @@ public class TeamController {
 
     }
 
+    @RequestMapping(path = "/teams/matches")
+    public BallByBalls getMatchOfTeamByMatchId(@RequestParam Long matchId) {
+        System.out.println(">----> " + matchId);
+        return new BallByBalls(ballRepositories.findByMatchIdOrderByInningAndOverAndBallAsc(matchId));
+    }
+
     @RequestMapping(path = "/teams/{teamName}/statistics")
     public TeamStat getMatchStatisticsByTeamName(@PathVariable String teamName) {
 
@@ -101,8 +113,6 @@ public class TeamController {
 
         teamStat.values().forEach(team -> teamStatistics.add(team));
         teamStatReturn.setStatistics(teamStatistics);
-        // return this.matchRepository.findByWinnerGroupByOpponent(teamName);
-        // return this.matchRepository.findByLoserGroupByOpponent(teamName);
         return teamStatReturn;
     }
 }

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const MatchSummaryCard = ({ mainTeam, match }) => {
   const rootTeam = mainTeam === match.team1 ? match.team2 : match.team1;
   const rootTeamRoute = "/teams/" + rootTeam;
-
+  const matchDetailsRoute = "/teams/matches/" + match.id;
   const isMatchWonByMainTeam = mainTeam === match.winner;
 
   return (
@@ -34,6 +34,9 @@ export const MatchSummaryCard = ({ mainTeam, match }) => {
       <h4 className="player-of-the-match">
         {match.playerOfMatch} was Player of the Match
       </h4>
+      <h6>
+        <Link to={matchDetailsRoute}>More Details</Link>
+      </h6>
     </div>
   );
 };

@@ -17,6 +17,7 @@ import ktklogo from "../images/KTK.jpg";
 import rpslogo from "../images/RPS.png";
 import pwilogo from "../images/PWI.png";
 import ipllogo from "../images/IPL.jpg";
+import vslogo from "../images/VS.png";
 
 export const TeamImage = ({ team }) => {
   let logoName = deflogo;
@@ -65,6 +66,9 @@ export const TeamImage = ({ team }) => {
   }
   if (team === "Chennai Super Kings") {
     logoName = csklogo;
+  }
+  if (team === "VS") {
+    logoName = vslogo;
   }
 
   return (
