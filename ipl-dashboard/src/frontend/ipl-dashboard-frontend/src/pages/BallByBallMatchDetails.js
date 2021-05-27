@@ -31,7 +31,7 @@ function BallByBallMatchDetails() {
     .map((bbyb) => (bowlingTeam = bbyb.bowlingTeam));
   const rootTeamRoute1 = "/teams/" + battingTeam;
   const rootTeamRoute2 = "/teams/" + bowlingTeam;
-
+  let totalRunsInInning = 0;
   return (
     <div className="BallByBallMatchDetails">
       <div className="t1-vs-t2-header-section">
@@ -63,10 +63,11 @@ function BallByBallMatchDetails() {
         </div>
       </div>
       <div className="ball-by-ball-main-section">
-        {ballByBalls.ballByBall.map((ballByBallData) => (
+        {ballByBalls.ballByBall.map((ballByBallData, totalWicketsInInning) => (
           <BallByBallDetailsCard
             key={ballByBallData.id}
             ballByBallDetailedData={ballByBallData}
+            totalWicks={totalWicketsInInning}
           />
         ))}
       </div>

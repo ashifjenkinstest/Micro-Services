@@ -1,0 +1,28 @@
+.BallByBallDetailsCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding: auto;
+  border-style: groove;
+  padding: 10px;
+  padding-bottom: 10px;
+  .score-section {
+    grid-column: span 2;
+    justify-self: start;
+    align-self: start;
+    padding: 10px;
+  }
+  .bowl-detail-section {
+    grid-column: span 2;
+    justify-self: start;
+    align-self: start;
+    padding: 10px;
+  }
+  .over-highlight-section {
+    grid-column: span 1;
+    //border-style: groove;
+    //border-width: 1px;
+    justify-self: center;
+    align-self: center;
+    padding: 2px;
+  }
+}

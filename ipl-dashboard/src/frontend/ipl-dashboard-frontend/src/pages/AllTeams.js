@@ -26,7 +26,7 @@ function AllTeams() {
       <div className="AllTeams">
         <div className="ipl-teams-section ipl-teams-section-card">
           <div className="ipl-name">
-            <h1>IPL Teams Found</h1>
+            <h3>No IPL Teams Found</h3>
           </div>
 
           <div className="team-image">

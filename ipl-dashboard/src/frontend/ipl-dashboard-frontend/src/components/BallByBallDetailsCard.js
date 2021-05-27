@@ -1,29 +1,108 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../csss/BallByBallDetailsCard.scss";
 
-export const BallByBallDetailsCard = ({ ballByBallDetailedData }) => {
+export const BallByBallDetailsCard = ({
+  ballByBallDetailedData,
+  totalWicks,
+}) => {
   return (
-    <div>
-      <p>
-        {ballByBallDetailedData.matchId}
-        {ballByBallDetailedData.inning}
-        {ballByBallDetailedData.over}
-        {ballByBallDetailedData.ball}
-        {ballByBallDetailedData.batsman}
-        {ballByBallDetailedData.nonStriker}
-        {ballByBallDetailedData.bowler}
-        {ballByBallDetailedData.batsmanRuns}
-        {ballByBallDetailedData.extraRuns}
-        {ballByBallDetailedData.totalRuns}
-        {ballByBallDetailedData.nonBoundary}
-        {ballByBallDetailedData.isWicket}
-        {ballByBallDetailedData.dismissalKind}
-        {ballByBallDetailedData.playerDismissed}
-        {ballByBallDetailedData.fielder}
-        {ballByBallDetailedData.extrasType}
-        {ballByBallDetailedData.battingTeam}
-        {ballByBallDetailedData.bowlingTeam}
-      </p>
+    <div className="BallByBallDetailsCard">
+      <div className="score-section">
+        <span>
+          <h4>
+            Inning: {ballByBallDetailedData.inning} -{" "}
+            {ballByBallDetailedData.over}.{ballByBallDetailedData.ball}
+          </h4>
+          <h4>(R/W)</h4>
+        </span>
+      </div>
+      <div className="bowl-detail-section">
+        <span>
+          {ballByBallDetailedData.isWicket ? (
+            <h5>
+              {ballByBallDetailedData.bowler} to{" "}
+              {ballByBallDetailedData.batsman} (W)
+            </h5>
+          ) : (
+            <h5>
+              {ballByBallDetailedData.bowler} to{" "}
+              {ballByBallDetailedData.batsman}
+            </h5>
+          )}
+
+          {ballByBallDetailedData.extrasType !== "NA" ? (
+            <h5>
+              Extra : {ballByBallDetailedData.extrasType},{" "}
+              {ballByBallDetailedData.extraRuns} Runs
+            </h5>
+          ) : (
+            ""
+          )}
+
+          {ballByBallDetailedData.isWicket ? (
+            <h5>
+              {ballByBallDetailedData.playerDismissed} Out,{" "}
+              {ballByBallDetailedData.dismissalKind} by{" "}
+              {ballByBallDetailedData.fielder}
+            </h5>
+          ) : (
+            ""
+          )}
+          {ballByBallDetailedData.batsmanRuns === 4 ? (
+            <h5>{ballByBallDetailedData.batsman} hits a Four</h5>
+          ) : (
+            ""
+          )}
+          {ballByBallDetailedData.batsmanRuns === 6 ? (
+            <h5>{ballByBallDetailedData.batsman} hits a Six</h5>
+          ) : (
+            ""
+          )}
+          {ballByBallDetailedData.batsmanRuns === 0 &&
+          !ballByBallDetailedData.isWicket &&
+          ballByBallDetailedData.extrasType === "NA" ? (
+            <h5>Dot Ball</h5>
+          ) : (
+            ""
+          )}
+
+          {ballByBallDetailedData.batsmanRuns !== 0 &&
+          ballByBallDetailedData.batsmanRuns !== 4 &&
+          ballByBallDetailedData.batsmanRuns !== 6 ? (
+            <h5>{ballByBallDetailedData.batsmanRuns} run/s.</h5>
+          ) : (
+            ""
+          )}
+        </span>
+      </div>
+      <div className="over-highlight-section">
+        <span>
+          <h3>
+            {ballByBallDetailedData.extrasType !== "NA"
+              ? ballByBallDetailedData.extraRuns + "(E)"
+              : ""}
+            {ballByBallDetailedData.isWicket ? "W" : ""}
+
+            {ballByBallDetailedData.isWicket &&
+            ballByBallDetailedData.extrasType !== "NA"
+              ? ballByBallDetailedData.batsmanRuns
+              : ""}
+
+            {ballByBallDetailedData.extrasType === "NA" &&
+            ballByBallDetailedData.batsmanRuns === 0 &&
+            !ballByBallDetailedData.isWicket
+              ? "D"
+              : ""}
+
+            {ballByBallDetailedData.extrasType === "NA" &&
+            ballByBallDetailedData.batsmanRuns !== 0 &&
+            !ballByBallDetailedData.isWicket
+              ? ballByBallDetailedData.batsmanRuns
+              : ""}
+          </h3>
+        </span>
+      </div>
     </div>
   );
 };
