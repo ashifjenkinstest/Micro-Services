@@ -1,11 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import "../csss/BallByBallDetailsCard.scss";
 
 export const BallByBallDetailsCard = ({
   ballByBallDetailedData,
-  totalWicks,
+  fInningRuns,
+  fInningWickets,
+  sInningRuns,
+  sInningWickets,
 }) => {
+  //if (fInningRuns) console.log("fInningRun==>" + fInningRuns);
+  //if (sInningRuns) console.log("sInningRun==>" + sInningRuns);
   return (
     <div className="BallByBallDetailsCard">
       <div className="score-section">
@@ -14,7 +19,15 @@ export const BallByBallDetailsCard = ({
             Inning: {ballByBallDetailedData.inning} -{" "}
             {ballByBallDetailedData.over}.{ballByBallDetailedData.ball}
           </h4>
-          <h4>(R/W)</h4>
+          {ballByBallDetailedData.inning === 1 ? (
+            <h4>
+              ({fInningRuns}/{fInningWickets})
+            </h4>
+          ) : (
+            <h4>
+              ({sInningRuns}/{sInningWickets})
+            </h4>
+          )}
         </span>
       </div>
       <div className="bowl-detail-section">
@@ -82,13 +95,15 @@ export const BallByBallDetailsCard = ({
             {ballByBallDetailedData.extrasType !== "NA"
               ? ballByBallDetailedData.extraRuns + "(E)"
               : ""}
-            {ballByBallDetailedData.isWicket ? "W" : ""}
-
+          </h3>
+          <h3>{ballByBallDetailedData.isWicket ? "Out" : ""}</h3>
+          <h3>
             {ballByBallDetailedData.isWicket &&
             ballByBallDetailedData.extrasType !== "NA"
               ? ballByBallDetailedData.batsmanRuns
               : ""}
-
+          </h3>
+          <h3>
             {ballByBallDetailedData.extrasType === "NA" &&
             ballByBallDetailedData.batsmanRuns === 0 &&
             !ballByBallDetailedData.isWicket

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TeamImage from "../components/TeamImage";
 import "../csss/BallByBallMatchDetails.scss";
-import { PieChart } from "react-minimal-pie-chart";
 import { useParams, Link } from "react-router-dom";
 import BallByBallDetailsCard from "../components/BallByBallDetailsCard";
 
@@ -9,6 +8,9 @@ function BallByBallMatchDetails() {
   const [ballByBalls, setBallByBalls] = useState({ ballByBall: [] });
 
   const { matchId } = useParams();
+
+  let battingTeam;
+  let bowlingTeam;
 
   useEffect(() => {
     const fetchMatchDetails = async () => {
@@ -19,24 +21,46 @@ function BallByBallMatchDetails() {
       setBallByBalls(data);
     };
     fetchMatchDetails();
-  }, []);
+  }, [matchId]);
 
-  let battingTeam;
-  let bowlingTeam;
   ballByBalls.ballByBall
     .slice(0, 1)
     .map((bbyb) => (battingTeam = bbyb.battingTeam));
   ballByBalls.ballByBall
     .slice(0, 1)
     .map((bbyb) => (bowlingTeam = bbyb.bowlingTeam));
+
   const rootTeamRoute1 = "/teams/" + battingTeam;
   const rootTeamRoute2 = "/teams/" + bowlingTeam;
   let totalRunsInInning = 0;
+  let totalRunsInInning1 = 0;
+  let totalWicketssInInning = 0;
+  let totalWicketssInInning1 = 0;
+  let totalRunsInFInningArr = [];
+  let totalWicketsInFInningArr = [];
+  let totalRunsInSInningArr = [];
+  let totalWicketsInSInningArr = [];
+  let rowcount = 0;
+  ballByBalls.ballByBall.forEach((element, x) => {
+    if (element.inning === 1) {
+      totalRunsInInning =
+        totalRunsInInning + element.extraRuns + element.batsmanRuns;
+      totalRunsInFInningArr.push(totalRunsInInning);
+      totalWicketssInInning = totalWicketssInInning + element.isWicket;
+      totalWicketsInFInningArr.push(totalWicketssInInning);
+      rowcount = x;
+    }
+    if (element.inning !== 1) {
+      totalRunsInInning1 =
+        totalRunsInInning1 + element.extraRuns + element.batsmanRuns;
+      totalRunsInSInningArr.push(totalRunsInInning1);
+      totalWicketssInInning1 = totalWicketssInInning1 + element.isWicket;
+      totalWicketsInSInningArr.push(totalWicketssInInning1);
+    }
+  });
+
   return (
     <div className="BallByBallMatchDetails">
-      <div className="t1-vs-t2-header-section">
-        <h1>Head to Head</h1>
-      </div>
       <div className="teamname-teamimage-section-1">
         <div className="team-image">
           <TeamImage team={battingTeam} />
@@ -57,19 +81,38 @@ function BallByBallMatchDetails() {
           <TeamImage team={bowlingTeam} />
         </div>
         <div className="team-name">
-          <Link to={rootTeamRoute1}>
+          <Link to={rootTeamRoute2}>
             <h3>{bowlingTeam}</h3>
           </Link>
         </div>
       </div>
+      <div className="t1-vs-t2-header-section">
+        <h1>Match Timeline</h1>
+      </div>
       <div className="ball-by-ball-main-section">
-        {ballByBalls.ballByBall.map((ballByBallData, totalWicketsInInning) => (
-          <BallByBallDetailsCard
-            key={ballByBallData.id}
-            ballByBallDetailedData={ballByBallData}
-            totalWicks={totalWicketsInInning}
-          />
-        ))}
+        {ballByBalls.ballByBall.map((ballByBallData, idx, wick, run) =>
+          ballByBallData.inning === 1
+            ? ((run = totalRunsInFInningArr[idx]),
+              (wick = totalWicketsInFInningArr[idx]),
+              (
+                <BallByBallDetailsCard
+                  key={ballByBallData.id}
+                  ballByBallDetailedData={ballByBallData}
+                  fInningRuns={run}
+                  fInningWickets={wick}
+                />
+              ))
+            : ((run = totalRunsInSInningArr[idx - rowcount - 1]),
+              (wick = totalWicketsInSInningArr[idx - rowcount - 1]),
+              (
+                <BallByBallDetailsCard
+                  key={ballByBallData.id}
+                  ballByBallDetailedData={ballByBallData}
+                  sInningRuns={run}
+                  sInningWickets={wick}
+                />
+              ))
+        )}
       </div>
     </div>
   );

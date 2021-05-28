@@ -1,10 +1,16 @@
 .BallByBallDetailsCard {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  padding: auto;
-  border-style: groove;
+  // padding: auto;
+  border-style: dotted;
   padding: 10px;
-  padding-bottom: 10px;
+
+  font-family: "Rubik", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(64, 65, 58);
+  color: rgb(255, 255, 255);
+
   .score-section {
     grid-column: span 2;
     justify-self: start;

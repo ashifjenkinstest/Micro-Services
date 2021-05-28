@@ -5,6 +5,7 @@ export const MatchDetailsCard = ({ match, matchesOfYear, matchOfTeam }) => {
   //console.log(match);
   const oppositionTeam =
     matchOfTeam === match.team1 ? match.team2 : match.team1;
+  const matchDetailsRoute = "/teams/matches/" + match.id;
   const matchesOfTeamUrl = `/teams/${oppositionTeam}/matches/${matchesOfYear}`;
 
   //console.log(match);
@@ -41,6 +42,9 @@ export const MatchDetailsCard = ({ match, matchesOfYear, matchOfTeam }) => {
       </h5>
       <h6 className="match-umpires">
         Umpires : {match.umpire1}, {match.umpire2}
+      </h6>
+      <h6>
+        <Link to={matchDetailsRoute}>More Details</Link>
       </h6>
     </div>
   );
