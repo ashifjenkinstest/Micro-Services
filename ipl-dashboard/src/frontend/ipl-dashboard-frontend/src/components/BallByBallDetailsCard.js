@@ -89,7 +89,7 @@ export const BallByBallDetailsCard = ({
           )}
         </span>
       </div>
-      <div className="over-highlight-section">
+      <div className="over-highlight-section no-match-played-card">
         <span>
           <h3>
             {ballByBallDetailedData.extrasType !== "NA"

@@ -7,7 +7,7 @@ import { PieChart } from "react-minimal-pie-chart";
 function AllTeams() {
   const [data, setData] = useState({ teams: [] });
 
-  const rootTeamRoute = "teams/";
+  const rootTeamRoute = "/teams/";
 
   useEffect(() => {
     const fetchAllTeams = async () => {
@@ -26,7 +26,7 @@ function AllTeams() {
       <div className="AllTeams">
         <div className="ipl-teams-section ipl-teams-section-card">
           <div className="ipl-name">
-            <h3>No IPL Teams Found</h3>
+            <h3>Oops!! No IPL Team Found....</h3>
           </div>
 
           <div className="team-image">
@@ -58,11 +58,13 @@ function AllTeams() {
                 {team.teamName}
               </Link>
             </div>
-            <h6> Played / Won / Lost</h6>
-            <p>
-              {team.totalMatches} / {team.totalWins} /{" "}
-              {team.totalMatches - team.totalWins}
-            </p>
+            <div className="played-won-lost-section">
+              <h6> Played / Won / Lost</h6>
+              <p>
+                {team.totalMatches} / {team.totalWins} /{" "}
+                {team.totalMatches - team.totalWins}
+              </p>
+            </div>
           </div>
           <div>
             <div className="pie-chart-section">

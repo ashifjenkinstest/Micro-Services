@@ -27,8 +27,21 @@
     grid-column: span 1;
     //border-style: groove;
     //border-width: 1px;
+    text-align: center;
     justify-self: center;
     align-self: center;
     padding: 2px;
+    height: 10 px;
+    width: 100px;
+  }
+  .no-match-played-card {
+    background-color: #000000;
+    padding: 20px;
+    border-style: dotted;
+  }
+  .out-card {
+    background-color: #e73414;
+    padding: 20px;
+    border-style: dotted;
   }
 }

@@ -32,7 +32,7 @@
     width: 250px;
     justify-self: start;
 
-    height: 230px;
+    height: 250px;
   }
   .team-name-section {
     width: 210px;
@@ -60,5 +60,8 @@
     background-color: rgb(53, 59, 59);
     border: 1px;
     border-style: dashed;
+  }
+  .played-won-lost-section {
+    padding: 3 px;
   }
 }
