@@ -14,14 +14,12 @@ export const PlayerProfilePage = () => {
         // "http://localhost:8099/teams/" + team
         `${process.env.REACT_APP_API_ROOT_URL}/match/ipl/players/${matchId}/${playerName}`
       );
-
       const data = await response.json();
-
       setPlayerStats(data);
     };
     fetchPlayerProfile();
   }, [matchId, playerName]);
-  console.log(playerStats.playerProfile);
+
   return (
     <div className="PlayerProfilePage">
       <div className="prfile">

@@ -31,12 +31,6 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
         PlayerAndAttribute runoutsAttribute = ballByBallRepositories.findTotalRunOutsOfPlayer(playerName);
         PlayerAndAttribute momAttribute = matchRepository.findNoOfMOMByPlayer(playerName);
 
-        System.out.println(wicketsAttribute);
-        System.out.println(runsAttribute);
-        System.out.println(catchesAttribute);
-        System.out.println(stumpingsAttribute);
-        System.out.println(runoutsAttribute);
-
         if (wicketsAttribute != null && playerName.equals(wicketsAttribute.getPlayer()))
             playerProfile.setWickets(wicketsAttribute.getAttr());
         if (runsAttribute != null && playerName.equals(runsAttribute.getPlayer()))
