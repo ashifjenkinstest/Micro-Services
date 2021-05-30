@@ -7,9 +7,12 @@
 }
 
 a {
-  text-decoration: none;
+  text-decoration: solid;
   color: rgb(230, 227, 109);
-  padding: 3px;
+  padding: 0px;
+  padding-right: 3px;
+  align-self: left;
+  justify-self: start;
 }
 
 body {

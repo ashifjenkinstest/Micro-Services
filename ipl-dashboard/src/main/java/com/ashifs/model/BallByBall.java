@@ -1,18 +1,24 @@
 package com.ashifs.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Index;
 
-@Entity(name = "BALL_BY_BALL")
+@Entity
+@Table(name = "BALL_BY_BALL", indexes = { @Index(name = "bbyb_idx", columnList = "id,match_id", unique = true) })
 public class BallByBall {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "B_BY_B_SEQ")
     @SequenceGenerator(name = "B_BY_B_SEQ", sequenceName = "B_BY_B_SEQ", allocationSize = 1)
+    @Column(name = "id", nullable = false)
     private Long Id;
+    @Column(name = "match_id", nullable = false)
     private Long matchId;
     private Long inning;
     private Long over;

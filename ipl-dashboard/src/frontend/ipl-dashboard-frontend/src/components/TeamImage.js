@@ -18,6 +18,7 @@ import rpslogo from "../images/RPS.png";
 import pwilogo from "../images/PWI.png";
 import ipllogo from "../images/IPL.jpg";
 import vslogo from "../images/VS.png";
+import playerlogo from "../images/PLAYER.png";
 
 export const TeamImage = ({ team }) => {
   let logoName = deflogo;
@@ -69,6 +70,9 @@ export const TeamImage = ({ team }) => {
   }
   if (team === "VS") {
     logoName = vslogo;
+  }
+  if (team === "PLAYER") {
+    logoName = playerlogo;
   }
 
   return (

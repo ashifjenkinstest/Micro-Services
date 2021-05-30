@@ -5,6 +5,7 @@ import MatchPage from "./pages/MatchPage";
 import TeamStatistics from "./components/TeamStatistics";
 import AllTeams from "./pages/AllTeams";
 import BallByBallMatchDetails from "./pages/BallByBallMatchDetails";
+import PlayerProfilePage from "./pages/PlayerProfilePage";
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
           <Route path="/teams/:rootTeamName">
             <TeamPage />
           </Route>
-
+          <Route path="/match/ipl/players/:matchId/:playerName">
+            <PlayerProfilePage />
+          </Route>
           <Route path="">
             <AllTeams />
           </Route>

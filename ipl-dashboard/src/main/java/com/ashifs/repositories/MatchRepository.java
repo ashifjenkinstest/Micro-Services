@@ -5,6 +5,7 @@ import java.util.List;
 import com.ashifs.model.Match;
 import com.ashifs.model.MatchStatisticsLost;
 import com.ashifs.model.MatchStatisticsWon;
+import com.ashifs.model.PlayerAndAttribute;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,9 @@ public interface MatchRepository extends CrudRepository<Match, Long> {
 
   @Query("select new com.ashifs.model.MatchStatisticsLost(m.winner , m.opponent , count(*) ) from com.ashifs.model.Match as m where m.winner != :teamName and m.winner!='NA' and (Team1=:teamName or Team2=:teamName ) group by m.winner ,m.opponent")
   List<MatchStatisticsLost> findByLoserGroupByOpponent(String teamName);
+
+  @Query("select new  com.ashifs.model.PlayerAndAttribute(m.playerOfMatch, count(*))  FROM com.ashifs.model.Match as m where m.playerOfMatch=:player")
+  PlayerAndAttribute findNoOfMOMByPlayer(String player);
 
   List<Match> findByTeam1AndMatchDateBetweenOrTeam2AndMatchDateBetweenOrderByMatchDateDesc(String team1,
       LocalDate startDate1, LocalDate endDate1, String team2, LocalDate startDate2, LocalDate endDate2);

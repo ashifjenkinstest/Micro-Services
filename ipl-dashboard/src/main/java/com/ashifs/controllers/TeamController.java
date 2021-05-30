@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import com.ashifs.model.BallByBalls;
 import com.ashifs.model.MatchStatisticsLost;
 import com.ashifs.model.MatchStatisticsWon;
 import com.ashifs.model.Matches;
+
+import com.ashifs.model.PlayerStats;
 import com.ashifs.model.Team;
 import com.ashifs.model.TeamStat;
 import com.ashifs.model.TeamStatistics;
@@ -18,6 +19,7 @@ import com.ashifs.model.Teams;
 import com.ashifs.repositories.BallByBallRepositories;
 import com.ashifs.repositories.MatchRepository;
 import com.ashifs.repositories.TeamRepository;
+import com.ashifs.services.PlayerProfileServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,13 +35,15 @@ public class TeamController {
     private TeamRepository teamRepository;
     private MatchRepository matchRepository;
     private BallByBallRepositories ballRepositories;
+    private PlayerProfileServiceImpl playerProfileServiceImpl;
 
     @Autowired
     public TeamController(TeamRepository teamRepository, MatchRepository matchRepository,
-            BallByBallRepositories ballByBallRepositories) {
+            BallByBallRepositories ballByBallRepositories, PlayerProfileServiceImpl playerProfileServiceImpl) {
         this.teamRepository = teamRepository;
         this.matchRepository = matchRepository;
         this.ballRepositories = ballByBallRepositories;
+        this.playerProfileServiceImpl = playerProfileServiceImpl;
     }
 
     @RequestMapping(path = "/teams")
@@ -102,7 +106,6 @@ public class TeamController {
             teamStat.put(iterable_element.getOpponent(), new TeamStatistics(iterable_element.getWinner(),
                     iterable_element.getOpponent(), iterable_element.getWon(), 0L));
         }
-
         for (MatchStatisticsLost iterable_element : this.matchRepository.findByLoserGroupByOpponent(teamName)) {
             if (teamStat.get(iterable_element.getWinner()) == null)
                 teamStat.put(iterable_element.getOpponent(), new TeamStatistics(iterable_element.getOpponent(),
@@ -114,5 +117,15 @@ public class TeamController {
         teamStat.values().forEach(team -> teamStatistics.add(team));
         teamStatReturn.setStatistics(teamStatistics);
         return teamStatReturn;
+    }
+
+    @RequestMapping(path = "/match/ipl/players/{matchId}/{player}")
+    public PlayerStats getPlayerProfile(@PathVariable Long matchId, @PathVariable String player) {
+        System.out.println("Inside getPlayerProfile");
+        PlayerStats playerStats = new PlayerStats();
+        playerStats.setPlayerProfile(playerProfileServiceImpl.getPlayerProfile(player));
+
+        return playerStats;
+
     }
 }

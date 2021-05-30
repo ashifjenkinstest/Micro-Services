@@ -8,6 +8,8 @@ export const LastMatchSummary = ({ mainTeam, match }) => {
   const rootTeamRoute = "/teams/" + rootTeam;
   const matchDetailsRoute = "/teams/matches/" + match.id;
   const isMatchWonByMainTeam = mainTeam === match.winner;
+  const playerProfileRoute =
+    process.env.REACT_APP_PLAYER_MATCH_PROFILE_ROUTE + match.id + "/";
   return (
     // <div className="LastestMatchSummaryCard">
     <div
@@ -43,6 +45,12 @@ export const LastMatchSummary = ({ mainTeam, match }) => {
         <p className="match-winner-result-margin">
           {match.winner} by {match.resultMargin} {match.result}
         </p>
+        <h4 className="player-of-the-match">
+          <Link to={playerProfileRoute + match.playerOfMatch}>
+            {match.playerOfMatch}
+          </Link>
+          was Player of the Match
+        </h4>
         <h5 className="match-umpires">Umpires :</h5>
         <p>
           {match.umpire1}, {match.umpire2}

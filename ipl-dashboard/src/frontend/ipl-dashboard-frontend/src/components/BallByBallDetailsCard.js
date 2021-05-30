@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "../csss/BallByBallDetailsCard.scss";
 
@@ -11,10 +12,15 @@ export const BallByBallDetailsCard = ({
 }) => {
   //if (fInningRuns) console.log("fInningRun==>" + fInningRuns);
   //if (sInningRuns) console.log("sInningRun==>" + sInningRuns);
+  const playerProfileRoute =
+    process.env.REACT_APP_PLAYER_MATCH_PROFILE_ROUTE +
+    ballByBallDetailedData.matchId +
+    "/";
   return (
     <div className="BallByBallDetailsCard">
       <div className="score-section">
         <span>
+          <h4>{ballByBallDetailedData.battingTeam}</h4>
           <h4>
             Inning: {ballByBallDetailedData.inning} -{" "}
             {ballByBallDetailedData.over}.{ballByBallDetailedData.ball}
@@ -34,13 +40,26 @@ export const BallByBallDetailsCard = ({
         <span>
           {ballByBallDetailedData.isWicket ? (
             <h5>
-              {ballByBallDetailedData.bowler} to{" "}
-              {ballByBallDetailedData.batsman} (W)
+              <Link to={playerProfileRoute + ballByBallDetailedData.bowler}>
+                {ballByBallDetailedData.bowler}
+              </Link>
+              to{" "}
+              <Link to={playerProfileRoute + ballByBallDetailedData.batsman}>
+                {" "}
+                {ballByBallDetailedData.batsman}{" "}
+              </Link>
+              (W)
             </h5>
           ) : (
             <h5>
-              {ballByBallDetailedData.bowler} to{" "}
-              {ballByBallDetailedData.batsman}
+              <Link to={playerProfileRoute + ballByBallDetailedData.bowler}>
+                {ballByBallDetailedData.bowler}
+              </Link>
+              to{" "}
+              <Link to={playerProfileRoute + ballByBallDetailedData.batsman}>
+                {" "}
+                {ballByBallDetailedData.batsman}
+              </Link>
             </h5>
           )}
 
@@ -55,9 +74,15 @@ export const BallByBallDetailsCard = ({
 
           {ballByBallDetailedData.isWicket ? (
             <h5>
-              {ballByBallDetailedData.playerDismissed} Out,{" "}
-              {ballByBallDetailedData.dismissalKind} by{" "}
-              {ballByBallDetailedData.fielder}
+              <Link
+                to={playerProfileRoute + ballByBallDetailedData.playerDismissed}
+              >
+                {ballByBallDetailedData.playerDismissed}
+              </Link>
+              Out, {ballByBallDetailedData.dismissalKind} by{" "}
+              <Link to={playerProfileRoute + ballByBallDetailedData.fielder}>
+                {ballByBallDetailedData.fielder}
+              </Link>
             </h5>
           ) : (
             ""
