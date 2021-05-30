@@ -23,13 +23,15 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
     public PlayerProfile getPlayerProfile(String playerName) {
 
         PlayerProfile playerProfile = new PlayerProfile(playerName, (long) 0, (long) 0, (long) 0, (long) 0, (long) 0,
-                (long) 0);
+                (long) 0, (long) 0, (long) 0, (long) 0);
         PlayerAndAttribute wicketsAttribute = ballByBallRepositories.findTotalWicketsofPlayer(playerName);
         PlayerAndAttribute runsAttribute = ballByBallRepositories.findTotalRunsofPlayer(playerName);
-        PlayerAndAttribute catchesAttribute = ballByBallRepositories.findTotalCatchessOfPlayer(playerName);
+        PlayerAndAttribute catchesAttribute = ballByBallRepositories.findTotalCatchesOfPlayer(playerName);
         PlayerAndAttribute stumpingsAttribute = ballByBallRepositories.findTotalStumpingsOfPlayer(playerName);
         PlayerAndAttribute runoutsAttribute = ballByBallRepositories.findTotalRunOutsOfPlayer(playerName);
         PlayerAndAttribute momAttribute = matchRepository.findNoOfMOMByPlayer(playerName);
+        PlayerAndAttribute sixesAttribute = ballByBallRepositories.findTotalSeixesOfPlayer(playerName);
+        PlayerAndAttribute foursAttribute = ballByBallRepositories.findTotalFoursOfPlayer(playerName);
 
         if (wicketsAttribute != null && playerName.equals(wicketsAttribute.getPlayer()))
             playerProfile.setWickets(wicketsAttribute.getAttr());
@@ -43,6 +45,10 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
             playerProfile.setRunOuts(runoutsAttribute.getAttr());
         if (momAttribute != null && playerName.equals(momAttribute.getPlayer()))
             playerProfile.setMom(momAttribute.getAttr());
+        if (sixesAttribute != null && playerName.equals(sixesAttribute.getPlayer()))
+            playerProfile.setSixes(sixesAttribute.getAttr());
+        if (foursAttribute != null && playerName.equals(foursAttribute.getPlayer()))
+            playerProfile.setFours(foursAttribute.getAttr());
         System.out.println(playerProfile);
         return playerProfile;
 

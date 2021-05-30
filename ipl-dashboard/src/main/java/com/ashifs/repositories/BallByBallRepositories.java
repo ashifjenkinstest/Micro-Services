@@ -26,7 +26,13 @@ public interface BallByBallRepositories extends JpaRepository<BallByBall, Long> 
     PlayerAndAttribute findTotalStumpingsOfPlayer(String player);
 
     @Query("select new  com.ashifs.model.PlayerAndAttribute(b.fielder, SUM(b.isWicket))  FROM com.ashifs.model.BallByBall as b where b.fielder=:player and dismissalKind = 'CAUGHT'")
-    PlayerAndAttribute findTotalCatchessOfPlayer(String player);
+    PlayerAndAttribute findTotalCatchesOfPlayer(String player);
+
+    @Query("select new  com.ashifs.model.PlayerAndAttribute(b.batsman, count(*))  FROM com.ashifs.model.BallByBall as b where b.batsman= :player  and batsman_runs=6")
+    PlayerAndAttribute findTotalSeixesOfPlayer(String player);
+
+    @Query("select new  com.ashifs.model.PlayerAndAttribute(b.batsman, count(*))  FROM com.ashifs.model.BallByBall as b where b.batsman= :player  and batsman_runs=4")
+    PlayerAndAttribute findTotalFoursOfPlayer(String player);
 
     default List<BallByBall> findByMatchIdOrderByInningAndOverAndBallAsc(Long matchId) {
         Sort sort = Sort.by(Sort.Order.asc("over"), Sort.Order.asc("ball"));

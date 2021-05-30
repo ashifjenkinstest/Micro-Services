@@ -9,12 +9,15 @@ public class PlayerProfile {
     private Long catches;
     private Long stumps;
     private Long mom;
+    private Long sixes;
+    private Long fours;
+    private Long maxWicketsInMatch;
 
     public PlayerProfile() {
     }
 
-    public PlayerProfile(String playerName, Long wickets, Long runs, Long runOuts, Long catches, Long stumps,
-            Long mom) {
+    public PlayerProfile(String playerName, Long wickets, Long runs, Long runOuts, Long catches, Long stumps, Long mom,
+            Long sixes, Long fours, Long maxWicketsInMatch) {
         this.playerName = playerName;
         this.wickets = wickets;
         this.runs = runs;
@@ -22,6 +25,9 @@ public class PlayerProfile {
         this.catches = catches;
         this.stumps = stumps;
         this.mom = mom;
+        this.sixes = sixes;
+        this.fours = fours;
+        this.maxWicketsInMatch = maxWicketsInMatch;
     }
 
     public String getPlayerName() {
@@ -80,10 +86,35 @@ public class PlayerProfile {
         this.mom = mom;
     }
 
+    public Long getSixes() {
+        return sixes;
+    }
+
+    public void setSixes(Long sixes) {
+        this.sixes = sixes;
+    }
+
+    public Long getFours() {
+        return fours;
+    }
+
+    public void setFours(Long fours) {
+        this.fours = fours;
+    }
+
+    public Long getMaxWicketsInMatch() {
+        return maxWicketsInMatch;
+    }
+
+    public void setMaxWicketsInMatch(Long maxWicketsInMatch) {
+        this.maxWicketsInMatch = maxWicketsInMatch;
+    }
+
     @Override
     public String toString() {
-        return "PlayerProfile [catches=" + catches + ", mom=" + mom + ", playerName=" + playerName + ", runOuts="
-                + runOuts + ", runs=" + runs + ", stumps=" + stumps + ", wickets=" + wickets + "]";
+        return "PlayerProfile [catches=" + catches + ", fours=" + fours + ", maxWicketsInMatch=" + maxWicketsInMatch
+                + ", mom=" + mom + ", playerName=" + playerName + ", runOuts=" + runOuts + ", runs=" + runs + ", sixes="
+                + sixes + ", stumps=" + stumps + ", wickets=" + wickets + "]";
     }
 
 }

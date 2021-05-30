@@ -28,7 +28,11 @@ export const PlayerProfilePage = () => {
           <h2>
             <b>{playerName} </b>
           </h2>
-          <p>Runs: {playerStats.playerProfile.runs}</p>
+          <p>
+            Runs: {playerStats.playerProfile.runs} , (6:{" "}
+            {playerStats.playerProfile.sixes} ,4:{" "}
+            {playerStats.playerProfile.fours}){" "}
+          </p>
           <p>Wickets: {playerStats.playerProfile.wickets}</p>
           <p>Catches: {playerStats.playerProfile.catches}</p>
           <p>Run outs: {playerStats.playerProfile.runOuts}</p>
