@@ -1,7 +1,13 @@
 package com.ashifs.services;
 
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import com.ashifs.model.BestBowlingFigure;
+import com.ashifs.model.BowlerAttrs;
 import com.ashifs.model.PlayerAndAttribute;
 import com.ashifs.model.PlayerProfile;
 import com.ashifs.repositories.BallByBallRepositories;
@@ -18,21 +24,59 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
     private BallByBallRepositories ballByBallRepositories;
 
     @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
     private MatchRepository matchRepository;
 
     public PlayerProfile getPlayerProfile(String playerName) {
 
         PlayerProfile playerProfile = new PlayerProfile(playerName, (long) 0, (long) 0, (long) 0, (long) 0, (long) 0,
-                (long) 0, (long) 0, (long) 0, (long) 0);
+                (long) 0, (long) 0, (long) 0, (long) 0, (long) 0, (long) 0, (long) 0, (long) 0, (long) 0);
         PlayerAndAttribute wicketsAttribute = ballByBallRepositories.findTotalWicketsofPlayer(playerName);
         PlayerAndAttribute runsAttribute = ballByBallRepositories.findTotalRunsofPlayer(playerName);
         PlayerAndAttribute catchesAttribute = ballByBallRepositories.findTotalCatchesOfPlayer(playerName);
         PlayerAndAttribute stumpingsAttribute = ballByBallRepositories.findTotalStumpingsOfPlayer(playerName);
         PlayerAndAttribute runoutsAttribute = ballByBallRepositories.findTotalRunOutsOfPlayer(playerName);
         PlayerAndAttribute momAttribute = matchRepository.findNoOfMOMByPlayer(playerName);
-        PlayerAndAttribute sixesAttribute = ballByBallRepositories.findTotalSeixesOfPlayer(playerName);
+        PlayerAndAttribute sixesAttribute = ballByBallRepositories.findTotalSixesOfPlayer(playerName);
         PlayerAndAttribute foursAttribute = ballByBallRepositories.findTotalFoursOfPlayer(playerName);
+        // System.out.println(ballByBallRepositories.findTotal30PlusScores(playerName).getClass());
 
+        PlayerAndAttribute thirtyPlusRunsAttribute = null;
+        List<PlayerAndAttribute> thitryPlusRunsAttributes = ballByBallRepositories.findTotal30PlusScores(playerName);
+        if (thitryPlusRunsAttributes != null) {
+
+            thirtyPlusRunsAttribute = new PlayerAndAttribute();
+            thirtyPlusRunsAttribute.setAttr((long) thitryPlusRunsAttributes.size());
+            thirtyPlusRunsAttribute.setPlayer(playerName);
+            // System.out.println(thirtyPlusRunsAttribute.toString());
+
+        }
+
+        PlayerAndAttribute fiftyPlusRunsAttribute = null;
+        List<PlayerAndAttribute> fiftyPlusRunsAttributes = ballByBallRepositories.findTotal50PlusScores(playerName);
+        if (thitryPlusRunsAttributes != null) {
+
+            fiftyPlusRunsAttribute = new PlayerAndAttribute();
+            fiftyPlusRunsAttribute.setAttr((long) fiftyPlusRunsAttributes.size());
+            fiftyPlusRunsAttribute.setPlayer(playerName);
+            // System.out.println(fiftyPlusRunsAttribute.toString());
+
+        }
+
+        PlayerAndAttribute hundredPlusRunsAttribute = null;
+        List<PlayerAndAttribute> hundredPlusRunsAttributes = ballByBallRepositories.findTotal100PlusScores(playerName);
+        if (thitryPlusRunsAttributes != null) {
+
+            hundredPlusRunsAttribute = new PlayerAndAttribute();
+            hundredPlusRunsAttribute.setAttr((long) hundredPlusRunsAttributes.size());
+            hundredPlusRunsAttribute.setPlayer(playerName);
+            // System.out.println(hundredPlusRunsAttribute.toString());
+
+        }
+
+        //
         if (wicketsAttribute != null && playerName.equals(wicketsAttribute.getPlayer()))
             playerProfile.setWickets(wicketsAttribute.getAttr());
         if (runsAttribute != null && playerName.equals(runsAttribute.getPlayer()))
@@ -49,7 +93,41 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
             playerProfile.setSixes(sixesAttribute.getAttr());
         if (foursAttribute != null && playerName.equals(foursAttribute.getPlayer()))
             playerProfile.setFours(foursAttribute.getAttr());
-        System.out.println(playerProfile);
+        if (thirtyPlusRunsAttribute != null && playerName.equals(thirtyPlusRunsAttribute.getPlayer()))
+            playerProfile.setThirtyPlusRunsInMatch(thirtyPlusRunsAttribute.getAttr());
+        if (fiftyPlusRunsAttribute != null && playerName.equals(fiftyPlusRunsAttribute.getPlayer()))
+            playerProfile.setFiftyPlusRunsInMatch(fiftyPlusRunsAttribute.getAttr());
+        if (hundredPlusRunsAttribute != null && playerName.equals(hundredPlusRunsAttribute.getPlayer()))
+            playerProfile.setHundredPlusRunsInMatch(hundredPlusRunsAttribute.getAttr());
+
+        /* Old Logic to get best bowling figure */
+        /*
+         * BowlerAttrs bowlerAttrs = new BowlerAttrs(playerName, (long) 0, (long) 0);
+         * for (BowlerAttrs bowlerAttrsTemp :
+         * ballByBallRepositories.findMaxWicketsAndMatchIdofPlayer(playerName)) { if
+         * (bowlerAttrsTemp.getWicketsOrRuns() > bowlerAttrs.getWicketsOrRuns()) {
+         * bowlerAttrs.setMatchId(bowlerAttrsTemp.getMatchId());
+         * bowlerAttrs.setWicketsOrRuns(bowlerAttrsTemp.getWicketsOrRuns()); } }
+         * System.out.println(bowlerAttrs); System.out.println(ballByBallRepositories.
+         * findTotalRunsInHighestWicketMatchofPlayer(bowlerAttrs.getBowlerName(),
+         * bowlerAttrs.getMatchId()));
+         * 
+         */
+        BestBowlingFigure bestBowlingFigure = new BestBowlingFigure(playerName, (long) 0, (long) 0);
+        ballByBallRepositories.findBestBowlingFigurefPlayer(playerName);
+
+        for (BestBowlingFigure playerAndAttributeTemp : ballByBallRepositories
+                .findBestBowlingFigurefPlayer(playerName)) {
+            if (playerAndAttributeTemp.getWickets() >= bestBowlingFigure.getWickets()) {
+                bestBowlingFigure.setWickets(playerAndAttributeTemp.getWickets());
+                bestBowlingFigure.setRuns(playerAndAttributeTemp.getRuns());
+            }
+        }
+        System.out.println(bestBowlingFigure);
+        if (bestBowlingFigure != null && playerName.equals(bestBowlingFigure.getBowler()))
+            playerProfile.setBestBowlingFigureWickets(bestBowlingFigure.getWickets());
+        playerProfile.setBestBowlingFigureRuns(bestBowlingFigure.getRuns());
+
         return playerProfile;
 
     }

@@ -12,12 +12,18 @@ public class PlayerProfile {
     private Long sixes;
     private Long fours;
     private Long maxWicketsInMatch;
+    private Long thirtyPlusRunsInMatch;
+    private Long fiftyPlusRunsInMatch;
+    private Long hundredPlusRunsInMatch;
+    private Long bestBowlingFigureWickets;
+    private Long bestBowlingFigureRuns;
 
     public PlayerProfile() {
     }
 
     public PlayerProfile(String playerName, Long wickets, Long runs, Long runOuts, Long catches, Long stumps, Long mom,
-            Long sixes, Long fours, Long maxWicketsInMatch) {
+            Long sixes, Long fours, Long maxWicketsInMatch, Long thirtyPlusRunsInMatch, Long fiftyPlusRunsInMatch,
+            Long hundredPlusRunsInMatch, Long bestBowlingFigureWickets, Long bestBowlingFigureRuns) {
         this.playerName = playerName;
         this.wickets = wickets;
         this.runs = runs;
@@ -28,6 +34,11 @@ public class PlayerProfile {
         this.sixes = sixes;
         this.fours = fours;
         this.maxWicketsInMatch = maxWicketsInMatch;
+        this.thirtyPlusRunsInMatch = thirtyPlusRunsInMatch;
+        this.fiftyPlusRunsInMatch = fiftyPlusRunsInMatch;
+        this.hundredPlusRunsInMatch = hundredPlusRunsInMatch;
+        this.bestBowlingFigureWickets = bestBowlingFigureWickets;
+        this.bestBowlingFigureRuns = bestBowlingFigureRuns;
     }
 
     public String getPlayerName() {
@@ -110,11 +121,54 @@ public class PlayerProfile {
         this.maxWicketsInMatch = maxWicketsInMatch;
     }
 
+    public Long getThirtyPlusRunsInMatch() {
+        return thirtyPlusRunsInMatch;
+    }
+
+    public void setThirtyPlusRunsInMatch(Long thirtyPlusRunsInMatch) {
+        this.thirtyPlusRunsInMatch = thirtyPlusRunsInMatch;
+    }
+
+    public Long getFiftyPlusRunsInMatch() {
+        return fiftyPlusRunsInMatch;
+    }
+
+    public void setFiftyPlusRunsInMatch(Long fiftyPlusRunsInMatch) {
+        this.fiftyPlusRunsInMatch = fiftyPlusRunsInMatch;
+    }
+
+    public Long getHundredPlusRunsInMatch() {
+        return hundredPlusRunsInMatch;
+    }
+
+    public void setHundredPlusRunsInMatch(Long hundredPlusRunsInMatch) {
+        this.hundredPlusRunsInMatch = hundredPlusRunsInMatch;
+    }
+
+    public Long getBestBowlingFigureWickets() {
+        return bestBowlingFigureWickets;
+    }
+
+    public void setBestBowlingFigureWickets(Long bestBowlingFigureWickets) {
+        this.bestBowlingFigureWickets = bestBowlingFigureWickets;
+    }
+
+    public Long getBestBowlingFigureRuns() {
+        return bestBowlingFigureRuns;
+    }
+
+    public void setBestBowlingFigureRuns(Long bestBowlingFigureRuns) {
+        this.bestBowlingFigureRuns = bestBowlingFigureRuns;
+    }
+
     @Override
     public String toString() {
-        return "PlayerProfile [catches=" + catches + ", fours=" + fours + ", maxWicketsInMatch=" + maxWicketsInMatch
-                + ", mom=" + mom + ", playerName=" + playerName + ", runOuts=" + runOuts + ", runs=" + runs + ", sixes="
-                + sixes + ", stumps=" + stumps + ", wickets=" + wickets + "]";
+        return "PlayerProfile [bestBowlingFigureRuns=" + bestBowlingFigureRuns + ", bestBowlingFigureWickets="
+                + bestBowlingFigureWickets + ", catches=" + catches + ", fiftyPlusRunsInMatch=" + fiftyPlusRunsInMatch
+                + ", fours=" + fours + ", hundredPlusRunsInMatch=" + hundredPlusRunsInMatch + ", maxWicketsInMatch="
+                + maxWicketsInMatch + ", mom=" + mom + ", playerName=" + playerName + ", runOuts=" + runOuts + ", runs="
+                + runs + ", sixes=" + sixes + ", stumps=" + stumps + ", thirtyPlusRunsInMatch=" + thirtyPlusRunsInMatch
+                + ", wickets=" + wickets + "]";
     }
 
 }

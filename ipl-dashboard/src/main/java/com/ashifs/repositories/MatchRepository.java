@@ -24,7 +24,7 @@ public interface MatchRepository extends CrudRepository<Match, Long> {
   @Query("select new com.ashifs.model.MatchStatisticsLost(m.winner , m.opponent , count(*) ) from com.ashifs.model.Match as m where m.winner != :teamName and m.winner!='NA' and (Team1=:teamName or Team2=:teamName ) group by m.winner ,m.opponent")
   List<MatchStatisticsLost> findByLoserGroupByOpponent(String teamName);
 
-  @Query("select new  com.ashifs.model.PlayerAndAttribute(m.playerOfMatch, count(*))  FROM com.ashifs.model.Match as m where m.playerOfMatch=:player")
+  @Query("select new  com.ashifs.model.PlayerAndAttribute(m.playerOfMatch, count(*))  FROM com.ashifs.model.Match as m where m.playerOfMatch=:player group by m.playerOfMatch")
   PlayerAndAttribute findNoOfMOMByPlayer(String player);
 
   List<Match> findByTeam1AndMatchDateBetweenOrTeam2AndMatchDateBetweenOrderByMatchDateDesc(String team1,
