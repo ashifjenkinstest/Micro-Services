@@ -1,6 +1,7 @@
 package com.ashifs.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -8,6 +9,10 @@ import javax.transaction.Transactional;
 
 import com.ashifs.model.BestBowlingFigure;
 import com.ashifs.model.BowlerAttrs;
+import com.ashifs.model.Match;
+import com.ashifs.model.MatchInningScore;
+import com.ashifs.model.MatchInningsDetails;
+import com.ashifs.model.MatchScoreAndSummary;
 import com.ashifs.model.PlayerAndAttribute;
 import com.ashifs.model.PlayerProfile;
 import com.ashifs.repositories.BallByBallRepositories;
@@ -130,6 +135,40 @@ public class PlayerProfileServiceImpl implements PlayerProfileService {
 
         return playerProfile;
 
+    }
+
+    public MatchScoreAndSummary getMatchScoreAndSummaryByMatchId(Long matchId) {
+
+        MatchScoreAndSummary matchScoreAndSummary = new MatchScoreAndSummary();
+
+        Optional<Match> matchs = matchRepository.findById(matchId);
+        if (matchs.isPresent()) {
+            System.out.println("Match Present");
+            matchScoreAndSummary.setMatch(matchs.get());
+        } else {
+            System.out.println("Match Not Present");
+            matchScoreAndSummary.setMatch(new Match());
+        }
+
+        MatchInningsDetails matchInningsDetails = new MatchInningsDetails();
+        List<MatchInningScore> inningScores = ballByBallRepositories.findMatchScoreSummaryByMatchId(matchId);
+        for (MatchInningScore matchInningScore : inningScores) {
+            if (matchInningScore.getInning() == (1)) {
+                matchInningsDetails.setFirstInningOvers(matchInningScore.getOvers());
+                matchInningsDetails.setFirstInningTeam(matchInningScore.getTeam());
+                matchInningsDetails.setFirstInningRuns(matchInningScore.getRuns());
+                matchInningsDetails.setFirstInningWickets(matchInningScore.getWickets());
+            }
+            if (matchInningScore.getInning() == (2)) {
+                matchInningsDetails.setSecondInningOvers(matchInningScore.getOvers());
+                matchInningsDetails.setSecondInningTeam(matchInningScore.getTeam());
+                matchInningsDetails.setSecondInningRuns(matchInningScore.getRuns());
+                matchInningsDetails.setSecondInningWickets(matchInningScore.getWickets());
+            }
+
+        }
+        matchScoreAndSummary.setMatchInningsScore(matchInningsDetails);
+        return matchScoreAndSummary;
     }
 
 }

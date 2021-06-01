@@ -3,12 +3,14 @@ package com.ashifs.model;
 public class PlayerStats {
 
     private PlayerProfile playerProfile;
+    private MatchScoreAndSummary matchScoreAndSummary;
 
     public PlayerStats() {
     }
 
-    public PlayerStats(PlayerProfile playerProfile) {
+    public PlayerStats(PlayerProfile playerProfile, MatchScoreAndSummary matchScoreAndSummary) {
         this.playerProfile = playerProfile;
+        this.matchScoreAndSummary = matchScoreAndSummary;
     }
 
     public PlayerProfile getPlayerProfile() {
@@ -19,9 +21,17 @@ public class PlayerStats {
         this.playerProfile = playerProfile;
     }
 
+    public MatchScoreAndSummary getMatchScoreAndSummary() {
+        return matchScoreAndSummary;
+    }
+
+    public void setMatchScoreAndSummary(MatchScoreAndSummary matchScoreAndSummary) {
+        this.matchScoreAndSummary = matchScoreAndSummary;
+    }
+
     @Override
     public String toString() {
-        return "PlayerStats [playerProfile=" + playerProfile + "]";
+        return "PlayerStats [matchScoreAndSummary=" + matchScoreAndSummary + ", playerProfile=" + playerProfile + "]";
     }
 
 }

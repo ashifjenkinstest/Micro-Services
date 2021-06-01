@@ -124,6 +124,7 @@ public class TeamController {
         System.out.println("Inside getPlayerProfile");
         PlayerStats playerStats = new PlayerStats();
         playerStats.setPlayerProfile(playerProfileServiceImpl.getPlayerProfile(player));
+        playerStats.setMatchScoreAndSummary(playerProfileServiceImpl.getMatchScoreAndSummaryByMatchId(matchId));
 
         return playerStats;
 

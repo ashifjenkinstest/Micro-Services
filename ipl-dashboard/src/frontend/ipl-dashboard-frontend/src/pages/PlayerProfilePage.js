@@ -4,7 +4,10 @@ import { useParams } from "react-router-dom";
 import "../csss/PlayerProfilePage.scss";
 
 export const PlayerProfilePage = () => {
-  const [playerStats, setPlayerStats] = useState({ playerProfile: [] });
+  const [playerStats, setPlayerStats] = useState({
+    playerProfile: [],
+    matchScoreAndSummary: [],
+  });
   const { matchId } = useParams();
   const { playerName } = useParams();
 
@@ -20,6 +23,7 @@ export const PlayerProfilePage = () => {
     fetchPlayerProfile();
   }, [matchId, playerName]);
 
+  console.log(playerStats.matchScoreAndSummary);
   if (playerStats.playerProfile.length === 0) {
     return (
       <div className="PlayerProfilePage">
@@ -38,7 +42,7 @@ export const PlayerProfilePage = () => {
 
   return (
     <div className="PlayerProfilePage">
-      <div className="prfile">
+      <div className="profile">
         <TeamImage team="PLAYER" />
         <div className="container-section">
           <h2>
@@ -75,6 +79,9 @@ export const PlayerProfilePage = () => {
             <b>Player of the Match: {playerStats.playerProfile.mom} </b>
           </p>
         </div>
+      </div>
+      <div className="matchdetail">
+        <h1>Match Detail</h1>
       </div>
       <div className="matchscore">
         <h1>CURRENT MATCH SCORE SECTION</h1>

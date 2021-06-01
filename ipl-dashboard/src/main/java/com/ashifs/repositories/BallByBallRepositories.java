@@ -8,6 +8,7 @@ import javax.persistence.NamedNativeQuery;
 import com.ashifs.model.BallByBall;
 import com.ashifs.model.BestBowlingFigure;
 import com.ashifs.model.BowlerAttrs;
+import com.ashifs.model.MatchInningScore;
 import com.ashifs.model.PlayerAndAttribute;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,11 @@ public interface BallByBallRepositories extends JpaRepository<BallByBall, Long> 
         // b.batsman = :player)"
         )
         List<PlayerAndAttribute> findTotal100PlusScores(String player);
+
+        @Query("SELECT new com.ashifs.model.MatchInningScore(b.battingTeam,b.inning,sum(totalRuns),sum(b.isWicket),max(b.over)) "
+                        + " FROM com.ashifs.model.BallByBall as b "
+                        + " where b.matchId=:matchId group by b.inning,b.battingTeam")
+        List<MatchInningScore> findMatchScoreSummaryByMatchId(Long matchId);
 
         default List<BallByBall> findByMatchIdOrderByInningAndOverAndBallAsc(Long matchId) {
                 Sort sort = Sort.by(Sort.Order.asc("over"), Sort.Order.asc("ball"));
