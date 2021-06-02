@@ -23,7 +23,7 @@ export const PlayerProfilePage = () => {
     fetchPlayerProfile();
   }, [matchId, playerName]);
 
-  console.log(playerStats.matchScoreAndSummary);
+  //console.log(playerStats.matchScoreAndSummary);
   if (playerStats.playerProfile.length === 0) {
     return (
       <div className="PlayerProfilePage">
@@ -81,13 +81,61 @@ export const PlayerProfilePage = () => {
         </div>
       </div>
       <div className="matchdetail">
-        <h1>Match Detail</h1>
+        <div>
+          <h3>
+            {playerStats.matchScoreAndSummary.match.tossWinner} elected to{" "}
+            {playerStats.matchScoreAndSummary.match.tossDecision} first
+          </h3>
+          <h2>
+            {playerStats.matchScoreAndSummary.matchInningsScore.firstInningTeam}{" "}
+            {playerStats.matchScoreAndSummary.matchInningsScore.firstInningRuns}
+            /
+            {
+              playerStats.matchScoreAndSummary.matchInningsScore
+                .firstInningWickets
+            }{" "}
+            (
+            {
+              playerStats.matchScoreAndSummary.matchInningsScore
+                .firstInningOvers
+            }
+            +)
+          </h2>
+          <h2>
+            {
+              playerStats.matchScoreAndSummary.matchInningsScore
+                .secondInningTeam
+            }{" "}
+            {
+              playerStats.matchScoreAndSummary.matchInningsScore
+                .secondInningRuns
+            }
+            /
+            {
+              playerStats.matchScoreAndSummary.matchInningsScore
+                .secondInningWickets
+            }{" "}
+            (
+            {
+              playerStats.matchScoreAndSummary.matchInningsScore
+                .secondInningOvers
+            }
+            +)
+          </h2>
+          <h4>
+            {playerStats.matchScoreAndSummary.match.winner} Won by{" "}
+            {playerStats.matchScoreAndSummary.match.resultMargin}{" "}
+            {playerStats.matchScoreAndSummary.match.result}
+          </h4>
+          <h3>PLAYER OF THE MATCH</h3>
+          <h5>{playerStats.matchScoreAndSummary.match.playerOfMatch}</h5>
+        </div>
       </div>
       <div className="matchscore">
-        <h1>CURRENT MATCH SCORE SECTION</h1>
+        <h1></h1>
       </div>
       <div className="careerscore">
-        <h1>CAREER MATCHES SCORE SECTION</h1>
+        <h1></h1>
       </div>
     </div>
   );
