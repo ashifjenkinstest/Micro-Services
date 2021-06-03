@@ -1,17 +1,20 @@
 .PlayerProfilePage {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  padding: 30px;
+  padding: 3px;
+  padding-left: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 
   border-style: dotted;
   .profile {
-    grid-column: span 2;
+    grid-column: span 4;
     // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     // transition: 0.3s;
     height: 200;
     width: 300;
+    // border-style: ridge;
+    padding: 30px;
   }
 
   .profile:hover {
@@ -19,13 +22,13 @@
   }
 
   .matchdetail {
-    grid-column: span 2;
+    grid-column: span 4;
     //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     //transition: 0.3s;
     padding: 3px;
     //height: 200px;
     //width: 300px;
-
+    padding-bottom: 20px;
     align-self: center;
     justify-self: start;
     & > h1,

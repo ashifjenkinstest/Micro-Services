@@ -2,7 +2,7 @@ import "./App.scss";
 import TeamPage from "./pages/TeamPage";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import MatchPage from "./pages/MatchPage";
-import TeamStatistics from "./components/TeamStatistics";
+import TeamStatistics from "./pages/TeamStatistics";
 import AllTeams from "./pages/AllTeams";
 import BallByBallMatchDetails from "./pages/BallByBallMatchDetails";
 import PlayerProfilePage from "./pages/PlayerProfilePage";

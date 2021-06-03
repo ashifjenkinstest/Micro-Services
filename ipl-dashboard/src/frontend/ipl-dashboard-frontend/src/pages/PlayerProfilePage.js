@@ -88,7 +88,6 @@ export const PlayerProfilePage = () => {
             </p>
           </div>
         </div>
-
         <div className="matchdetail">
           <div>
             <h3>
@@ -162,6 +161,7 @@ export const PlayerProfilePage = () => {
             <h5>{playerStats.matchScoreAndSummary.match.playerOfMatch}</h5>
           </div>
         </div>
+
         <div className="matchscore"></div>
         <div className="careerscore"></div>
       </div>

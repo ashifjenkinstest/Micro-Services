@@ -1,7 +1,8 @@
 .MatchSummaryCard {
   display: grid;
 
-  height: 400px;
+  height: 500px;
+  width: 200px;
   padding: 10px;
   margin-bottom: 1px;
   border-style: dotted;
@@ -15,5 +16,13 @@
   .match-venue,
   .match-umpires {
     margin-top: 5px;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+  }
+  .team-name {
+    align-self: center;
+    justify-self: center;
+    text-align: center;
   }
 }

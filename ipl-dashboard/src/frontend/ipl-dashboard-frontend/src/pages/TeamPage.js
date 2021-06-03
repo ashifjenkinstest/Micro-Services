@@ -74,7 +74,9 @@ export const TeamPage = ({ team }) => {
             ]}
           />
           <div className="more-section">
-            <Link to={statsRoute}>Statistics ></Link>
+            <div>
+              <Link to={statsRoute}>Statistics ></Link>
+            </div>
           </div>
         </div>
 
@@ -99,7 +101,11 @@ export const TeamPage = ({ team }) => {
         ))}
 
         <div className="more-section">
-          <Link to={moreRoute}>More ></Link>
+          <div>
+            <Link to={`/teams`}>All Teams ></Link>
+          </div>
+          <div></div>
+          <Link to={moreRoute}>More Matches></Link>
         </div>
       </div>
     </React.Fragment>
