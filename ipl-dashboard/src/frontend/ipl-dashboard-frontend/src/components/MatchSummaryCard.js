@@ -31,14 +31,14 @@ export const MatchSummaryCard = ({ mainTeam, match }) => {
         </h4>
       </span>
       <h2 className="match-winner-result-margin">
-        {match.winner} by {match.resultMargin} {match.result}
+        {match.winner} won by {match.resultMargin} {match.result}.
       </h2>
       <h4 className="player-of-the-match">
         <Link to={playerProfileRoute + match.playerOfMatch}>
           {" "}
           {match.playerOfMatch}
         </Link>
-        was Player of the Match
+        was Player of the Match.
       </h4>
       <h6>
         <Link to={matchDetailsRoute}>More Details</Link>

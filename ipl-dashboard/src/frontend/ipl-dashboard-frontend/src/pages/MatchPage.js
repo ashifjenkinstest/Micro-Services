@@ -45,7 +45,7 @@ function MatchPage() {
         <div className="match-detail-section">
           <div className="no-match-played-section no-match-played-card">
             <h1>
-              No mathes Played by {matchesOfTeam} since {matchFromYear}
+              No match found for {matchesOfTeam} since {matchFromYear} !!
             </h1>
           </div>
         </div>

@@ -23,3 +23,26 @@
   padding: 20px;
   border-style: dotted;
 }
+.pnf-section {
+  padding: 200px;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  text-shadow: #66baeb;
+  border-style: dashed;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background-color: rgb(64, 65, 58);
+  align-self: center;
+  .footer-text {
+    align-self: center;
+    justify-self: center;
+    text-align: right;
+  }
+}

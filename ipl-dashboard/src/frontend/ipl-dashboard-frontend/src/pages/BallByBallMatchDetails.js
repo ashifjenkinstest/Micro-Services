@@ -59,6 +59,16 @@ function BallByBallMatchDetails() {
     }
   });
 
+  if (!ballByBalls || ballByBalls.ballByBall.length === 0) {
+    return (
+      <div>
+        <div className="pnf-section">
+          <h1>Oops... Page Not Found!</h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="BallByBallMatchDetails">
       <div className="teamname-teamimage-section-1">

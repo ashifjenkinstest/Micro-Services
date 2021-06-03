@@ -32,7 +32,22 @@ export const TeamPage = ({ team }) => {
   }, [rootTeamName, moreRoute, statsRoute]);
   const matchesLost = teamLocal.totalMatches - teamLocal.totalWins;
   if (!teamLocal || !teamLocal.teamName) {
-    return <h1>Team Not Found!</h1>;
+    return (
+      <div>
+        <div className="TeamPage">
+          <div className="team-name-section">
+            <h1 className="team-name"> {rootTeamName}</h1>
+          </div>
+          <div className="team-image">
+            <TeamImage team={rootTeamName} />
+          </div>
+        </div>
+
+        <div className="pnf-section">
+          <h1>Oops... Page Not Found!</h1>
+        </div>
+      </div>
+    );
   }
   return (
     <React.Fragment>

@@ -19,6 +19,26 @@ export const TeamStatistics = ({ team }) => {
     fetchTeamStatistics();
   }, [rootTeamName]);
 
+  if (!stat || stat.statistics.length === 0) {
+    return (
+      <div>
+        <div className="TeamStatistics">
+          <div className="team-name-section">
+            <h1 className="team-name"> {rootTeamName}</h1>
+
+            <Link to={rootTeamRoute}> Latest Matches</Link>
+          </div>
+          <div className="team-image">
+            <TeamImage team={rootTeamName} />
+          </div>
+        </div>
+        <div className="pnf-section">
+          <h1>Oops... Page Not Found!</h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <React.Fragment>
       <div className="TeamStatistics">

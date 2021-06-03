@@ -25,137 +25,147 @@ export const PlayerProfilePage = () => {
     fetchPlayerProfile();
   }, [matchId, playerName]);
 
-  //console.log(playerStats.matchScoreAndSummary);
-  if (playerStats.playerProfile.length === 0) {
+  console.log(
+    "playerStats.matchScoreAndSummary " + playerStats.matchScoreAndSummary
+  );
+  console.log("playerStats.playerProfile " + playerStats.playerProfile);
+  console.log(
+    "playerStats.matchScoreAndSummary.matchInningsScore " +
+      playerStats.matchScoreAndSummary.matchInningsScore
+  );
+  if (
+    !playerStats.playerProfile ||
+    playerStats.playerProfile.length === 0 ||
+    playerStats.matchScoreAndSummary.match.id === 0
+  ) {
     return (
-      <div className="PlayerProfilePage">
-        <div className="prfile">
-          <TeamImage team="PLAYER" />
-          <div className="container-section">
-            <h2>
-              <b>{playerName} </b>
-            </h2>
-            <h1>No Data Found</h1>
-          </div>
+      <div>
+        <div className="pnf-section">
+          <h1>Oops... Page Not Found!</h1>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="PlayerProfilePage">
-      <div className="profile">
-        <TeamImage team="PLAYER" />
-        <div className="container-section">
-          <h2>
-            <b>{playerName} </b>
-          </h2>
-          <p>
-            <b>
-              Runs: {playerStats.playerProfile.runs} , ( 6:{" "}
-              {playerStats.playerProfile.sixes} , 4:{" "}
-              {playerStats.playerProfile.fours} , 30+:{" "}
-              {playerStats.playerProfile.thirtyPlusRunsInMatch}, 50+:{" "}
-              {playerStats.playerProfile.fiftyPlusRunsInMatch}, 100+:{" "}
-              {playerStats.playerProfile.hundredPlusRunsInMatch} ){" "}
-            </b>
-          </p>
-          <p>
-            {" "}
-            <b>
-              Wickets: {playerStats.playerProfile.wickets} (
-              {playerStats.playerProfile.bestBowlingFigureWickets}/
-              {playerStats.playerProfile.bestBowlingFigureRuns}){" "}
-            </b>
-          </p>
-          <p>
-            <b>Catches: {playerStats.playerProfile.catches}</b>
-          </p>
-          <p>
-            <b>Run outs: {playerStats.playerProfile.runOuts}</b>
-          </p>
-          <p>
-            <b>Stumps: {playerStats.playerProfile.stumps}</b>
-          </p>
-          <p>
-            <b>Player of the Match: {playerStats.playerProfile.mom} </b>
-          </p>
+    <React.Fragment>
+      <div className="PlayerProfilePage">
+        <div className="profile">
+          <TeamImage team="PLAYER" />
+          <div className="container-section">
+            <h2>
+              <b>{playerName} </b>
+            </h2>
+            <p>
+              <b>
+                Runs: {playerStats.playerProfile.runs} , ( 6:{" "}
+                {playerStats.playerProfile.sixes} , 4:{" "}
+                {playerStats.playerProfile.fours} , 30+:{" "}
+                {playerStats.playerProfile.thirtyPlusRunsInMatch}, 50+:{" "}
+                {playerStats.playerProfile.fiftyPlusRunsInMatch}, 100+:{" "}
+                {playerStats.playerProfile.hundredPlusRunsInMatch} ){" "}
+              </b>
+            </p>
+            <p>
+              {" "}
+              <b>
+                Wickets: {playerStats.playerProfile.wickets} (
+                {playerStats.playerProfile.bestBowlingFigureWickets}/
+                {playerStats.playerProfile.bestBowlingFigureRuns}){" "}
+              </b>
+            </p>
+            <p>
+              <b>Catches: {playerStats.playerProfile.catches}</b>
+            </p>
+            <p>
+              <b>Run outs: {playerStats.playerProfile.runOuts}</b>
+            </p>
+            <p>
+              <b>Stumps: {playerStats.playerProfile.stumps}</b>
+            </p>
+            <p>
+              <b>Player of the Match: {playerStats.playerProfile.mom} </b>
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="matchdetail">
-        <div>
-          <h3>
-            {playerStats.matchScoreAndSummary.match.tossWinner} elected to{" "}
-            {playerStats.matchScoreAndSummary.match.tossDecision} first
-          </h3>
-          <h2>
-            <Link
-              to={
-                rootTeamRoute +
-                playerStats.matchScoreAndSummary.matchInningsScore
-                  .firstInningTeam
-              }
-            >
+        <div className="matchdetail">
+          <div>
+            <h3>
+              {playerStats.matchScoreAndSummary.match.tossWinner} elected to{" "}
+              {playerStats.matchScoreAndSummary.match.tossDecision} first
+            </h3>
+            <h2>
+              <Link
+                to={
+                  rootTeamRoute +
+                  playerStats.matchScoreAndSummary.matchInningsScore
+                    .firstInningTeam
+                }
+              >
+                {
+                  playerStats.matchScoreAndSummary.matchInningsScore
+                    .firstInningTeam
+                }
+              </Link>{" "}
               {
                 playerStats.matchScoreAndSummary.matchInningsScore
-                  .firstInningTeam
+                  .firstInningRuns
               }
-            </Link>{" "}
-            {playerStats.matchScoreAndSummary.matchInningsScore.firstInningRuns}
-            /
-            {
-              playerStats.matchScoreAndSummary.matchInningsScore
-                .firstInningWickets
-            }{" "}
-            (
-            {
-              playerStats.matchScoreAndSummary.matchInningsScore
-                .firstInningOvers
-            }
-            +)
-          </h2>
-          <h2>
-            <Link
-              to={
-                rootTeamRoute +
-                playerStats.matchScoreAndSummary.matchInningsScore
-                  .secondInningTeam
-              }
-            >
+              /
               {
                 playerStats.matchScoreAndSummary.matchInningsScore
-                  .secondInningTeam
+                  .firstInningWickets
+              }{" "}
+              (
+              {
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .firstInningOvers
               }
-            </Link>{" "}
-            {
-              playerStats.matchScoreAndSummary.matchInningsScore
-                .secondInningRuns
-            }
-            /
-            {
-              playerStats.matchScoreAndSummary.matchInningsScore
-                .secondInningWickets
-            }{" "}
-            (
-            {
-              playerStats.matchScoreAndSummary.matchInningsScore
-                .secondInningOvers
-            }
-            +)
-          </h2>
-          <h4>
-            {playerStats.matchScoreAndSummary.match.winner} Won by{" "}
-            {playerStats.matchScoreAndSummary.match.resultMargin}{" "}
-            {playerStats.matchScoreAndSummary.match.result}
-          </h4>
-          <h3>PLAYER OF THE MATCH</h3>
-          <h5>{playerStats.matchScoreAndSummary.match.playerOfMatch}</h5>
+              +)
+            </h2>
+            <h2>
+              <Link
+                to={
+                  rootTeamRoute +
+                  playerStats.matchScoreAndSummary.matchInningsScore
+                    .secondInningTeam
+                }
+              >
+                {
+                  playerStats.matchScoreAndSummary.matchInningsScore
+                    .secondInningTeam
+                }
+              </Link>{" "}
+              {
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .secondInningRuns
+              }
+              /
+              {
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .secondInningWickets
+              }{" "}
+              (
+              {
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .secondInningOvers
+              }
+              +)
+            </h2>
+            <h4>
+              {playerStats.matchScoreAndSummary.match.winner} Won by{" "}
+              {playerStats.matchScoreAndSummary.match.resultMargin}{" "}
+              {playerStats.matchScoreAndSummary.match.result}
+            </h4>
+            <h3>PLAYER OF THE MATCH</h3>
+            <h5>{playerStats.matchScoreAndSummary.match.playerOfMatch}</h5>
+          </div>
         </div>
+        <div className="matchscore"></div>
+        <div className="careerscore"></div>
       </div>
-      <div className="matchscore"></div>
-      <div className="careerscore"></div>
-    </div>
+    </React.Fragment>
   );
 };
 

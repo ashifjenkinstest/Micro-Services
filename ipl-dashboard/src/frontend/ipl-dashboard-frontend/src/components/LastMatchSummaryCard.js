@@ -44,7 +44,7 @@ export const LastMatchSummary = ({ mainTeam, match }) => {
         </span>
         <h4>Match Winner:</h4>
         <p className="match-winner-result-margin">
-          {match.winner} by {match.resultMargin} {match.result}
+          {match.winner} won by {match.resultMargin} {match.result}
         </p>
         <h4 className="player-of-the-match">
           <Link to={playerProfileRoute + match.playerOfMatch}>

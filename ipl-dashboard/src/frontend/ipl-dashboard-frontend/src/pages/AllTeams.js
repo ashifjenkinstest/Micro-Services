@@ -24,16 +24,8 @@ function AllTeams() {
 
   if (!data || data.teams.length === 0)
     return (
-      <div className="AllTeams">
-        <div className="ipl-teams-section ipl-teams-section-card">
-          <div className="ipl-name">
-            <h3>Oops!! No IPL Team Found....</h3>
-          </div>
-
-          <div className="team-image">
-            <TeamImage team="IPL" />
-          </div>
-        </div>
+      <div className="pnf-section">
+        <h1>Oops... Page Not Found!</h1>
       </div>
     );
 
