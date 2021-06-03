@@ -71,7 +71,7 @@ export const TeamPage = ({ team }) => {
           />
         </div>
         <div className="match-summary-vs summary-card">
-          <h2>Match Summary of previous matches</h2>
+          <h2>Match Summary of previous matches ...</h2>
         </div>
         {teamLocal.lastestMatches.slice(1).map((latestMatch) => (
           <div key={latestMatch.id}>

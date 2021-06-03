@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TeamImage from "../components/TeamImage";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "../csss/PlayerProfilePage.scss";
 
 export const PlayerProfilePage = () => {
@@ -10,6 +10,8 @@ export const PlayerProfilePage = () => {
   });
   const { matchId } = useParams();
   const { playerName } = useParams();
+
+  const rootTeamRoute = process.env.REACT_APP_TEAM_ROUTE;
 
   useEffect(() => {
     const fetchPlayerProfile = async () => {
@@ -80,6 +82,7 @@ export const PlayerProfilePage = () => {
           </p>
         </div>
       </div>
+
       <div className="matchdetail">
         <div>
           <h3>
@@ -87,7 +90,18 @@ export const PlayerProfilePage = () => {
             {playerStats.matchScoreAndSummary.match.tossDecision} first
           </h3>
           <h2>
-            {playerStats.matchScoreAndSummary.matchInningsScore.firstInningTeam}{" "}
+            <Link
+              to={
+                rootTeamRoute +
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .firstInningTeam
+              }
+            >
+              {
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .firstInningTeam
+              }
+            </Link>{" "}
             {playerStats.matchScoreAndSummary.matchInningsScore.firstInningRuns}
             /
             {
@@ -102,10 +116,18 @@ export const PlayerProfilePage = () => {
             +)
           </h2>
           <h2>
-            {
-              playerStats.matchScoreAndSummary.matchInningsScore
-                .secondInningTeam
-            }{" "}
+            <Link
+              to={
+                rootTeamRoute +
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .secondInningTeam
+              }
+            >
+              {
+                playerStats.matchScoreAndSummary.matchInningsScore
+                  .secondInningTeam
+              }
+            </Link>{" "}
             {
               playerStats.matchScoreAndSummary.matchInningsScore
                 .secondInningRuns
@@ -131,12 +153,8 @@ export const PlayerProfilePage = () => {
           <h5>{playerStats.matchScoreAndSummary.match.playerOfMatch}</h5>
         </div>
       </div>
-      <div className="matchscore">
-        <h1></h1>
-      </div>
-      <div className="careerscore">
-        <h1></h1>
-      </div>
+      <div className="matchscore"></div>
+      <div className="careerscore"></div>
     </div>
   );
 };

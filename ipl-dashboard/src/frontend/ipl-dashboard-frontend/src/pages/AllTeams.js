@@ -7,7 +7,8 @@ import { PieChart } from "react-minimal-pie-chart";
 function AllTeams() {
   const [data, setData] = useState({ teams: [] });
 
-  const rootTeamRoute = "/teams/";
+  //const rootTeamRoute = "/teams/";
+  const rootTeamRoute = process.env.REACT_APP_TEAM_ROUTE;
 
   useEffect(() => {
     const fetchAllTeams = async () => {

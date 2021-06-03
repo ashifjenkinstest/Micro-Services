@@ -8,6 +8,8 @@ import YearSelector from "../components/YearSelector";
 function MatchPage() {
   const [matches, setMatches] = useState({ match: [] });
 
+  //const rootTeamRoute = process.env.REACT_APP_TEAM_ROUTE;
+
   const { rootTeamName } = useParams();
   const { matchYear } = useParams();
   const matchesOfTeam = rootTeamName;
@@ -29,7 +31,7 @@ function MatchPage() {
       <div className="MatchPage">
         <div className="latest-match-from-year">
           <h3>Latest Matches of </h3>
-          <h1>{matchesOfTeam} </h1>
+          <h1>{rootTeamName} </h1>
           <h3>since </h3> <h1> {matchFromYear} </h1>
           <Link to={`/teams`}> All Teams</Link>
         </div>

@@ -6,6 +6,7 @@ import "../csss/LatestMatchSummaryCard.scss";
 export const LastMatchSummary = ({ mainTeam, match }) => {
   const rootTeam = mainTeam === match.team1 ? match.team2 : match.team1;
   const rootTeamRoute = "/teams/" + rootTeam;
+
   const matchDetailsRoute = "/teams/matches/" + match.id;
   const isMatchWonByMainTeam = mainTeam === match.winner;
   const playerProfileRoute =

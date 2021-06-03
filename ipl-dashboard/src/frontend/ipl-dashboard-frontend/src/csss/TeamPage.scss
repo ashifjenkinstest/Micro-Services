@@ -41,13 +41,15 @@
   .match-summary-vs {
     grid-column: span 4;
     grid-row-start: auto;
-    height: min-content;
+    //height: min-content;
   }
   .match-summary-section-root {
   }
 
   .match-summary-section {
     grid-column: span 1;
+    height: fit-content;
+    border-style: dotted;
   }
   .more-section {
     grid-column: span 0.5;

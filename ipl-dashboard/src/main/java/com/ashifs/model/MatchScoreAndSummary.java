@@ -36,13 +36,5 @@ public class MatchScoreAndSummary {
         return "MatchScoreAndSummary [match=" + match + ", matchInningsScore=" + matchInningsScore + "]";
     }
 
-    public void setMatch(Optional<Match> findById) {
-    }
-
-    public void setMatch(Optional<Match> findById) {
-    }
-
-    public void setMatch(Optional<Match> findById) {
-    }
 
 }

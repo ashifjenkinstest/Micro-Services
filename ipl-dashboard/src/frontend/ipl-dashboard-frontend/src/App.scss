@@ -4,14 +4,22 @@
 }
 
 .won-card {
-  background-color: #4da375;
+  background-color: rgb(77, 163, 117);
 }
 .lost-card {
-  background-color: #a34d5d;
+  background-color: rgb(163, 77, 93);
+}
+
+.won-card:hover {
+  box-shadow: 0 20px 26px 0 rgba(40, 146, 7, 0.2);
+}
+
+.lost-card:hover {
+  box-shadow: 0 20px 26px 0 rgba(236, 16, 16, 0.2);
 }
 
 .no-match-played-card {
-  background-color: #d7f178;
+  background-color: #66baeb;
   padding: 20px;
   border-style: dotted;
 }
