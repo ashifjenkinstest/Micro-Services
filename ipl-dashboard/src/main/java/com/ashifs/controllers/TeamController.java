@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/ipl")
@@ -47,6 +49,7 @@ public class TeamController {
     }
 
     @RequestMapping(path = "/teams")
+    @ApiOperation(value = "Get all the IPL Teams since 2008", notes = "Provides the teams which do not play anymore  also", response = Teams.class)
     public Teams getAllTeams(String teamName) {
         Teams teams = new Teams(this.teamRepository.findAll());
 
@@ -54,6 +57,7 @@ public class TeamController {
     }
 
     @RequestMapping(path = "/teams/{teamName}")
+    @ApiOperation(value = "Get details of a team", notes = "Provided a team it will return details of that team", response = Team.class)
     public Team getTeam(@PathVariable String teamName) {
         Team team = new Team();
         Team teamInternal = this.teamRepository.findByTeamName(teamName);
@@ -69,6 +73,7 @@ public class TeamController {
     }
 
     @RequestMapping(path = "/matches/{teamName}")
+    @ApiOperation(value = "Get details of the latest four matches played by a team", notes = "Provided a team it will return details of the matches played by that team", response = Matches.class)
     public Matches getMatchOfTeam(@PathVariable String teamName) {
 
         return new Matches(this.matchRepository.findTopFewByTeam1OrTeam2OrderByMatchDateDesc(teamName, 4));
@@ -76,6 +81,7 @@ public class TeamController {
     }
 
     @RequestMapping(path = "/teams/{teamName}/matches")
+    @ApiOperation(value = "Get details of the matches played by a team since a certain year", notes = "Provided a team and a year it will return details of the matches played by that team since the year 2XXX", response = Matches.class)
     public Matches getMatchOfTeamByDateRanges(@PathVariable String teamName, @RequestParam int year) {
         LocalDate startDate = LocalDate.of(year, 1, 1);
         LocalDate endDate = LocalDate.of(year + 1, 1, 1).getYear() > LocalDate.now().getYear()
@@ -89,12 +95,14 @@ public class TeamController {
     }
 
     @RequestMapping(path = "/teams/matches")
+    @ApiOperation(value = "Get details of the matche of specific matchID", notes = "Provided a matchID it will return details of the matche", response = BallByBalls.class)
     public BallByBalls getMatchOfTeamByMatchId(@RequestParam Long matchId) {
         System.out.println(">----> " + matchId);
         return new BallByBalls(ballRepositories.findByMatchIdOrderByInningAndOverAndBallAsc(matchId));
     }
 
     @RequestMapping(path = "/teams/{teamName}/statistics")
+    @ApiOperation(value = "Get the match statistics of a Team", notes = "Provided a team name it will return the statistics of the Team", response = TeamStat.class)
     public TeamStat getMatchStatisticsByTeamName(@PathVariable String teamName) {
 
         List<TeamStatistics> teamStatistics = new ArrayList<>();
@@ -120,13 +128,12 @@ public class TeamController {
     }
 
     @RequestMapping(path = "/match/ipl/players/{matchId}/{player}")
+    @ApiOperation(value = "Get the statistics of the player and details of a match", notes = "Provided a player name  and match id it will return the statistics of the Player and details of the match", response = PlayerStats.class)
     public PlayerStats getPlayerProfile(@PathVariable Long matchId, @PathVariable String player) {
         System.out.println("Inside getPlayerProfile");
         PlayerStats playerStats = new PlayerStats();
         playerStats.setPlayerProfile(playerProfileServiceImpl.getPlayerProfile(player));
         playerStats.setMatchScoreAndSummary(playerProfileServiceImpl.getMatchScoreAndSummaryByMatchId(matchId));
-
         return playerStats;
-
     }
 }
