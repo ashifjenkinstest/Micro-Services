@@ -7,14 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import com.ashifs.model.BestBowlingFigure;
-import com.ashifs.model.BowlerAttrs;
 import com.ashifs.model.Match;
-import com.ashifs.model.MatchInningScore;
-import com.ashifs.model.MatchInningsDetails;
-import com.ashifs.model.MatchScoreAndSummary;
-import com.ashifs.model.PlayerAndAttribute;
-import com.ashifs.model.PlayerProfile;
+import com.ashifs.pojos.BestBowlingFigure;
+import com.ashifs.pojos.BowlerAttrs;
+import com.ashifs.pojos.MatchInningScore;
+import com.ashifs.pojos.MatchInningsDetails;
+import com.ashifs.pojos.MatchScoreAndSummary;
+import com.ashifs.pojos.PlayerAndAttribute;
+import com.ashifs.pojos.PlayerProfile;
 import com.ashifs.repositories.BallByBallRepositories;
 import com.ashifs.repositories.MatchRepository;
 

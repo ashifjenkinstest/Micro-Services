@@ -1,6 +1,6 @@
 package com.ashifs.services;
 
-import com.ashifs.model.PlayerProfile;
+import com.ashifs.pojos.PlayerProfile;
 
 public interface PlayerProfileService {
 

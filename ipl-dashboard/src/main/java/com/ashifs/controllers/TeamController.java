@@ -6,16 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.ashifs.model.BallByBalls;
-import com.ashifs.model.MatchStatisticsLost;
-import com.ashifs.model.MatchStatisticsWon;
-import com.ashifs.model.Matches;
-
-import com.ashifs.model.PlayerStats;
 import com.ashifs.model.Team;
-import com.ashifs.model.TeamStat;
-import com.ashifs.model.TeamStatistics;
-import com.ashifs.model.Teams;
+import com.ashifs.pojos.BallByBalls;
+import com.ashifs.pojos.MatchStatisticsLost;
+import com.ashifs.pojos.MatchStatisticsWon;
+import com.ashifs.pojos.Matches;
+import com.ashifs.pojos.PlayerStats;
+import com.ashifs.pojos.TeamStat;
+import com.ashifs.pojos.TeamStatistics;
+import com.ashifs.pojos.Teams;
 import com.ashifs.repositories.BallByBallRepositories;
 import com.ashifs.repositories.MatchRepository;
 import com.ashifs.repositories.TeamRepository;
@@ -30,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/ipl")
 public class TeamController {
 
     private TeamRepository teamRepository;
