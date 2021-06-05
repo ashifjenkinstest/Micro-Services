@@ -25,14 +25,6 @@ export const PlayerProfilePage = () => {
     fetchPlayerProfile();
   }, [matchId, playerName]);
 
-  console.log(
-    "playerStats.matchScoreAndSummary " + playerStats.matchScoreAndSummary
-  );
-  console.log("playerStats.playerProfile " + playerStats.playerProfile);
-  console.log(
-    "playerStats.matchScoreAndSummary.matchInningsScore " +
-      playerStats.matchScoreAndSummary.matchInningsScore
-  );
   if (
     !playerStats.playerProfile ||
     playerStats.playerProfile.length === 0 ||
