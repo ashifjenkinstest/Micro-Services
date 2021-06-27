@@ -31,10 +31,21 @@ public class UserService {
 
     public RestTemplateVO getUserDepartmentVO(Long userId) {
         RestTemplateVO restTemplateVO = new RestTemplateVO();
-        System.out.println("departmentId " + userId);
+        System.out.println("userId " + userId);
         User user = get(userId);
-        Department department = restTemplate.getForObject(
-                "http://DEPARTMENT-SERVICE-EUREKACLIENT/departments/" + user.getDepartmentId(), Department.class);
+        Department department = null;
+        if (user == null) {
+            // department =
+            // restTemplate.getForObject("http://DEPARTMENT-SERVICE-EUREKACLIENT/departments/"
+            // + userId,
+            // Department.class);;
+            return null;
+        } else {
+            department = restTemplate.getForObject("http://DEPARTMENT-SERVICE/departments/" + user.getDepartmentId(),
+                    Department.class);
+
+        }
+
         restTemplateVO.setUser(user);
         restTemplateVO.setDepartment(department);
 

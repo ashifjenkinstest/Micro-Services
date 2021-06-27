@@ -21,12 +21,12 @@ public class DepartmentService {
     private DepartmentRepository departmentRepository;
 
     public Department save(Department department) {
-        System.out.println("Department " + department.toString());
+
         return departmentRepository.save(department);
     }
 
     public Department get(Long id) {
-        System.out.println("Department " + departmentRepository.findByDepartmentId(id).toString());
+
         return departmentRepository.findByDepartmentId(id);
     }
 

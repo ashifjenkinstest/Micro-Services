@@ -1,7 +1,5 @@
 package com.ashifs.cloudgateway_1;
 
-import com.netflix.ribbon.proxy.annotation.Hystrix;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
