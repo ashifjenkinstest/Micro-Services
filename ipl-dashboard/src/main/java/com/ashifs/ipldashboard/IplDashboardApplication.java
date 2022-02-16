@@ -9,6 +9,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -23,27 +28,32 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EntityScan(basePackages = { "com.ashifs.*" })
 @ComponentScan(basePackages = { "com.ashifs.*" })
 @EnableJpaRepositories(basePackages = "com.ashifs.*")
-public class IplDashboardApplication {
+public class IplDashboardApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		SpringApplication.run(IplDashboardApplication.class, args);
-		System.out.println("<===========================================>");
-		System.out.println("<\t Ipl  Dashboard  Application..\t  >");
-		System.out.println("<===========================================>");
-	}
+        SpringApplication.run(IplDashboardApplication.class, args);
+        System.out.println("<===========================================>");
+        System.out.println("<\t Ipl  Dashboard  Application..\t  >");
+        System.out.println("<===========================================>");
+    }
 
-	@Bean
-	public Docket swaggerConfiguration() {
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(StartWebApplication.class);
+    }
 
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com."))
-				.build().apiInfo(iplApiDetails());
-	}
+    @Bean
+    public Docket swaggerConfiguration() {
 
-	private ApiInfo iplApiDetails() {
-		return new ApiInfo("IPL DASHBOARD API", "Simple APIs for IPL teams,matches,players", "1.0",
-				"Let's learn together...", new springfox.documentation.service.Contact("Ashif", "", ""), "API license",
-				"http://nourl.com", Collections.emptyList());
-	}
+        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com."))
+                                                      .build().apiInfo(iplApiDetails());
+    }
+
+    private ApiInfo iplApiDetails() {
+        return new ApiInfo("IPL DASHBOARD API", "Simple APIs for IPL teams,matches,players", "1.0",
+                           "Let's learn together...", new springfox.documentation.service.Contact("Ashif", "", ""), "API license",
+                           "http://nourl.com", Collections.emptyList());
+    }
 
 }
