@@ -40,7 +40,7 @@ public class IplDashboardApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(StartWebApplication.class);
+        return builder.sources(IplDashboardApplication.class);
     }
 
     @Bean
